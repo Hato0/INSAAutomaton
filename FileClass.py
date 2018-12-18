@@ -10,6 +10,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import os.path
 
@@ -107,14 +111,14 @@ class FilesBlock:
                 for i in range(len(a)):
                     if a[i] == itemlink.get_name():
                         files.write("(")
-                        files.write(item.get_attributeletter())
+                        files.write(itemlink.get_attributeletter())
                         files.write(")     [loop]   node  {")
                         files.write(itemlink.link_name[iterateurbis])
                         files.write("}  (")
                         files.write(a[i])
                     else:
                         files.write("(")
-                        files.write(item.get_attributeletter())
+                        files.write(itemlink.get_attributeletter())
                         files.write(")     node  {")
                         files.write(itemlink.link_name[iterateurbis])
                         files.write("}  (")
@@ -123,6 +127,7 @@ class FilesBlock:
             files.write("\\end{tikzpicture} \n \\end{document}")
             files.close()
 
+"afdsfsdfsdfsdfsdfsd"
     """def __iimport(a):
         list = os.listdir('Cible')
     
