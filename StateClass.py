@@ -9,6 +9,10 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
 class States:
@@ -96,7 +100,7 @@ class States:
         """
         return self.link_name
 
-    def add_link(self, v):
+    def add_link(self, v, n):
         """
 
         :param v: char
@@ -104,7 +108,7 @@ class States:
         Add link with an other states
         """
         self.link.append(v)
-        self.link_name.append(v)
+        self.link_name.append(n)
 
     def enlimination_link(self, v):
         """
@@ -165,16 +169,15 @@ class States:
         self.attributeletter = v
 
 
-""" 
-
 pomme = States()
 chaud = States()
-pomme._set_name("bonjour")
-pomme._set_status(0)
-chaud._set_name("rahhhhh")
-for i in States._registry:
-    print(i._name)
-    print(i._status)
-    print(i._get_name())
-
-"""
+pomme.set_name("bonjour")
+pomme.set_status(0)
+chaud.set_name("rahhhhh")
+chaud.add_link("bonjour", "rat")
+for i in States.registry:
+    print(i.name)
+    print(i.status)
+    print(i.get_name())
+    print(i.get_link())
+    print(i.get_link_name())
