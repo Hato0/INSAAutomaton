@@ -14,6 +14,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import os.path
 import sys
@@ -115,7 +119,7 @@ class Window(QtWidgets.QMainWindow):
         Define a pop up window used to inform the user above all active window
         """
         choice = QtWidgets.QMessageBox.question(self, 'Quit application check_box', "Do you really want to quit \n "
-                                                                                    "Press no if you haven't save "
+                                                                                    "Press No if you haven't save "
                                                                                     "your work",
                                                 QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
         if choice == QtWidgets.QMessageBox.Yes:
@@ -128,42 +132,51 @@ class Window(QtWidgets.QMainWindow):
 
     def import_application(self):
         file = FilesBlock()
+        list_file = []
         text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to import", "File Name or Path:",
                                                           QtWidgets.QLineEdit.Normal, "")
+        list_file.append(text)
         if ok_pressed and text != '':
             if not os.path.isfile(text):
-                while text != "Quit":
+                while list_file[-1] != "Quit":
                     text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to import",
                                                                       "File not found, try an "
                                                                       "other name or path: \n Or enter Quit to close "
                                                                       "this window",
                                                                       QtWidgets.QLineEdit.Normal, "")
-                    if os.path.isfile(text):
+                    list_file.append(text)
+                    if os.path.isfile(list_file[-1]):
                         break
-            if text == "Quit":
+            if list_file[-1] == "Quit":
                 pass
             else:
-                file.set_name(text)
+                file.set_name(list_file[-2])
                 FilesBlock.importation(file)
 
     def export_application(self):
         file = FilesBlock()
+        list_file = []
         text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to import", "File Name or Path:",
                                                           QtWidgets.QLineEdit.Normal, "")
+        list_file.append(text)
         if ok_pressed and text != '':
             if os.path.isfile(text):
-                while text != "OverWrite":
+                while list_file[-1] != "OverWrite":
                     text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to export",
                                                                       "File already exist please enter a new file or "
                                                                       "type 'OverWrite' to continue \n "
                                                                       "Type Quit to leave"
                                                                       , QtWidgets.QLineEdit.Normal, "")
-                    if not os.path.isfile(text):
+                    list_file.append(text)
+                    if not os.path.isfile(list_file[-1]):
                         break
-            if text == "Quit":
+            if list_file[-1] == "Quit":
                 pass
+            elif list_file[-1] == "OverWrite":
+                file.set_name(list_file[-2])
+                FilesBlock.export(file)
             else:
-                file.set_name(text)
+                file.set_name(list_file[-1])
                 FilesBlock.export(file)
 
     def save_application(self):
@@ -187,7 +200,6 @@ class Window(QtWidgets.QMainWindow):
             if list_file[-1] == "Quit":
                 pass
             elif list_file[-1] == "OverWrite":
-                print("e")
                 file.set_name(list_file[-2])
                 header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
                                                                                          "the save file(optional)",
@@ -196,7 +208,6 @@ class Window(QtWidgets.QMainWindow):
                     FilesBlock.save(file, header)
 
             else:
-                print("f")
                 file.set_name(list_file[-1])
                 header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
                                                                                          "the save file(optional)",

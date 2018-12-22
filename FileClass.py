@@ -26,6 +26,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import StateClass
 
@@ -62,68 +66,84 @@ class FilesBlock:
         Write the Latex/Tikz code on the file realated to the current automaton
         """
         files = open(self.name, "w")
-        files.write("\\usepackage{tikz}\n \\usetikzlibrary{automata,arrows}\n \\begin{document}\n\n "
+        files.write("\\usepackage{tikz}\n\\usetikzlibrary{automata,arrows}\n\\begin{document}\n\n"
                     "\\begin{tikzpicture}")
         for item in StateClass.States.registry:
+            name = item.get_name()
+            shape = item.get_shape()
+            color = item.get_color()
+            attributeletter = item.get_attributeletter()
+            position_x = item.get_position_x()
+            position_y = item.get_position_y()
             if item.get_status() == 0:
-                files.write("\n node[state, initial, shape = ")
-                files.write(item.get_shape)
-                files.write("draw = ")
-                files.write(item.get_color)
+                files.write("\nnode[state, initial, shape = ")
+                files.write(shape)
+                files.write(", draw = ")
+                files.write(color)
                 files.write("]   (")
-                files.write(item.get_attributeletter())
-                files.write(") at ")
-                files.write(item.get_position())
-                files.write(" {$")
-                files.write(item.get_name())
+                files.write(attributeletter)
+                files.write(") at (")
+                files.write(str(position_x))
+                files.write(" , ")
+                files.write(str(position_y))
+                files.write(") {$")
+                files.write(name)
                 files.write("$};")
             elif item.get_status() == 1:
-                files.write("\n node[state, shape = ")
-                files.write(item.get_shape)
-                files.write("draw = ")
-                files.write(item.get_color)
+                files.write("\nnode[state, shape = ")
+                files.write(shape)
+                files.write(", draw = ")
+                files.write(color)
                 files.write("]   (")
-                files.write(item.get_attributeletter())
-                files.write(") at ")
-                files.write(item.get_position())
-                files.write("{$")
-                files.write(item.get_name())
+                files.write(attributeletter)
+                files.write(") at (")
+                files.write(str(position_x))
+                files.write(" , ")
+                files.write(str(position_y))
+                files.write(") {$")
+                files.write(name)
                 files.write("$};")
             else:
-                files.write("\n node[state, accepting, shape = ")
-                files.write(item.get_shape)
-                files.write("draw = ")
-                files.write(item.get_color)
+                files.write("\nnode[state, accepting, shape = ")
+                files.write(shape)
+                files.write(", draw = ")
+                files.write(color)
                 files.write("]   (")
-                files.write(item.get_attributeletter())
-                files.write(") at ")
-                files.write(item.get_position())
-                files.write(" {$")
-                files.write(item.get_name())
+                files.write(attributeletter)
+                files.write(") at (")
+                files.write(str(position_x))
+                files.write(" , ")
+                files.write(str(position_y))
+                files.write(") {$")
+                files.write(name)
                 files.write("$};")
-        files.write("\\path  ")
+        files.write("\n\n\\path  ")
         iterateurbis = 0
         for itemlink in StateClass.States.registry:
             a = itemlink.link
             for i in range(len(a)):
+                attributeletter = itemlink.get_attributeletter()
+                link_name = itemlink.get_link_name()
                 if a[i] == itemlink.get_name():
                     files.write("(")
-                    files.write(itemlink.get_attributeletter())
-                    files.write(")     [loop]   node  {")
-                    files.write(itemlink.link_name[iterateurbis])
+                    files.write(attributeletter)
+                    files.write(") edge [loop]   node  {")
+                    files.write(link_name[iterateurbis])
                     files.write("}  (")
                     files.write(a[i])
+                    files.write(")")
                     files.write("\n")
                 else:
                     files.write("(")
-                    files.write(itemlink.get_attributeletter())
-                    files.write(")     node  {")
-                    files.write(itemlink.link_name[iterateurbis])
+                    files.write(attributeletter)
+                    files.write(") edge          node  {")
+                    files.write(link_name[iterateurbis])
                     files.write("}  (")
                     files.write(a[i])
+                    files.write(")")
                     files.write("\n")
                 iterateurbis += 1
-        files.write("\\end{tikzpicture} \n \\end{document}")
+        files.write("\\end{tikzpicture} \n\\end{document}")
         files.close()
 
     def save(self, header):
@@ -132,21 +152,37 @@ class FilesBlock:
         :return: None
         """
         file = open(self.name, "w")
-        print("a")
         file.write(header)
-        print("b")
+        file.write("\n")
         for item in StateClass.States.registry:
-            print("c")
             file.write("\\StateSafe \n")
             file.write(item.get_name())
-            file.write(item.get_position())
-            file.write(item.get_link())
-            file.write(item.get_link_name())
+            file.write("\n")
+            file.write(str(item.get_position_x()))
+            file.write("\n")
+            file.write(str(item.get_position_y()))
+            file.write("\n")
+            file.write(str(len(item.get_link())))
+            file.write("\n")
+            a = item.get_link()
+            for i in a:
+                file.write(str(i))
+                file.write("\n")
+            file.write("end_link_list")
+            file.write("\n")
+            b = item.get_link_name()
+            for i in b:
+                file.write(str(i))
+                file.write("\n")
+            file.write("end_link_name_list")
+            file.write("\n")
             file.write(item.get_color())
+            file.write("\n")
             file.write(item.get_shape())
+            file.write("\n")
             file.write(item.get_attributeletter())
+            file.write("\n")
             file.write("\\EndStateSafe \n")
-        print("d")
         file.close()
 
     def importation(self):
@@ -164,16 +200,32 @@ class FilesBlock:
                     while line != "\\EndStateSafe \n":
                         line = file.readline()
                         alpha[cursor].set_name(line)
+                        file.readline()
                         line = file.readline()
-                        alpha[cursor].set_position(line)
+                        alpha[cursor].set_position_x(int(line))
+                        file.readline()
                         line = file.readline()
-                        linebis = file.readline()
-                        alpha[cursor].add_link(line, linebis)
+                        alpha[cursor].set_position_y(int(line))
+                        file.readline()
+                        range_iter = int(file.readline())
+                        for i in range(range_iter):
+                            file.readline()
+                            line = file.readline()
+                            alpha[cursor].add_link(line)
+                        for i in range(range_iter):
+                            file.readline()
+                            line = file.readline()
+                            alpha[cursor].add_link_name(line)
+                        file.readline()
                         line = file.readline()
                         alpha[cursor].set_color(line)
+                        file.readline()
                         line = file.readline()
                         alpha[cursor].set_shape(line)
+                        file.readline()
                         line = file.readline()
                         alpha[cursor].set_attributeletter(line)
+            file.readline()
             line = file.readline()
+            cursor += 1
         file.close()
