@@ -17,6 +17,10 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
 class States:
@@ -179,9 +183,4 @@ pomme.set_name("bonjour")
 pomme.set_status(0)
 chaud.set_name("rahhhhh")
 chaud.add_link("bonjour", "rat")
-for i in States.registry:
-    print(i.name)
-    print(i.status)
-    print(i.get_name())
-    print(i.get_link())
-    print(i.get_link_name())
+
