@@ -9,6 +9,10 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
 import os.path
@@ -75,24 +79,32 @@ class Window(QtWidgets.QMainWindow):
         """
         """
         """ Define a button quit """
-        btn = QtWidgets.QPushButton("Quit", self)
+        #btn_1 = QtWidgets.QPushButton("Quit", self)
         """ Define the button action """
-        btn.clicked.connect(self.close_application)
+        #btn_1.clicked.connect(self.close_application)
         """ Define the button size """
-        btn.resize(btn.minimumSizeHint())
+        #btn_1.resize(btn_1.minimumSizeHint())
         """ Move the button at (x = 0, y = 100) """
-        btn.move(0, 100)
+        #btn_1.move(500, 500)
         """ Define an icon shortcut with under_text while mouse is on """
-        extract_action = QtWidgets.QAction(QtGui.QIcon('todachoppa.png'), 'Flee the Scene', self)
+        leave_action = QtWidgets.QAction(QtGui.QIcon('Picture/QuitIcon.png'), 'Quit the application', self)
         """ Make the button work """
-        extract_action.triggered.connect(self.close_application)
+        leave_action.triggered.connect(self.close_application)
+        """ Define button to create automaton"""
+        create_action = QtWidgets.QAction(QtGui.QIcon('Picture/states.png'), 'Create states ', self)
+        create_action.triggered.connect(self.add_new_states)
+        """ Define button to create new transition """
+        transition_action = QtWidgets.QAction(QtGui.QIcon('Picture/Arrow.png'), 'Create transitions', self)
+        transition_action.triggered.connect(self.add_transition)
         """ Make the extract_action widget a toolBar which can be move everywhere on the window | Right clic on the top
          able or disable the option"""
-        self.toolBar = self.addToolBar("Extraction")
-        self.toolBar.addAction(extract_action)
+        self.toolBar = self.addToolBar("Able or Disable Tool Bar")
+        self.toolBar.addAction(create_action)
+        self.toolBar.addAction(transition_action)
+        self.toolBar.addAction(leave_action)
         """ Checkbox to resize the main window """
-        check_box = QtWidgets.QCheckBox('Enlarge Window', self)
-        check_box.move(100, 25)
+        check_box = QtWidgets.QCheckBox('Full screen', self)
+        check_box.move(900, 25)
         check_box.stateChanged.connect(self.enlarge_window)
         self.show()
 
@@ -206,6 +218,12 @@ class Window(QtWidgets.QMainWindow):
                                                                     QtWidgets.QLineEdit.Normal, "")
                 if ok_pressed and header != '':
                     FilesBlock.save(file, header)
+
+    def add_new_states(self):
+        pass
+
+    def add_transition(self):
+        pass
 
 
 def run():
