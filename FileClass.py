@@ -9,6 +9,10 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 import StateClass
 
@@ -133,8 +137,10 @@ class FilesBlock:
         file = open(self.name, "w")
         file.write(header)
         file.write("\n")
+        number_of_states = len(StateClass.States.registry)
+        file.write(str(number_of_states))
         for item in StateClass.States.registry:
-            file.write("\\StateSafe \n")
+            file.write("\n\\StateSafe \n")
             file.write(item.get_name())
             file.write("\n")
             file.write(str(item.get_position_x()))
@@ -147,21 +153,17 @@ class FilesBlock:
             for i in a:
                 file.write(str(i))
                 file.write("\n")
-            file.write("end_link_list")
-            file.write("\n")
             b = item.get_link_name()
             for i in b:
                 file.write(str(i))
                 file.write("\n")
-            file.write("end_link_name_list")
-            file.write("\n")
             file.write(item.get_color())
             file.write("\n")
             file.write(item.get_shape())
             file.write("\n")
             file.write(item.get_attributeletter())
             file.write("\n")
-            file.write("\\EndStateSafe \n")
+            file.write("\\EndStateSafe")
         file.close()
 
     def importation(self):
@@ -172,8 +174,9 @@ class FilesBlock:
         alpha = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         cursor = 0
         file = open(self.name, 'r')
+        file.readline()
         line = file.readline()
-        while line != "":
+        for i in range(int(line)):
             if line == "\\StateSafe \n":
                     alpha[cursor] = StateClass.States()
                     while line != "\\EndStateSafe \n":

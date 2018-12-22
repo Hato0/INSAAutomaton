@@ -13,12 +13,15 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
-import os.path
 import sys
 
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from FileClass import FilesBlock;
 
@@ -28,7 +31,7 @@ class Window(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         files = FilesBlock()
-        self.setGeometry(50, 50, 1000, 600)
+        self.setGeometry(50, 50, 1500, 800)
         self.setWindowTitle("AutoMates project")
         self.setWindowIcon(QtGui.QIcon('Picture/Logo.png'))
         """ Create new widget and associate it to new_application"""
@@ -60,8 +63,8 @@ class Window(QtWidgets.QMainWindow):
         leave_action.setShortcut("Ctrl+Q")
         leave_action.setStatusTip('Quit the application')
         leave_action.triggered.connect(self.close_application)
-
         self.statusBar()
+        self.setCentralWidget(self.centralWidget())
 
         main_menu = self.menuBar()
         """ Create the file drop down menu """
@@ -78,45 +81,43 @@ class Window(QtWidgets.QMainWindow):
     def home(self):
         """
         """
-        """ Define a button quit """
-        #btn_1 = QtWidgets.QPushButton("Quit", self)
-        """ Define the button action """
-        #btn_1.clicked.connect(self.close_application)
-        """ Define the button size """
-        #btn_1.resize(btn_1.minimumSizeHint())
-        """ Move the button at (x = 0, y = 100) """
-        #btn_1.move(500, 500)
         """ Define an icon shortcut with under_text while mouse is on """
         leave_action = QtWidgets.QAction(QtGui.QIcon('Picture/QuitIcon.png'), 'Quit the application', self)
         """ Make the button work """
         leave_action.triggered.connect(self.close_application)
-        """ Define button to create automaton"""
-        create_action = QtWidgets.QAction(QtGui.QIcon('Picture/states.png'), 'Create states ', self)
-        create_action.triggered.connect(self.add_new_states)
         """ Define button to create new transition """
         transition_action = QtWidgets.QAction(QtGui.QIcon('Picture/Arrow.png'), 'Create transitions', self)
         transition_action.triggered.connect(self.add_transition)
+
         """ Make the extract_action widget a toolBar which can be move everywhere on the window | Right clic on the top
          able or disable the option"""
+
+        self.menu_select_states = QtWidgets.QMenu("")
+
+        self.tbutton = QtWidgets.QToolButton(self)
+        self.tbutton.setMenu(self.menu_select_states)
+        self.tbutton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.tbutton.setIcon(QtGui.QIcon("Picture/states.png"))
+        self.tbutton.setToolTip("Select state form")
+
+        self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
+        self.action_select_circle.triggered.connect(self.create_states_circle)
+        self.menu_select_states.addAction(self.action_select_circle)
+
+        self.action_select_rectangle = QtWidgets.QAction(QtGui.QIcon("Picture/Rectangle.png"), "Rectangle", self)
+        self.action_select_rectangle.triggered.connect(self.create_states_rectangle)
+        self.menu_select_states.addAction(self.action_select_rectangle)
+
+        self.action_select_square = QtWidgets.QAction(QtGui.QIcon("Picture/square.png"), "Square", self)
+        self.action_select_square.triggered.connect(self.create_states_square)
+        self.menu_select_states.addAction(self.action_select_square)
+
         self.toolBar = self.addToolBar("Able or Disable Tool Bar")
-        self.toolBar.addAction(create_action)
+        self.toolBar.addWidget(self.tbutton)
         self.toolBar.addAction(transition_action)
         self.toolBar.addAction(leave_action)
-        """ Checkbox to resize the main window """
-        check_box = QtWidgets.QCheckBox('Full screen', self)
-        check_box.move(900, 25)
-        check_box.stateChanged.connect(self.enlarge_window)
-        self.show()
 
-    def enlarge_window(self, state):
-        """
-        Resize Window with Check Box parameters
-        :param state: State of CheckBox
-        """
-        if state == QtCore.Qt.Checked:
-            self.showFullScreen()
-        else:
-            self.setGeometry(50, 50, 1000, 600)
+        self.show()
 
     def close_application(self):
         """
@@ -132,94 +133,40 @@ class Window(QtWidgets.QMainWindow):
             pass
 
     def new_application(self):
-        pass
+        self.__init__()
 
     def import_application(self):
         file = FilesBlock()
-        list_file = []
-        text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to import", "File Name or Path:",
-                                                          QtWidgets.QLineEdit.Normal, "")
-        list_file.append(text)
-        if ok_pressed and text != '':
-            if not os.path.isfile(text):
-                while list_file[-1] != "Quit":
-                    text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to import",
-                                                                      "File not found, try an "
-                                                                      "other name or path: \n Or enter Quit to close "
-                                                                      "this window",
-                                                                      QtWidgets.QLineEdit.Normal, "")
-                    list_file.append(text)
-                    if os.path.isfile(list_file[-1]):
-                        break
-            if list_file[-1] == "Quit":
-                pass
-            else:
-                file.set_name(list_file[-2])
-                FilesBlock.importation(file)
+        text = QtWidgets.QFileDialog.getOpenFileName(self, 'Import File')
+        file.set_name(text[0])
+        FilesBlock.importation(file)
 
     def export_application(self):
         file = FilesBlock()
-        list_file = []
-        text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to import", "File Name or Path:",
-                                                          QtWidgets.QLineEdit.Normal, "")
-        list_file.append(text)
-        if ok_pressed and text != '':
-            if os.path.isfile(text):
-                while list_file[-1] != "OverWrite":
-                    text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to export",
-                                                                      "File already exist please enter a new file or "
-                                                                      "type 'OverWrite' to continue \n "
-                                                                      "Type Quit to leave"
-                                                                      , QtWidgets.QLineEdit.Normal, "")
-                    list_file.append(text)
-                    if not os.path.isfile(list_file[-1]):
-                        break
-            if list_file[-1] == "Quit":
-                pass
-            elif list_file[-1] == "OverWrite":
-                file.set_name(list_file[-2])
-                FilesBlock.export(file)
-            else:
-                file.set_name(list_file[-1])
-                FilesBlock.export(file)
+        text = QtWidgets.QFileDialog.getSaveFileName(self, 'Export File')
+        file.set_name(text[0])
+        FilesBlock.export(file)
 
     def save_application(self):
         file = FilesBlock()
-        list_file = []
-        text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to save", "File Name or Path:",
-                                                          QtWidgets.QLineEdit.Normal, "")
-        list_file.append(text)
-        if ok_pressed and text != '':
-            if os.path.isfile(text):
-                while list_file[-1] != "OverWrite":
-                    text, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get File Name to save",
-                                                                      "File already exist please enter a new file or "
-                                                                      "type 'OverWrite' to continue \n "
-                                                                      "Type Quit to leave"
-                                                                      , QtWidgets.QLineEdit.Normal, "")
-                    list_file.append(text)
-                    if not os.path.isfile(list_file[-1]):
-                        break
+        text = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File')
+        header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
+                                                            "the save file(optional)",
+                                                            QtWidgets.QLineEdit.Normal, "")
+        file.set_name(text[0])
+        if ok_pressed and header != '':
+                FilesBlock.save(file, header)
 
-            if list_file[-1] == "Quit":
-                pass
-            elif list_file[-1] == "OverWrite":
-                file.set_name(list_file[-2])
-                header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
-                                                                                         "the save file(optional)",
-                                                                    QtWidgets.QLineEdit.Normal, "")
-                if ok_pressed and header != '':
-                    FilesBlock.save(file, header)
+    def create_states_circle(self):
+        print(1)
+        pass
 
-            else:
-                file.set_name(list_file[-1])
-                header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
-                                                                                         "the save file(optional)",
-                                                                    QtWidgets.QLineEdit.Normal, "")
-                if ok_pressed and header != '':
-                    FilesBlock.save(file, header)
+    def create_states_rectangle(self):
+        print(2)
+        pass
 
-    def add_new_states(self):
+    def create_states_square(self):
+        print(3)
         pass
 
     def add_transition(self):

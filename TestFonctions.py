@@ -6,199 +6,171 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
 
-import os.path
+import sys
 
-import StateClass
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 
-class FilesBlock:
+class Window(QtWidgets.QMainWindow):
 
     def __init__(self):
-        """
-        Initilisation of file
-        """
-        self.name = ""
+        super(Window, self).__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle("PyQT tuts!")
+        self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
 
-    def get_name(self):
-        """
-        Return file name
-        :return: char
-        """
-        return self.name
+        extractAction = QtWidgets.QAction("&GET TO THE CHOPPAH!!!", self)
+        extractAction.setShortcut("Ctrl+Q")
+        extractAction.setStatusTip('Leave The App')
+        extractAction.triggered.connect(self.close_application)
 
-    def set_name(self, v):
-        """
-        Change file name
-        :param v: char
-        :return: None
-        """
-        self.name = v
+        openEditor = QtWidgets.QAction("&Editor", self)
+        openEditor.setShortcut("Ctrl+E")
+        openEditor.setStatusTip('Open Editor')
+        openEditor.triggered.connect(self.editor)
 
-    def export(self):
-        """
-        Open or create a file to export the automaton on Latex/Tikz
-        :return: None
-        """
-        if not os.path.isfile(self.name):
-            print("File not found, \n Please correct the file name(Type a new name) "
-                  "or overwrite the existing file (Type Y)")
-            newfile = input()
-            if newfile != "Y":
-                FilesBlock.set_name(self, newfile)
-                return FilesBlock.save(self)
-            else:
-                pass
+        openFile = QtWidgets.QAction("&Open File", self)
+        openFile.setShortcut("Ctrl+O")
+        openFile.setStatusTip('Open File')
+        openFile.triggered.connect(self.file_open)
+
+        saveFile = QtWidgets.QAction("&Save File", self)
+        saveFile.setShortcut("Ctrl+S")
+        saveFile.setStatusTip('Save File')
+        saveFile.triggered.connect(self.file_save)
+
+        self.statusBar()
+
+        mainMenu = self.menuBar()
+
+        fileMenu = mainMenu.addMenu('&File')
+        fileMenu.addAction(extractAction)
+        fileMenu.addAction(openFile)
+        fileMenu.addAction(saveFile)
+
+        editorMenu = mainMenu.addMenu("&Editor")
+        editorMenu.addAction(openEditor)
+
+        self.home()
+
+    def home(self):
+        btn = QtWidgets.QPushButton("Quit", self)
+        btn.clicked.connect(self.close_application)
+        btn.resize(btn.minimumSizeHint())
+        btn.move(0, 100)
+
+        extractAction = QtWidgets.QAction(QtGui.QIcon('todachoppa.png'), 'Flee the Scene', self)
+        extractAction.triggered.connect(self.close_application)
+        self.toolBar = self.addToolBar("Extraction")
+        self.toolBar.addAction(extractAction)
+
+        fontChoice = QtWidgets.QAction('Font', self)
+        fontChoice.triggered.connect(self.font_choice)
+        # self.toolBar = self.addToolBar("Font")
+        self.toolBar.addAction(fontChoice)
+
+        color = QtGui.QColor(0, 0, 0)
+
+        fontColor = QtWidgets.QAction('Font bg Color', self)
+        fontColor.triggered.connect(self.color_picker)
+
+        self.toolBar.addAction(fontColor)
+
+        checkBox = QtWidgets.QCheckBox('Enlarge Window', self)
+        checkBox.move(300, 25)
+        checkBox.stateChanged.connect(self.enlarge_window)
+
+        self.progress = QtWidgets.QProgressBar(self)
+        self.progress.setGeometry(200, 80, 250, 20)
+
+        self.btn = QtWidgets.QPushButton("Download", self)
+        self.btn.move(200, 120)
+        self.btn.clicked.connect(self.download)
+
+        # print(self.style().objectName())
+        self.styleChoice = QtWidgets.QLabel("Windows Vista", self)
+
+        comboBox = QtWidgets.QComboBox(self)
+        comboBox.addItem("motif")
+        comboBox.addItem("Windows")
+        comboBox.addItem("cde")
+        comboBox.addItem("Plastique")
+        comboBox.addItem("Cleanlooks")
+        comboBox.addItem("windowsvista")
+
+        comboBox.move(50, 250)
+        self.styleChoice.move(50, 150)
+        comboBox.activated[str].connect(self.style_choice)
+
+        cal = QtWidgets.QCalendarWidget(self)
+        cal.move(500, 200)
+        cal.resize(200, 200)
+
+        self.show()
+
+    def file_open(self):
+        name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File')
+        file = open(name, 'r')
+
+        self.editor()
+
+        with file:
+            text = file.read()
+            self.textEdit.setText(text)
+
+    def file_save(self):
+        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File')
+        file = open(name, 'w')
+        text = self.textEdit.toPlainText()
+        file.write(text)
+        file.close()
+
+    def color_picker(self):
+        color = QtWidgets.QColorDialog.getColor()
+        self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % color.name())
+
+    def editor(self):
+        self.textEdit = QtWidgets.QTextEdit()
+        self.setCentralWidget(self.textEdit)
+
+    def font_choice(self):
+        font, valid = QtWidgets.QFontDialog.getFont()
+        if valid:
+            self.styleChoice.setFont(font)
+
+    def style_choice(self, text):
+        self.styleChoice.setText(text)
+        QtWidgets.QApplication.setStyle(QtWidgets.QStyleFactory.create(text))
+
+    def download(self):
+        self.completed = 0
+
+        while self.completed < 100:
+            self.completed += 0.0001
+            self.progress.setValue(self.completed)
+
+    def enlarge_window(self, state):
+        if state == QtCore.Qt.Checked:
+            self.setGeometry(50, 50, 1000, 600)
         else:
-            """
-            Write the Latex/Tikz code on the file realated to the current automaton
-            """
-            files = open(self.name, "w")
-            files.write("\\usepackage{tikz}\n \\usetikzlibrary{automata,arrows}\n \\begin{document}\n\n "
-                        "\\begin{tikzpicture}")
-            for item in StateClass.States.registry:
-                if item.get_status() == 0:
-                    files.write("\n node[state, initial, shape = ")
-                    files.write(item.get_shape)
-                    files.write("draw = ")
-                    files.write(item.get_color)
-                    files.write("]   (")
-                    files.write(item.get_attributeletter())
-                    files.write(") at ")
-                    files.write(item.get_position())
-                    files.write(" {$")
-                    files.write(item.get_name())
-                    files.write("$};")
-                elif item.get_status() == 1:
-                    files.write("\n node[state, shape = ")
-                    files.write(item.get_shape)
-                    files.write("draw = ")
-                    files.write(item.get_color)
-                    files.write("]   (")
-                    files.write(item.get_attributeletter())
-                    files.write(") at ")
-                    files.write(item.get_position())
-                    files.write("{$")
-                    files.write(item.get_name())
-                    files.write("$};")
-                else:
-                    files.write("\n node[state, accepting, shape = ")
-                    files.write(item.get_shape)
-                    files.write("draw = ")
-                    files.write(item.get_color)
-                    files.write("]   (")
-                    files.write(item.get_attributeletter())
-                    files.write(") at ")
-                    files.write(item.get_position())
-                    files.write(" {$")
-                    files.write(item.get_name())
-                    files.write("$};")
-            files.write("\\path  ")
-            iterateurbis = 0
-            for itemlink in StateClass.States.registry:
-                a = itemlink.link
-                for i in range(len(a)):
-                    if a[i] == itemlink.get_name():
-                        files.write("(")
-                        files.write(itemlink.get_attributeletter())
-                        files.write(")     [loop]   node  {")
-                        files.write(itemlink.link_name[iterateurbis])
-                        files.write("}  (")
-                        files.write(a[i])
-                        files.write("\n")
-                    else:
-                        files.write("(")
-                        files.write(itemlink.get_attributeletter())
-                        files.write(")     node  {")
-                        files.write(itemlink.link_name[iterateurbis])
-                        files.write("}  (")
-                        files.write(a[i])
-                        files.write("\n")
-                    iterateurbis += 1
-            files.write("\\end{tikzpicture} \n \\end{document}")
-            files.close()
+            self.setGeometry(50, 50, 500, 300)
 
-    def save(self):
-        """
-        Set a safe to recover the user work
-        :return: None
-        """
-        if os.path.isfile(self.name):
-            print("File not found, \n Please correct the file name(Type a new name) "
-                  "or overwrite the existing file (Type Y)")
-            newfile = input()
-            if newfile != "Y":
-                FilesBlock.set_name(self, newfile)
-                return FilesBlock.save(self)
-            else:
-                pass
+    def close_application(self):
+        choice = QtWidgets.QMessageBox.question(self, 'Extract!',
+                                            "Get into the chopper?",
+                                            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+        if choice == QtWidgets.QMessageBox.Yes:
+            print("Extracting Naaaaaaoooww!!!!")
+            sys.exit()
         else:
-            fichier = open(self.name, "w")
-            a = input("Set a header")
-            fichier.write(a)
-            for item in StateClass.States.registry:
-                fichier.write("\\StateSafe \n")
-                fichier.write(item.get_name())
-                fichier.write(item.get_position())
-                fichier.write(item.get_link())
-                fichier.write(item.get_link_name())
-                fichier.write(item.get_color())
-                fichier.write(item.get_shape())
-                fichier.write(item.get_attributeletter())
-                fichier.write("\\EndStateSafe \n")
-            fichier.close()
+            pass
 
-    def importation(self):
-        """
-        Initialise state with existing file
-        :return: None
-        """
-        if not os.path.isfile(self.name):
-            print("File not found, \n Please correct the file name or correct path")
-            newfile = input()
-            FilesBlock.set_name(self, newfile)
-            return FilesBlock.save(self)
-        else:
-            alpha = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-            cursor = 0
-            fichier = open(self.name,'r')
-            line = fichier.readline()
-            while line != "":
-                if line == "\\StateSafe \n":
-                        alpha[cursor] = StateClass.States()
-                        while line != "\\EndStateSafe \n":
-                            line = fichier.readline()
-                            alpha[cursor].set_name(line)
-                            line = fichier.readline()
-                            alpha[cursor].set_position(line)
-                            line = fichier.readline()
-                            linebis = fichier.readline()
-                            alpha[cursor].add_link(line, linebis)
-                            line = fichier.readline()
-                            alpha[cursor].set_color(line)
-                            line = fichier.readline()
-                            alpha[cursor].set_shape(line)
-                            line = fichier.readline()
-                            alpha[cursor].set_attributeletter(line)
-                line = fichier.readline()
-            fichier.close()
+
+def run():
+    app = QtWidgets.QApplication(sys.argv)
+    GUI = Window()
+    sys.exit(app.exec_())
+
+
+run()
