@@ -6,6 +6,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 class States:
@@ -194,6 +198,7 @@ class States:
         self.attributeletter = v
 
 
+"""
 pomme = States()
 pomme.set_name("States1")
 pomme.set_position_x(0)
@@ -215,4 +220,4 @@ apple.set_status(2)
 
 test = apple.get_attributeletter()
 pomme.add_link(test)
-pomme.add_link_name("test_link")
+pomme.add_link_name("test_link") """

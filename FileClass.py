@@ -13,6 +13,10 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 import StateClass
 
@@ -175,39 +179,39 @@ class FilesBlock:
         cursor = 0
         file = open(self.name, 'r')
         file.readline()
-        line = file.readline()
-        for i in range(int(line)):
+        number_of_states = file.readline()
+        number_of_states = number_of_states.replace('\n', '')
+        for i in range(int(number_of_states)):
+            line = file.readline()
             if line == "\\StateSafe \n":
                     alpha[cursor] = StateClass.States()
-                    while line != "\\EndStateSafe \n":
+                    line = file.readline()
+                    line = line.replace('\n', '')
+                    alpha[cursor].set_name(line)
+                    line = file.readline()
+                    line = line.replace('\n', '')
+                    alpha[cursor].set_position_x(int(line))
+                    line = file.readline()
+                    line = line.replace('\n', '')
+                    alpha[cursor].set_position_y(int(line))
+                    range_iter = int(file.readline())
+                    for j in range(range_iter):
                         line = file.readline()
-                        alpha[cursor].set_name(line)
-                        file.readline()
+                        line = line.replace('\n', '')
+                        alpha[cursor].add_link(line)
+                    for t in range(range_iter):
                         line = file.readline()
-                        alpha[cursor].set_position_x(int(line))
-                        file.readline()
-                        line = file.readline()
-                        alpha[cursor].set_position_y(int(line))
-                        file.readline()
-                        range_iter = int(file.readline())
-                        for i in range(range_iter):
-                            file.readline()
-                            line = file.readline()
-                            alpha[cursor].add_link(line)
-                        for i in range(range_iter):
-                            file.readline()
-                            line = file.readline()
-                            alpha[cursor].add_link_name(line)
-                        file.readline()
-                        line = file.readline()
-                        alpha[cursor].set_color(line)
-                        file.readline()
-                        line = file.readline()
-                        alpha[cursor].set_shape(line)
-                        file.readline()
-                        line = file.readline()
-                        alpha[cursor].set_attributeletter(line)
+                        line = line.replace('\n', '')
+                        alpha[cursor].add_link_name(line)
+                    line = file.readline()
+                    line = line.replace('\n', '')
+                    alpha[cursor].set_color(line)
+                    line = file.readline()
+                    line = line.replace('\n', '')
+                    alpha[cursor].set_shape(line)
+                    line = file.readline()
+                    line = line.replace('\n', '')
+                    alpha[cursor].set_attributeletter(line)
             file.readline()
-            line = file.readline()
             cursor += 1
         file.close()
