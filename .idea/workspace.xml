@@ -11,12 +11,9 @@
     <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="54" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ba40801-7b01-43fd-96a8-119429dff4bc" name="Default Changelist" comment="">
+    <list default="true" id="4ba40801-7b01-43fd-96a8-119429dff4bc" name="Default Changelist" comment="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Save an import now works correctly&#10;Pour run file, execute GraphicWindow.py">
       <change afterPath="$PROJECT_DIR$/GraphicWindowTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Thibaut.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Thibaut.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExportParametersClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/ExportParametersClass.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GraphicWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphicWindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestFonctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestFonctions.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,14 +33,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="404">
+              <caret line="227" selection-start-line="227" selection-end-line="227" />
               <folding>
-                <element signature="e#870#880#0" expanded="true" />
+                <element signature="e#1002#1013#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/telechargement/GuiGraphes/GuiClasses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="388" column="11" lean-forward="true" selection-start-line="388" selection-start-column="11" selection-end-line="388" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/telechargement/GuiGraphes/mainwindow.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="182" column="25" selection-start-line="182" selection-start-column="19" selection-end-line="182" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -57,14 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestFonctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="33" column="43" lean-forward="true" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
-              <folding>
-                <element signature="e#738#748#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="357">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -73,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/ExportParametersClass.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="125">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -95,7 +107,6 @@
       <find>remove</find>
       <find>enlarge</find>
       <find>add_new</find>
-      <find>create</find>
       <find>create_states</find>
       <find>tbutton</find>
       <find>MainW</find>
@@ -117,6 +128,8 @@
       <find>retranslate</find>
       <find>statusBar</find>
       <find>menuBar</find>
+      <find>create_st</find>
+      <find>create</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,8 +171,8 @@
         <option value="D:/telechargement/GuiGraphes-prototype/mainwindow.py" />
         <option value="D:/telechargement/GuiGraphes/mainwindow.py" />
         <option value="$PROJECT_DIR$/GraphicWindowTest.py" />
-        <option value="$PROJECT_DIR$/TestFonctions.py" />
         <option value="$PROJECT_DIR$/GraphicWindow.py" />
+        <option value="$PROJECT_DIR$/TestFonctions.py" />
       </list>
     </option>
   </component>
@@ -222,7 +235,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.GraphicWindow">
+  <component name="RunManager" selected="Python.TestFonctions">
     <configuration name="DefinitionClasse" type="PythonConfigurationType" factoryName="Python">
       <module name="Automate" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -390,8 +403,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.GraphicWindow" />
         <item itemvalue="Python.TestFonctions" />
+        <item itemvalue="Python.GraphicWindow" />
         <item itemvalue="Python.GraphicWindowTest" />
         <item itemvalue="Python.mainwindow (1)" />
         <item itemvalue="Python.mainwindow" />
@@ -479,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545564791921</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Update 22/12/18 ,  23:28 &#10;integration of graphic Widet&#10;Pour run file, execute GraphicWindow.py">
+      <created>1545579749255</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1545579749255</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers>
       <GitHub url="https://gist.github.com/Hato0" />
     </servers>
@@ -513,15 +533,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.21104816" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" weight="0.28895184" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" visible="true" weight="0.28895184" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23087819" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49733475" weight="0.08017335" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.28045326" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50231326" side_tool="true" weight="0.28895184" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" visible="true" weight="0.20113315" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" weight="0.20113315" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.17162699" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -542,7 +562,8 @@
     <MESSAGE value="Update 22/12/18 ,  19:27 &#10;Graphic tools bar functional&#10;Pour run file, execute GraphicWindow.py" />
     <MESSAGE value="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Pour run file, execute GraphicWindow.py" />
     <MESSAGE value="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Save an import now works correctly&#10;Pour run file, execute GraphicWindow.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Save an import now works correctly&#10;Pour run file, execute GraphicWindow.py" />
+    <MESSAGE value="Update 22/12/18 ,  23:28 &#10;integration of graphic Widet&#10;Pour run file, execute GraphicWindow.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update 22/12/18 ,  23:28 &#10;integration of graphic Widet&#10;Pour run file, execute GraphicWindow.py" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -640,7 +661,7 @@
     <entry file="file://$PROJECT_DIR$/ExportParametersClass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -667,24 +688,10 @@
     <entry file="file://D:/telechargement/GuiGraphes-prototype/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://D:/telechargement/GuiGraphes/GuiClasses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="668" column="7" lean-forward="true" selection-start-line="668" selection-start-column="7" selection-end-line="668" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FileClass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="193" column="42" lean-forward="true" selection-start-line="193" selection-start-column="42" selection-end-line="193" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/telechargement/GuiGraphes/mainwindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="325" selection-start-line="325" selection-end-line="325" />
         </state>
       </provider>
     </entry>
@@ -705,16 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestFonctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="33" column="43" lean-forward="true" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
-          <folding>
-            <element signature="e#738#748#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bonjour2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -729,13 +726,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/telechargement/GuiGraphes/GuiClasses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="388" column="11" lean-forward="true" selection-start-line="388" selection-start-column="11" selection-end-line="388" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/telechargement/GuiGraphes/mainwindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="182" column="25" selection-start-line="182" selection-start-column="19" selection-end-line="182" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="404">
+          <caret line="227" selection-start-line="227" selection-end-line="227" />
           <folding>
-            <element signature="e#870#880#0" expanded="true" />
+            <element signature="e#1002#1013#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestFonctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
