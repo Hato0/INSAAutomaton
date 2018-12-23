@@ -17,20 +17,27 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
+import math
 import sys
 
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets, QtCore
 
-from FileClass import FilesBlock;
+from FileClass import FilesBlock
 
 
 class Window(QtWidgets.QMainWindow):
-
     def __init__(self):
         super(Window, self).__init__()
-        files = FilesBlock()
         self.setGeometry(50, 50, 1500, 800)
         self.setWindowTitle("AutoMates project")
         self.setWindowIcon(QtGui.QIcon('Picture/Logo.png'))
@@ -64,11 +71,10 @@ class Window(QtWidgets.QMainWindow):
         leave_action.setStatusTip('Quit the application')
         leave_action.triggered.connect(self.close_application)
         self.statusBar()
-        self.setCentralWidget(self.centralWidget())
 
-        main_menu = self.menuBar()
+        mainmenu = self.menuBar()
         """ Create the file drop down menu """
-        file_menu = main_menu.addMenu('&File')
+        file_menu = mainmenu.addMenu('&File')
         """ Add file parameters """
         file_menu.addAction(new_action)
         file_menu.addAction(open_action)
@@ -112,10 +118,40 @@ class Window(QtWidgets.QMainWindow):
         self.action_select_square.triggered.connect(self.create_states_square)
         self.menu_select_states.addAction(self.action_select_square)
 
-        self.toolBar = self.addToolBar("Able or Disable Tool Bar")
+        self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
         self.toolBar.addWidget(self.tbutton)
         self.toolBar.addAction(transition_action)
         self.toolBar.addAction(leave_action)
+
+        self.toolBar_list_states = self.addToolBar("Able or Disable states show")
+
+        self.setObjectName("main_window")
+        self.resize(903, 555)
+
+        self.centralWidget = QtWidgets.QWidget(self)
+        self.centralWidget.setObjectName("centralWidget")
+
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName("verticalLayout")
+
+        """ Graphic Views """
+        self.graphicsView = GraphWidget()
+        self.graphicsView.setObjectName("graphicsView")
+
+        """ Set vertical layout """
+
+        """ Graphic Scene """
+        self.setCentralWidget(self.centralWidget)
+
+        self.verticalLayout.addWidget(self.graphicsView)
+        self.retranslate_ui(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslate_ui(self, main_window):
+        _translate = QtCore.QCoreApplication.translate
+        main_window.setWindowTitle(_translate("main_window", "Graph GUI "))
 
         self.show()
 
@@ -171,6 +207,50 @@ class Window(QtWidgets.QMainWindow):
 
     def add_transition(self):
         pass
+
+
+class GraphWidget(QtWidgets.QGraphicsView):
+    """
+    Graph Widget definition
+    """
+    def __init__(self):
+        super(GraphWidget, self).__init__()
+
+        self.scene = Scene()
+        self.scene.setItemIndexMethod(QtWidgets.QGraphicsScene.NoIndex)
+        self.setScene(self.scene)
+        self.setCacheMode(QtWidgets.QGraphicsView.CacheBackground)
+        self.setViewportUpdateMode(QtWidgets.QGraphicsView.BoundingRectViewportUpdate)
+        self.setRenderHint(QtGui.QPainter.Antialiasing)
+        self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
+        self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        self.setDragMode(QtWidgets.QGraphicsView.RubberBandDrag)
+
+    def wheel_event(self, event):
+        """
+        We can zoom in/ zoom out the GraphicsView by using wheelButton of the mouse.
+        """
+        self.zoomView(math.pow(2.0, -event.angleDelta().y() / 200.0))
+
+    def zoom_view(self, zoom_factor):
+        """
+        Scale with the factor calculated.
+        """
+        factor = self.transform().scale(zoom_factor, zoom_factor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()
+        if factor < 0.09 or factor > 50:
+            return
+        self.scale(zoom_factor, zoom_factor)
+
+
+class Scene(QtWidgets.QGraphicsScene):
+    def __init__(self):
+        super(QtWidgets.QGraphicsScene, self).__init__()
+        self.state_selected = []
+        self.trans_selected = []
+        self.states_list = []
+        self.InvalidInMsg = QtWidgets.QMessageBox()
+        self.InvalidInMsg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        self.InvalidInMsg.setWindowTitle('Invalid input alert!')
 
 
 def run():
