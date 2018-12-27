@@ -9,30 +9,15 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-
 
 import math
 import sys
+from random import randint
 
 from PyQt5 import QtGui, QtWidgets, QtCore
 
 from FileClass import FilesBlock
+from StateClass import States
 
 
 class Window(QtWidgets.QMainWindow):
@@ -41,6 +26,8 @@ class Window(QtWidgets.QMainWindow):
         self.setGeometry(50, 50, 1500, 800)
         self.setWindowTitle("AutoMates project")
         self.setWindowIcon(QtGui.QIcon('Picture/Logo.png'))
+        self.graphicsView = GraphWidget()
+        self.graphicsView.setObjectName("graphicsView")
         """ Create new widget and associate it to new_application"""
         """ Define a file argument """
         new_action = QtWidgets.QAction("&New", self)
@@ -107,15 +94,15 @@ class Window(QtWidgets.QMainWindow):
         self.tbutton.setToolTip("Select state form")
 
         self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
-        self.action_select_circle.triggered.connect(self.create_states_circle)
+        #self.action_select_circle.triggered.connect(self.create_state_circle())
         self.menu_select_states.addAction(self.action_select_circle)
 
         self.action_select_rectangle = QtWidgets.QAction(QtGui.QIcon("Picture/Rectangle.png"), "Rectangle", self)
-        self.action_select_rectangle.triggered.connect(self.create_states_rectangle)
+        #self.action_select_rectangle.triggered.connect(self.create_states_rectangle())
         self.menu_select_states.addAction(self.action_select_rectangle)
 
         self.action_select_square = QtWidgets.QAction(QtGui.QIcon("Picture/square.png"), "Square", self)
-        self.action_select_square.triggered.connect(self.create_states_square)
+        #self.action_select_square.triggered.connect(self.create_states_square())
         self.menu_select_states.addAction(self.action_select_square)
 
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
@@ -193,16 +180,14 @@ class Window(QtWidgets.QMainWindow):
         if ok_pressed and header != '':
                 FilesBlock.save(file, header)
 
-    def create_states_circle(self):
-        print(1)
+    def create_state_circle(self):
+        #self.graphicsView.scene.create_states_circle()
         pass
 
     def create_states_rectangle(self):
-        print(2)
         pass
 
     def create_states_square(self):
-        print(3)
         pass
 
     def add_transition(self):
@@ -251,6 +236,25 @@ class Scene(QtWidgets.QGraphicsScene):
         self.InvalidInMsg = QtWidgets.QMessageBox()
         self.InvalidInMsg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         self.InvalidInMsg.setWindowTitle('Invalid input alert!')
+
+    def create_states_circle(self):
+        state = States()
+        self.addItem(state)
+        state.set_position_x(randint(-50, 50))
+        state.set_position_y(randint(-50, 50))
+        self.states_list.append(state)
+        self.update()
+
+    def create_states_rectangle(self):
+        print(2)
+        pass
+
+    def create_states_square(self):
+        print(3)
+        pass
+
+    def add_transition(self):
+        pass
 
 
 def run():

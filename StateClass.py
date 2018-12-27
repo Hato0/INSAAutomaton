@@ -9,26 +9,62 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
 
 
-class States:
+from TransitionClass import *
+
+
+class States(QGraphicsItem):
     registry = []
 
-    def __init__(self):
+    def __init__(self, graphWidget, name):
         """
         Initialisation of States Object
         """
+        super(States, self).__init__()
         self.registry.append(self)
         self.status = 1
+        self.selected = False
         self.name = ""
         self.position_x = 0
         self.position_y = 0
+        self.position = QtCore.QPointF()
+        self.setFlag(QGraphicsItem.ItemIsMovable)
+        self.setFlag(QGraphicsItem.ItemSendsGeometryChanges)
+        self.setFlag(QGraphicsItem.ItemIsSelectable)
+        self.setCursor(Qt.OpenHandCursor)
         self.link = []
         self.color = ""
         self.shape = ""
         self.link_name = []
         self.attributeletter = ""
+
+    def move_state(self, position_x, position_y):
+        if self.newPosition == self.pos():
+            return False
+        self.setPos(position_x, position_y)
+        return True
+
+    def shape_determination(self):
+        figure = QtGui.QPainterPath()
+        figure.addEllipse(-15, -15, 30, 30)
+        figure.addRect(100, 200, 11, 16)
+        figure.addRect(100, 100, 11, 11)
+        return figure
+
+    def state_color(self, painter, option, widget):
+        if self.selected:
+            painter.setPen(Qt.black)
+            painter.setBrush(QColor(self.get_color()))
+            painter.drawEllipse(QtCore.QRectF(-20 / 2, -20 / 2, 20, 20))
+            painter.drawText(QtCore.QRect(-10, -10, 20, 20), QtCore.Qt.AlignCenter, self.name)
+            self.update()
+
+    def movement(self, change, value):
+        if change == QGraphicsItem.ItemPositionHasChanged:
+            for transition in self.link:
+                transition.adjust()
+        return super(States, self).movement(change, value)
 
     def get_status(self):
         """
