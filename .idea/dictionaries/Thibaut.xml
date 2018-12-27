@@ -23,6 +23,7 @@
       <w>createinitial</w>
       <w>createstate</w>
       <w>deplace</w>
+      <w>dest</w>
       <w>déjà</w>
       <w>enlimination</w>
       <w>entrez</w>
@@ -42,6 +43,7 @@
       <w>iterateur</w>
       <w>iterateurbis</w>
       <w>linebis</w>
+      <w>lompech</w>
       <w>mainmenu</w>
       <w>mainwindow</w>
       <w>mainwindowmanual</w>
@@ -68,6 +70,7 @@
       <w>statusbar</w>
       <w>statut</w>
       <w>supress</w>
+      <w>tbutton</w>
       <w>tikz</w>
       <w>tikzpicture</w>
       <w>usepackage</w>

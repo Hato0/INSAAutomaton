@@ -9,7 +9,13 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
+
+from PyQt5 import QtCore, QtGui
 
 from TransitionClass import *
 
@@ -17,7 +23,7 @@ from TransitionClass import *
 class States(QGraphicsItem):
     registry = []
 
-    def __init__(self, graphWidget, name):
+    def __init__(self):
         """
         Initialisation of States Object
         """
@@ -45,14 +51,15 @@ class States(QGraphicsItem):
         self.setPos(position_x, position_y)
         return True
 
-    def shape_determination(self):
+    @staticmethod
+    def shape_determination():
         figure = QtGui.QPainterPath()
         figure.addEllipse(-15, -15, 30, 30)
         figure.addRect(100, 200, 11, 16)
         figure.addRect(100, 100, 11, 11)
         return figure
 
-    def state_color(self, painter, option, widget):
+    def state_color(self, painter):
         if self.selected:
             painter.setPen(Qt.black)
             painter.setBrush(QColor(self.get_color()))

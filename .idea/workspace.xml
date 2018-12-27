@@ -6,18 +6,26 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="53" />
-    <bookmark url="file://$PROJECT_DIR$/StateClass.py" line="225" />
+    <bookmark url="file://$PROJECT_DIR$/StateClass.py" line="229" />
     <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="127" />
     <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="54" />
+    <bookmark url="file://$PROJECT_DIR$/StateParameters.py" line="24" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ba40801-7b01-43fd-96a8-119429dff4bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ActionClass.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TransitionClass.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StateParameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Thibaut.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Thibaut.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExportParametersClass.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ActionClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/ActionClass.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GraphicWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphicWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphicWindowTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestForPython/GraphicWindowTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/StateClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/StateClass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestFonctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestForPython/TestFonctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitionClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/TransitionClass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_gerantfichier.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestForPython/test_gerantfichier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_states.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestForPython/test_states.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FileClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="176" column="11" lean-forward="true" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
+            <state relative-caret-position="-113">
+              <caret line="181" column="42" lean-forward="true" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -39,19 +47,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="243" column="8" lean-forward="true" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
+            <state relative-caret-position="113">
+              <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+              <folding>
+                <element signature="e#472#482#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ActionClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="50" column="40" lean-forward="true" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
+            <state relative-caret-position="280">
+              <caret line="113" column="51" lean-forward="true" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
               <folding>
-                <element signature="e#341#383#0" expanded="true" />
+                <element signature="e#342#384#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StateClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+            <state relative-caret-position="-17">
+              <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -69,31 +80,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TransitionClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+            <state relative-caret-position="-1134">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/StateParameters.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
               <folding>
-                <element signature="e#343#385#0" expanded="true" />
+                <element signature="e#341#351#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/telechargement/GuiGraphes/mainwindow.py">
+        <entry file="file://$PROJECT_DIR$/TestForPython/GraphicWindowTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2175">
-              <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/telechargement/GuiGraphes/GuiClasses.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="652" column="46" lean-forward="true" selection-start-line="652" selection-start-column="46" selection-end-line="652" selection-end-column="46" />
+            <state relative-caret-position="187">
+              <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="24" selection-end-column="35" />
               <folding>
-                <element signature="e#128#138#0" expanded="true" />
+                <element signature="e#343#353#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -110,11 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>add_new</find>
-      <find>create_states</find>
-      <find>tbutton</find>
-      <find>MainW</find>
-      <find>vert</find>
       <find>GraphWi</find>
       <find>zoomView</find>
       <find>wheelEvent</find>
@@ -140,6 +146,11 @@
       <find>state</find>
       <find>MainWin</find>
       <find>val</find>
+      <find>ver</find>
+      <find>vert</find>
+      <find>items()</find>
+      <find>QL</find>
+      <find>W</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,10 +195,12 @@
         <option value="D:/telechargement/GuiGraphes/mainwindow.py" />
         <option value="$PROJECT_DIR$/bonjourtest.txt" />
         <option value="$PROJECT_DIR$/TransitonClass.py" />
-        <option value="$PROJECT_DIR$/TransitionClass.py" />
         <option value="$PROJECT_DIR$/StateClass.py" />
+        <option value="$PROJECT_DIR$/TransitionClass.py" />
         <option value="$PROJECT_DIR$/GraphicWindow.py" />
         <option value="$PROJECT_DIR$/ActionClass.py" />
+        <option value="$PROJECT_DIR$/TestForPython/GraphicWindowTest.py" />
+        <option value="$PROJECT_DIR$/StateParameters.py" />
       </list>
     </option>
   </component>
@@ -203,6 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,13 +227,12 @@
             <path>
               <item name="INSAAutomaton" type="b2602c69:ProjectViewProjectNode" />
               <item name="INSAAutomaton" type="462c0819:PsiDirectoryNode" />
-              <item name="Picture" type="462c0819:PsiDirectoryNode" />
+              <item name="TestForPython" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -238,6 +251,14 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Thibaut\PycharmProjects\INSAAutomaton\TestForPython" />
+      <recent name="C:\Users\Thibaut\PycharmProjects\INSAAutomaton" />
+      <recent name="C:\Users\Thibaut\PycharmProjects\INSAAutomaton\" />
+      <recent name="C:\Users\Thibaut\PycharmProjects\INSAAutomaton\TestFile" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -250,7 +271,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.GraphicWindow">
+  <component name="RunManager" selected="Python.StateParameters">
     <configuration name="DefinitionClasse" type="PythonConfigurationType" factoryName="Python">
       <module name="Automate" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -311,7 +332,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="GraphicWindowTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="GraphicWindowTest (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Automate" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -319,11 +340,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestForPython" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GraphicWindowTest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestForPython/GraphicWindowTest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -353,6 +374,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="StateParameters" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Automate" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StateParameters.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestFonctions" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Automate" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -365,7 +407,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestFonctions.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Thibaut\PycharmProjects\INSAAutomaton\TestForPython\TestFonctions.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -395,34 +437,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="mainwindow" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Automate" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="D:/telechargement/GuiGraphes-prototype" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:/telechargement/GuiGraphes-prototype/mainwindow.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.StateParameters" />
+        <item itemvalue="Python.GraphicWindowTest (1)" />
         <item itemvalue="Python.GraphicWindow" />
         <item itemvalue="Python.mainwindow (1)" />
         <item itemvalue="Python.TestFonctions" />
-        <item itemvalue="Python.GraphicWindowTest" />
-        <item itemvalue="Python.mainwindow" />
       </list>
     </recent_temporary>
   </component>
@@ -521,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545585515176</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Update 27/12/18 ,  11:15&#10;Graphic tools bar functional&#10;Save an import now works correctly &#10;Transition and State now appears&#10;To run file, execute GraphicWindow.py">
+      <created>1545905715425</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1545905715425</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers>
       <GitHub url="https://gist.github.com/Hato0" />
     </servers>
@@ -555,7 +583,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.21104816" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" weight="0.28895184" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4976867" visible="true" weight="0.32152975" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23087819" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -563,7 +591,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49733475" weight="0.08017335" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.28045326" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50231326" side_tool="true" weight="0.28895184" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" weight="0.20113315" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" weight="0.33427763" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.17162699" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -572,12 +600,12 @@
       <window_info anchor="right" id="R Packages" order="4" weight="0.32995737" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.19497687" />
+      <window_info content_ui="combo" id="Project" order="0" side_tool="true" weight="0.19497687" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.21104816" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" weight="0.28895184" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" weight="0.32152975" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23087819" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -585,7 +613,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49733475" weight="0.08017335" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.28045326" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50231326" side_tool="true" weight="0.28895184" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" visible="true" weight="0.20113315" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" visible="true" weight="0.33427763" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.17162699" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -608,20 +636,21 @@
     <MESSAGE value="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Save an import now works correctly&#10;Pour run file, execute GraphicWindow.py" />
     <MESSAGE value="Update 22/12/18 ,  23:28 &#10;integration of graphic Widet&#10;Pour run file, execute GraphicWindow.py" />
     <MESSAGE value="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Save an import now works correctly &#10;Have to program the mouse Event&#10;Pour run file, execute GraphicWindow.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update 22/12/18 ,  23:28 &#10;Graphic tools bar functional&#10;Save an import now works correctly &#10;Have to program the mouse Event&#10;Pour run file, execute GraphicWindow.py" />
+    <MESSAGE value="Update 27/12/18 ,  11:15&#10;Graphic tools bar functional&#10;Save an import now works correctly &#10;Transition and State now appears&#10;To run file, execute GraphicWindow.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update 27/12/18 ,  11:15&#10;Graphic tools bar functional&#10;Save an import now works correctly &#10;Transition and State now appears&#10;To run file, execute GraphicWindow.py" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../Aidepoto/venv/Lib/site-packages/pip/_internal/vcs/git.py" />
-    <entry file="file://$PROJECT_DIR$/test_states.py">
+    <entry file="file://$PROJECT_DIR$/TestForPython/test_states.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_gerantfichier.py">
+    <entry file="file://$PROJECT_DIR$/TestForPython/test_gerantfichier.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="19" />
@@ -702,72 +731,49 @@
     <entry file="file://D:/telechargement/GuiGraphes-prototype/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraphicWindowTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-          <folding>
-            <element signature="e#343#385#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bonjour2.txt">
+    <entry file="file://$PROJECT_DIR$/TestFileTxt/bonjour2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bonjour.txt">
+    <entry file="file://$PROJECT_DIR$/TestFileTxt/bonjour.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestFonctions.py">
+    <entry file="file://$PROJECT_DIR$/TestForPython/TestFonctions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExportParametersClass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bonjourtest.txt">
+    <entry file="file://$PROJECT_DIR$/ExportParametersClass.py" />
+    <entry file="file://$PROJECT_DIR$/TestFileTxt/bonjourtest.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FileClass.py">
+    <entry file="file://D:/telechargement/GuiGraphes/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="176" column="11" lean-forward="true" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
+        <state relative-caret-position="510">
+          <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-520954362/PyQt5/QtWidgets/QGraphicsItem.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="414" column="18" lean-forward="true" selection-start-line="414" selection-start-column="18" selection-end-line="414" selection-end-column="18" />
+        <state relative-caret-position="227">
+          <caret line="420" column="8" selection-start-line="420" selection-start-column="8" selection-end-line="420" selection-end-column="8" />
           <folding>
             <element signature="e#176#213#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/telechargement/GuiGraphes/mainwindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2175">
-          <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -781,36 +787,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
+    <entry file="file://$PROJECT_DIR$/FileClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="243" column="8" lean-forward="true" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StateClass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+        <state relative-caret-position="-113">
+          <caret line="181" column="42" lean-forward="true" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TransitionClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="e#343#385#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1134">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StateClass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ActionClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="50" column="40" lean-forward="true" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
+        <state relative-caret-position="280">
+          <caret line="113" column="51" lean-forward="true" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
           <folding>
-            <element signature="e#341#383#0" expanded="true" />
+            <element signature="e#342#384#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-520954362/PyQt5/QtWidgets/QMainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+          <folding>
+            <element signature="e#472#482#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestForPython/GraphicWindowTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="24" selection-end-column="35" />
+          <folding>
+            <element signature="e#343#353#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StateParameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+          <folding>
+            <element signature="e#341#351#0" expanded="true" />
           </folding>
         </state>
       </provider>

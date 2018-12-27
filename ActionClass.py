@@ -9,10 +9,10 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-import math
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import *
+
+from GraphicWindow import *
+from StateClass import *
 
 
 class Scene(QGraphicsScene):
@@ -20,7 +20,6 @@ class Scene(QGraphicsScene):
         super(QGraphicsScene, self).__init__()
         self.state_selected = []
         self.trans_selected = []
-        self.states_list = []
         self.InvalidInMsg = QMessageBox()
         self.InvalidInMsg.setStandardButtons(QMessageBox.Ok)
         self.InvalidInMsg.setWindowTitle('Invalid input !')
@@ -49,13 +48,14 @@ class Scene(QGraphicsScene):
         if event.key() == QtCore.Qt.Key_Delete:
             self.delete_selected_states()
 
-    def mouseDoubleClickEvent(self,event):
+    def mouseDoubleClickEvent(self, event):
         """
         CHANGE TO OPEN WINDOW PARAMETERS
         Rename with double mouse click
         """
         self.select_elements(event)
-        self.rename()
+        self.get
+        self.StateParameters
 
     def mousePressEvent(self, event):
         """
@@ -104,18 +104,21 @@ class Scene(QGraphicsScene):
         """
         Change color and status of chosen items. Add to list state_selected or trans_selected
         """
-        element  = self.itemAt(event.scenePos(), QtGui.QTransform()) # get item clicked on at this position in scene
-        # if it is a state,and not chosen yet, choose it add to state_selected,  if it is already chosen we deselect it and remove from state_selected
-        if isinstance(element,State):
-            if element.selected == False:
+        element = self.itemAt(event.scenePos(), QtGui.QTransform())
+        """ get item clicked on at this position in scene """
+        """ if it is a state,and not chosen yet, choose it add to state_selected,  if it is already chosen we deselect 
+        it and remove from state_selected"""
+        if isinstance(element, States):
+            if not element.selected:
                 element.selected = True
                 self.state_selected.append(element)
             else:
                 element.selected = False
                 self.state_selected.remove(element)
-        # if it is a transition or self-transition,and not chosen yet, choose it add to trans_selected,  if it is already chosen we deselect it and remove from trans_selected
-        if isinstance(element,Transition) or isinstance(element,selfTransition) :
-            if element.selected == False:
+        """ if it is a transition or self-transition,and not chosen yet, choose it add to trans_selected,  if it is 
+        already chosen we deselect it and remove from trans_selected """
+        if isinstance(element, Transition) or isinstance(element, SelfTransition):
+            if not element.selected:
                 element.selected = True
                 self.trans_selected.append(element)
             else:
@@ -128,30 +131,30 @@ class Scene(QGraphicsScene):
         Create transition between 2 chosen state. The first chosen one is source, the second is destination
         We can choose one state to create a transition towards itself.
         """
-        trans_val, ok = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
+        trans_val, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
             'Enter Transition Name:')
-        if ok:
-            # If 2 states are chosen, create a transition with a name between these.
+        if ok_pressed:
+            """ If 2 states are chosen, create a transition with a name between these. """
             if len(self.state_selected)== 2:
-                # Check if between 2 states there is already a transition
+                """ Check if between 2 states there is already a transition """
                 for trans in self.items():
-                    if isinstance(trans,Transition):
+                    if isinstance(trans, Transition):
                         if trans.source == self.state_selected[0] and trans.dest == self.state_selected[1]:
                             self.InvalidInMsg.setText('Transition already exists')
                             self.InvalidInMsg.exec_()
                             self.deselect_states()
                             return
-                # If there isn't, we create a new transition
+                """ If there isn't, we create a new transition """
                 self.addItem(Transition(self.state_selected[0],self.state_selected[1], trans_val))
                 self.deselect_states()
                 self.update()
             elif len(self.state_selected) == 1:
-                # if only 1 state is chosen, we create a self-transition of that state
-                self.addItem(selfTransition(self.state_selected[0],trans_val))
+                """ if only 1 state is chosen, we create a self-transition of that state """
+                self.addItem(SelfTransition(self.state_selected[0],trans_val))
                 self.deselect_states()
                 self.update()
             else:
-                # if we choose > 2 transition, we can not create a transition
+                """ if we choose > 2 transition, we can not create a transition """
                 self.InvalidInMsg.setText('Must select 2 states to create transition')
                 self.InvalidInMsg.exec_()
 
@@ -159,15 +162,15 @@ class Scene(QGraphicsScene):
         """
         Delete chosen state and all transitions connect to it.
         """
-        for state in self.state_selected: # for each of the selected states
-            for i in range(len(state.TransitionList)):
-                self.removeItem(state.TransitionList[i])
+        for state in self.state_selected:
+            for i in range(len(state.link)):
+                self.removeItem(state.link[i])
             self.removeItem(state)
         for state in self.selectedItems():
             # check on all selected items, if there are states then delete them.
-            if isinstance(state,State):
-                for i in range(len(state.TransitionList)):
-                    self.removeItem(state.TransitionList[i])
+            if isinstance(state,States):
+                for i in range(len(state.link)):
+                    self.removeItem(state.link[i])
                 self.removeItem(state)
                 state.setSelected(0)
         self.state_selected = []
@@ -192,7 +195,7 @@ class Scene(QGraphicsScene):
             #self.trans_list.remove(state)
         for transition in self.selectedItems():
             # check on all selected items, if there are states then delete them.
-            if isinstance(transition,Transition) or isinstance(transition,selfTransition):
+            if isinstance(transition,Transition) or isinstance(transition,SelfTransition):
                 self.removeItem(transition)
                 transition.setSelected(0)
         self.trans_selected = []

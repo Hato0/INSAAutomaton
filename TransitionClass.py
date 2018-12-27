@@ -10,6 +10,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import math
 
@@ -20,6 +24,9 @@ from PyQt5.QtWidgets import *
 
 
 class Transition(QGraphicsItem):
+    mid_x: float
+    mid_y: float
+
     def __init__(self, state_source, state_final, name):
         super(Transition, self).__init__()
         self.arrow_size = 5
@@ -46,15 +53,15 @@ class Transition(QGraphicsItem):
     def adjust(self):
         if not self.start or not self.end:
             pass
-        if self.final_point.x() - self.source_point.x() > 0 :
+        if self.final_point.x() - self.source_point.x() > 0:
             line = QLineF(self.mapFromItem(self.start, 0, -3), self.mapFromItem(self.end, 0, -3))
         else:
-            line = QLineF(self.mapFromItem(self.start, 0, 3),self.mapFromItem(self.dest, 0, 3))
+            line = QLineF(self.mapFromItem(self.start, 0, 3), self.mapFromItem(self.dest, 0, 3))
         length = line.lenght()
 
         self.prepareGeometryChange()
 
-        if length > 20 :
+        if length > 20:
             state_offset = QtCore.QPointF((line.dx()*10)/length, (line.dy()*10)/length)
             self.source_point = line.p1() + state_offset
             self.final_point = line.p2() - state_offset
@@ -68,11 +75,11 @@ class Transition(QGraphicsItem):
         pen_width = 1
         extra = (pen_width + self.arrow_size)/2
 
-        return QRectF(self.source_point,QSizeF(self.final_point.x() - self.source_point.x(), self.final_point.y()-
-                                               self.source_point.y())).normalized()\
+        return QRectF(self.source_point, QSizeF(self.final_point.x() - self.source_point.x(), self.final_point.y() -
+                                                self.source_point.y())).normalized()\
             .adjusted(-extra, -extra, extra, extra)
 
-    def paint(self, painter, option, widget):
+    def painted(self, painter):
         if not self.start or not self.end:
             pass
         line = QLineF(self.source_point, self.final_point)
@@ -98,7 +105,7 @@ class Transition(QGraphicsItem):
         if self.final_point.x() - self.final_point.x() > 0:
             painter.drawText(self.mid_x - 10, self.mid_y - 10, self.name)
         else:
-            painter.drawText(self.mid_x - 10, self.mid_y + 20 , self.name)
+            painter.drawText(self.mid_x - 10, self.mid_y + 20, self.name)
         self.update()
 
 
@@ -125,7 +132,7 @@ class SelfTransition(Transition):
                                                self.sourcePoint.y() - 100)).normalized().\
             adjusted(-extra, -extra, extra, extra)
 
-    def paint(self, painter, option, widget):
+    def painted(self, painter):
         """
         Draw the transition on scene, change the color of transition when we select it
         """

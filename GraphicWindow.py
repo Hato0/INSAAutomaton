@@ -9,18 +9,27 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-
-import math
-import sys
-from random import randint
-
-from PyQt5 import QtGui, QtWidgets, QtCore
-
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+from ActionClass import *
 from FileClass import FilesBlock
 from StateClass import States
 
 
 class Window(QtWidgets.QMainWindow):
+
+    action_select_square: QAction
+    action_select_circle: QAction
+    menu_select_states: QMenu
+    tbutton: QToolButton
+    action_select_rectangle: QAction
+    toolBar: QToolBar
+    toolBar_list_states: QToolBar
+    centralWidget: QWidget
+    verticalLayout: QVBoxLayout
+
     def __init__(self):
         super(Window, self).__init__()
         self.setGeometry(50, 50, 1500, 800)
@@ -94,15 +103,15 @@ class Window(QtWidgets.QMainWindow):
         self.tbutton.setToolTip("Select state form")
 
         self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
-        #self.action_select_circle.triggered.connect(self.create_state_circle())
+        """ self.action_select_circle.triggered.connect(self.create_state_circle()) """
         self.menu_select_states.addAction(self.action_select_circle)
 
         self.action_select_rectangle = QtWidgets.QAction(QtGui.QIcon("Picture/Rectangle.png"), "Rectangle", self)
-        #self.action_select_rectangle.triggered.connect(self.create_states_rectangle())
+        """ self.action_select_rectangle.triggered.connect(self.create_states_rectangle()) """
         self.menu_select_states.addAction(self.action_select_rectangle)
 
         self.action_select_square = QtWidgets.QAction(QtGui.QIcon("Picture/square.png"), "Square", self)
-        #self.action_select_square.triggered.connect(self.create_states_square())
+        """ self.action_select_square.triggered.connect(self.create_states_square()) """
         self.menu_select_states.addAction(self.action_select_square)
 
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
@@ -181,8 +190,7 @@ class Window(QtWidgets.QMainWindow):
                 FilesBlock.save(file, header)
 
     def create_state_circle(self):
-        #self.graphicsView.scene.create_states_circle()
-        pass
+        self.graphicsView.scene.create_states_circle()
 
     def create_states_rectangle(self):
         pass
@@ -227,9 +235,9 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.scale(zoom_factor, zoom_factor)
 
 
-class Scene(QtWidgets.QGraphicsScene):
+class Scene(QGraphicsScene):
     def __init__(self):
-        super(QtWidgets.QGraphicsScene, self).__init__()
+        super(QGraphicsScene, self).__init__()
         self.state_selected = []
         self.trans_selected = []
         self.states_list = []
@@ -246,11 +254,9 @@ class Scene(QtWidgets.QGraphicsScene):
         self.update()
 
     def create_states_rectangle(self):
-        print(2)
         pass
 
     def create_states_square(self):
-        print(3)
         pass
 
     def add_transition(self):
@@ -258,6 +264,7 @@ class Scene(QtWidgets.QGraphicsScene):
 
 
 def run():
+    gui: Window
     app = QtWidgets.QApplication(sys.argv)
     gui = Window()
     sys.exit(app.exec_())
