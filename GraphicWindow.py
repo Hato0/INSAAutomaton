@@ -6,37 +6,34 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+
+from PyQt5 import QtWidgets
+
 from ActionClass import *
 from FileClass import FilesBlock
-from StateClass import States
+from StateClass import *
+from TransitionClass import *
 
 
 class Window(QtWidgets.QMainWindow):
 
     action_select_square: QAction
     action_select_circle: QAction
+    action_select_rectangle: QAction
     menu_select_states: QMenu
     tbutton: QToolButton
-    action_select_rectangle: QAction
     toolBar: QToolBar
     toolBar_list_states: QToolBar
     centralWidget: QWidget
     verticalLayout: QVBoxLayout
 
-    def __init__(self):
-        super(Window, self).__init__()
+    def setup_total(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(903, 555)
         self.setGeometry(50, 50, 1500, 800)
         self.setWindowTitle("AutoMates project")
         self.setWindowIcon(QtGui.QIcon('Picture/Logo.png'))
-        self.graphicsView = GraphWidget()
-        self.graphicsView.setObjectName("graphicsView")
+
         """ Create new widget and associate it to new_application"""
         """ Define a file argument """
         new_action = QtWidgets.QAction("&New", self)
@@ -78,11 +75,6 @@ class Window(QtWidgets.QMainWindow):
         file_menu.addAction(export_action)
         file_menu.addAction(leave_action)
         """ Start the home def """
-        self.home()
-
-    def home(self):
-        """
-        """
         """ Define an icon shortcut with under_text while mouse is on """
         leave_action = QtWidgets.QAction(QtGui.QIcon('Picture/QuitIcon.png'), 'Quit the application', self)
         """ Make the button work """
@@ -90,6 +82,10 @@ class Window(QtWidgets.QMainWindow):
         """ Define button to create new transition """
         transition_action = QtWidgets.QAction(QtGui.QIcon('Picture/Arrow.png'), 'Create transitions', self)
         transition_action.triggered.connect(self.add_transition)
+
+        """ Graphic Views """
+        self.graphicsView = GraphWidget()
+        self.graphicsView.setObjectName("graphicsView")
 
         """ Make the extract_action widget a toolBar which can be move everywhere on the window | Right clic on the top
          able or disable the option"""
@@ -103,15 +99,15 @@ class Window(QtWidgets.QMainWindow):
         self.tbutton.setToolTip("Select state form")
 
         self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
-        """ self.action_select_circle.triggered.connect(self.create_state_circle()) """
+        self.action_select_circle.triggered.connect(self.create_state_circle)
         self.menu_select_states.addAction(self.action_select_circle)
 
         self.action_select_rectangle = QtWidgets.QAction(QtGui.QIcon("Picture/Rectangle.png"), "Rectangle", self)
-        """ self.action_select_rectangle.triggered.connect(self.create_states_rectangle()) """
+        self.action_select_rectangle.triggered.connect(self.create_states_rectangle)
         self.menu_select_states.addAction(self.action_select_rectangle)
 
         self.action_select_square = QtWidgets.QAction(QtGui.QIcon("Picture/square.png"), "Square", self)
-        """ self.action_select_square.triggered.connect(self.create_states_square()) """
+        self.action_select_square.triggered.connect(self.create_states_square)
         self.menu_select_states.addAction(self.action_select_square)
 
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
@@ -127,16 +123,12 @@ class Window(QtWidgets.QMainWindow):
         self.centralWidget = QtWidgets.QWidget(self)
         self.centralWidget.setObjectName("centralWidget")
 
+        """ Set vertical layout """
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName("verticalLayout")
-
-        """ Graphic Views """
-        self.graphicsView = GraphWidget()
-        self.graphicsView.setObjectName("graphicsView")
-
-        """ Set vertical layout """
 
         """ Graphic Scene """
         self.setCentralWidget(self.centralWidget)
@@ -183,23 +175,23 @@ class Window(QtWidgets.QMainWindow):
         file = FilesBlock()
         text = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File')
         header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
-                                                            "the save file(optional)",
+                                                                                 "the save file(optional)",
                                                             QtWidgets.QLineEdit.Normal, "")
         file.set_name(text[0])
         if ok_pressed and header != '':
-                FilesBlock.save(file, header)
+            FilesBlock.save(file, header)
 
     def create_state_circle(self):
-        self.graphicsView.scene.create_states_circle()
+        self.graphicsView.scene.create_state(1)
 
     def create_states_rectangle(self):
-        pass
+        self.graphicsView.scene.create_state(2)
 
     def create_states_square(self):
-        pass
+        self.graphicsView.scene.create_state(3)
 
     def add_transition(self):
-        pass
+        self.graphicsView.scene.create_transition()
 
 
 class GraphWidget(QtWidgets.QGraphicsView):
@@ -235,39 +227,12 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.scale(zoom_factor, zoom_factor)
 
 
-class Scene(QGraphicsScene):
-    def __init__(self):
-        super(QGraphicsScene, self).__init__()
-        self.state_selected = []
-        self.trans_selected = []
-        self.states_list = []
-        self.InvalidInMsg = QtWidgets.QMessageBox()
-        self.InvalidInMsg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        self.InvalidInMsg.setWindowTitle('Invalid input alert!')
-
-    def create_states_circle(self):
-        state = States()
-        self.addItem(state)
-        state.set_position_x(randint(-50, 50))
-        state.set_position_y(randint(-50, 50))
-        self.states_list.append(state)
-        self.update()
-
-    def create_states_rectangle(self):
-        pass
-
-    def create_states_square(self):
-        pass
-
-    def add_transition(self):
-        pass
-
-
-def run():
-    gui: Window
+if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
-    gui = Window()
+    MainWindow = QtWidgets.QMainWindow()
+    MainWindowManual = QtWidgets.QMainWindow()
+    ui = Window()
+    ui.setup_total(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())
-
-
-run()

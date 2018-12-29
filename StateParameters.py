@@ -6,14 +6,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
-import sys
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QDialog, QLineEdit, QFormLayout, QApplication, QPushButton
+from PyQt5.QtWidgets import QDialog, QLineEdit, QFormLayout, QPushButton
 
 
 class StateParameters(QDialog):
@@ -58,6 +54,7 @@ class StateParameters(QDialog):
         self.push_button = QPushButton()
         self.push_button.setObjectName("connect")
         self.push_button.setText("Validate")
+        self.push_button.clicked.connect(self.end_window)
 
         layout = QFormLayout()
         layout.addWidget(self.name_get)
@@ -71,7 +68,9 @@ class StateParameters(QDialog):
 
         self.setLayout(layout)
 
-app = QApplication(sys.argv)
-state_parameters = StateParameters()
-state_parameters.show()
-app.exec_()
+    def end_window(self):
+        self.close()
+        return self.name_get, self.status_get, self.position_x_get, self.position_y_get, self.color_get, self.shape_get
+
+
+

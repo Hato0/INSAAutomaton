@@ -6,16 +6,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
-from PyQt5 import QtCore, QtGui
+
+from PyQt5 import QtGui
 
 from TransitionClass import *
 
@@ -34,6 +28,7 @@ class States(QGraphicsItem):
         self.name = ""
         self.position_x = 0
         self.position_y = 0
+        self.arrowSize = 5
         self.position = QtCore.QPointF()
         self.setFlag(QGraphicsItem.ItemIsMovable)
         self.setFlag(QGraphicsItem.ItemSendsGeometryChanges)
@@ -58,6 +53,86 @@ class States(QGraphicsItem):
         figure.addRect(100, 200, 11, 16)
         figure.addRect(100, 100, 11, 11)
         return figure
+
+    def boundingRect(self):
+        param = 2
+        return QtCore.QRectF(-10 - param, -10 - param, 23 + param, 23 + param)
+
+    def paint(self, painter, option, widget):
+        """
+        Set color for States , change color when select and deselect state
+
+        """
+        if self.selected:
+            """In this case, we choose as right click"""
+            self.setSelected(0)
+            """if the state is seleted paint it orange"""
+            """Set pen to black"""
+            painter.setPen(Qt.black)
+            painter.setBrush(QColor(223,50, 0, 255))
+            """paint the initial state orange when selected and keep the arrow. Description for drawing arrow is 
+            explained in method Transition.paint()"""
+            if self.status == 0:
+                arrow = QPointF(-10, 0)
+                line = QLineF(-30, 0, -10,0)
+                angle = math.acos(line.dx() / line.length())
+                if line.dy() >= 0:
+                    angle = math.pi * 2 - angle
+                destArrowP1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
+                                                     math.cos(angle - math.pi / 3) * self.arrowSize)
+                destArrowP2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
+                                                     math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
+                painter.drawPolygon(QPolygonF([line.p2(), destArrowP1, destArrowP2 ]))
+                painter.setPen(Qt.black)
+                painter.drawLine(-10, 0, -30, 0)
+                """paint the final state orange when selected, keep the outside circle"""
+            elif self.status == 2:
+                painter.drawEllipse(QtCore.QRectF(-25 / 2.0, -25 / 2.0, 25, 25))
+                """draw the state initial"""
+        elif self.isSelected():
+            """In this case, we choose as left click or choose mouse area by left click"""
+            """pain it green when selected"""
+            painter.setPen(Qt.black)
+            painter.setBrush(Qt.green)
+            if self.status == 0:
+                arrow = QPointF(-10, 0)
+                line = QLineF(-30, 0, -10,0)
+                angle = math.acos(line.dx() / line.length())
+                if line.dy() >= 0:
+                    angle = math.pi * 2 - angle
+                destArrowP1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
+                                                          math.cos(angle - math.pi / 3) * self.arrowSize)
+                destArrowP2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
+                                                          math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
+                painter.drawPolygon(QPolygonF([line.p2(), destArrowP1, destArrowP2 ]))
+                painter.setPen(Qt.black)
+                painter.drawLine(-10, 0, -30, 0)
+            elif self.status == 2:
+                painter.drawEllipse(QtCore.QRectF(-25 / 2.0, -25 / 2.0, 25, 25)) # draw the state initial
+            """draw the initial state (when we create or unselected)"""
+        elif self.status == 0:
+                arrow = QPointF(-10, 0)
+                line = QLineF(-30, 0, -10,0)
+                angle = math.acos(line.dx() / line.length())
+                if line.dy() >= 0:
+                    angle = math.pi * 2 - angle
+                destArrowP1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
+                                                             math.cos(angle - math.pi / 3) * self.arrowSize)
+                destArrowP2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
+                                                              math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
+                painter.drawPolygon(QPolygonF([line.p2(), destArrowP1, destArrowP2 ]))
+                painter.setPen(Qt.black)
+                painter.drawLine(-10, 0, -30, 0)
+                """draw the final state (when we create or unselected)"""
+        elif self.status == 2:
+            painter.drawEllipse(QtCore.QRectF(-25 / 2.0, -25 / 2.0, 25, 25))
+        else:
+            """draw the normal state (when we create or unselected)"""
+            painter.setPen(Qt.black)
+            painter.setBrush(Qt.white)
+        painter.drawEllipse(QtCore.QRectF(-20 / 2.0, -20 / 2.0, 20, 20))
+        painter.drawText(QtCore.QRect(-10, -10, 20, 20), QtCore.Qt.AlignCenter, self.val)
+        self.update()
 
     def state_color(self, painter):
         if self.selected:
@@ -241,26 +316,23 @@ class States(QGraphicsItem):
         self.attributeletter = v
 
 
-"""
-pomme = States()
-pomme.set_name("States1")
-pomme.set_position_x(0)
-pomme.set_position_y(1)
-pomme.set_color("blue")
-pomme.set_shape("circle")
-pomme.set_attributeletter("A")
-pomme.set_status(0)
+"""     pomme = States()
+        pomme.set_name("States1")
+        pomme.set_position_x(0)
+        pomme.set_position_y(1)
+        pomme.set_color("blue")
+        pomme.set_shape("circle")
+        pomme.set_attributeletter("A")
+        pomme.set_status(0)
+        apple = States()
+        apple.set_name("States2")
+        apple.set_position_x(1)
+        apple.set_position_y(3)
+        apple.set_color("red")
+        apple.set_shape("rectangle")
+        apple.set_attributeletter("B")
+        apple.set_status(2)
 
-apple = States()
-apple.set_name("States2")
-apple.set_position_x(1)
-apple.set_position_y(3)
-apple.set_color("red")
-apple.set_shape("rectangle")
-apple.set_attributeletter("B")
-apple.set_status(2)
-
-
-test = apple.get_attributeletter()
-pomme.add_link(test)
-pomme.add_link_name("test_link") """
+        test = apple.get_attributeletter()
+        pomme.add_link(test)
+        pomme.add_link_name("test_link")    """
