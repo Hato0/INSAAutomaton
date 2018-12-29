@@ -13,25 +13,33 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtWidgets import QAction, QMenu, QToolButton, QToolBar, QWidget, QVBoxLayout
+
 from ActionClass import *
 from FileClass import FilesBlock
-from StateClass import States
+from StateClass import *
 
 
 class Window(QtWidgets.QMainWindow):
 
     action_select_square: QAction
     action_select_circle: QAction
+    action_select_rectangle: QAction
     menu_select_states: QMenu
     tbutton: QToolButton
-    action_select_rectangle: QAction
     toolBar: QToolBar
     toolBar_list_states: QToolBar
     centralWidget: QWidget
     verticalLayout: QVBoxLayout
 
-    def __init__(self):
-        super(Window, self).__init__()
+    def setup_total(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(903, 555)
         self.setGeometry(50, 50, 1500, 800)
         self.setWindowTitle("AutoMates project")
         self.setWindowIcon(QtGui.QIcon('Picture/Logo.png'))
@@ -103,7 +111,7 @@ class Window(QtWidgets.QMainWindow):
         self.tbutton.setToolTip("Select state form")
 
         self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
-        """ self.action_select_circle.triggered.connect(self.create_state_circle()) """
+        self.action_select_circle.triggered.connect(self.create_state_circle())
         self.menu_select_states.addAction(self.action_select_circle)
 
         self.action_select_rectangle = QtWidgets.QAction(QtGui.QIcon("Picture/Rectangle.png"), "Rectangle", self)
@@ -190,7 +198,7 @@ class Window(QtWidgets.QMainWindow):
                 FilesBlock.save(file, header)
 
     def create_state_circle(self):
-        self.graphicsView.scene.create_states_circle()
+        self.graphicsView.scene.create_state()
 
     def create_states_rectangle(self):
         pass
@@ -235,39 +243,12 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.scale(zoom_factor, zoom_factor)
 
 
-class Scene(QGraphicsScene):
-    def __init__(self):
-        super(QGraphicsScene, self).__init__()
-        self.state_selected = []
-        self.trans_selected = []
-        self.states_list = []
-        self.InvalidInMsg = QtWidgets.QMessageBox()
-        self.InvalidInMsg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        self.InvalidInMsg.setWindowTitle('Invalid input alert!')
-
-    def create_states_circle(self):
-        state = States()
-        self.addItem(state)
-        state.set_position_x(randint(-50, 50))
-        state.set_position_y(randint(-50, 50))
-        self.states_list.append(state)
-        self.update()
-
-    def create_states_rectangle(self):
-        pass
-
-    def create_states_square(self):
-        pass
-
-    def add_transition(self):
-        pass
-
-
-def run():
-    gui: Window
+if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
-    gui = Window()
+    MainWindow = QtWidgets.QMainWindow()
+    MainWindowManual = QtWidgets.QMainWindow()
+    ui = Window()
+    ui.setup_total(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())
-
-
-run()

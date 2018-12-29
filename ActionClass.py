@@ -9,13 +9,20 @@
 #
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 
 
 from GraphicWindow import *
 from StateClass import *
+from StateParameters import StateParameters
 
 
 class Scene(QGraphicsScene):
+    state_parameters: StateParameters
+
     def __init__(self):
         super(QGraphicsScene, self).__init__()
         self.state_selected = []
@@ -53,34 +60,22 @@ class Scene(QGraphicsScene):
         CHANGE TO OPEN WINDOW PARAMETERS
         Rename with double mouse click
         """
+        state_parameters: StateParameters
         self.select_elements(event)
-        self.get
-        self.StateParameters
-
-    def mousePressEvent(self, event):
-        """
-        Click right button to chose items
-        Click mid button to rename item chosen ( only 1 item chosen can be renamed)
-        """
-
-        if event.button() == QtCore.Qt.RightButton:
-            self.select_elements(event)
-            return
-        if event.button() == QtCore.Qt.MidButton:
-            self.rename()
-            return
-        QtWidgets.QGraphicsScene.mousePressEvent(self, event)
+        self.state_parameters = StateParameters()
+        self.state_parameters.show()
+        self.update()
 
     def create_state(self):
         """
         Create new state , random place it on scene, add to states_list
         """
-        state = State(self,"")
+        state = States()
         self.addItem(state)
         state.setPos(randint(-50, 50), randint(-50, 50))
-        self.states_list.append(state)
         self.update()
         print(2)
+
     def create_initial(self):
         """
         Make chosen states  initials
@@ -90,6 +85,7 @@ class Scene(QGraphicsScene):
             state.initial = True
         self.deselect_states()
         self.update()
+
     def create_final(self):
         """
         Make chosen states  finals
@@ -201,54 +197,55 @@ class Scene(QGraphicsScene):
         self.trans_selected = []
         self.update()
 
-    def rename(self):
-        new_val, ok = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Rename state',
-            'Enter new name of state or transition:')
-        if ok:
-            # if the entered champ is empty, we push an Invalid message
-            if new_val == "":
-                self.InvalidInMsg.setText('A state or transition must have a new name!')
-                self.InvalidInMsg.exec_()
+    def re_define(self, value=("", 1, 0, 0, "black", "circle")):
+        if value[0] == "":
+            self.InvalidInMsg.setText('A state or transition must have a new name!')
+            self.InvalidInMsg.exec_()
+        else:
+            """ We only allow one transition or one state can be renamed each time """
+            if len(self.trans_selected) == 1:
+                for transition in self.trans_selected:
+                    """ Delete the transition and create a new one with new name """
+                    new_val, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Rename transition',
+                                                                                                  'Enter new '
+                                                                                                  'transition name:')
+
+                    if type(transition) == Transition and ok_pressed and new_val != "":
+                        self.removeItem(transition)
+                        self.addItem(Transition(self.trans_selected[0].source, self.trans_selected[0].dest, new_val))
+                        self.trans_selected.clear()
+                        self.deselect_transitions()
+                        self.update()
+                    else:
+                        self.removeItem(transition)
+                        self.addItem(SelfTransition(self.trans_selected[0].source, new_val))
+                        self.trans_selected.clear()
+                        self.deselect_transitions()
+                        self.update()
+            elif len(self.state_selected) == 1:
+                flag = True
+                for state in self.state_selected:
+                    """ Delete the state and create a new one with new name """
+                    for item in self.items():
+                        if isinstance(item, States):
+                            if item.name == value[0]:
+                                flag = False
+                    if flag:
+                        state.name = value[0]
+                        state.setPos(state.value[2],state.value[3])
+                        state.status = value[1]
+                        state.color = value[4]
+                        state.shape = value[5]
+                        self.deselect_states()
+                        self.state_selected.clear()
+                        self.update()
+                    else:
+                        self.InvalidInMsg.setText('A state with this name exist')
+                        self.InvalidInMsg.exec_()
             else:
-                # We only allow one transition or one state can be renamed each time
-                if len(self.trans_selected) == 1:
-                    for transition in self.trans_selected:
-                        # Delete the transition and create a new one with new name
-                        if type(transition) == Transition:
-                            self.removeItem(transition)
-                            self.addItem(Transition(self.trans_selected[0].source,self.trans_selected[0].dest, new_val))
-                            self.trans_selected.clear()
-                            self.deselect_transitions()
-                            self.update()
-                        else:
-                            self.removeItem(transition)
-                            self.addItem(selfTransition(self.trans_selected[0].source, new_val))
-                            self.trans_selected.clear()
-                            self.deselect_transitions()
-                            self.update()
-                elif len(self.state_selected) == 1:
-                    flag = True
-                    for state in self.state_selected:
-                         # Delete the state and create a new one with new name
-                        for item in self.items():
-                            if isinstance(item,State):
-                                if item.val == new_val:
-                                    flag = False
-                        if flag:
-                            state.val=new_val
-                            state.setPos(state.pos().x(),state.pos().y())
-                            self.deselect_states()
-                            self.state_selected.clear()
-                            self.update()
-                        else:
-                            self.InvalidInMsg.setText('A state with this name exist')
-                            self.InvalidInMsg.exec_()
-
-                # If we choose plus than 2 items, we push an InvalidMsg
-                else:
-                    self.InvalidInMsg.setText('Only 1 state !')
-                    self.InvalidInMsg.exec_()
-
+                """ If we choose more than 2 items, we push an InvalidMsg """
+                self.InvalidInMsg.setText('Only 1 state !')
+                self.InvalidInMsg.exec_()
 
     def reorganize(self,radius=150, s=0):
         """
@@ -257,7 +254,7 @@ class Scene(QGraphicsScene):
         deplace = 800
         stateselected=[]
         for state in self.selectedItems():
-            if isinstance(state,State):
+            if isinstance(state,States):
                 stateselected.append(state)
 
         if len(stateselected) > 0:
