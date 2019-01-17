@@ -8,24 +8,34 @@
       <w>attributeletter</w>
       <w>aurevoir</w>
       <w>automata</w>
+      <w>autonomination</w>
       <w>autre</w>
       <w>backgroundcolor</w>
       <w>bonjour</w>
+      <w>centralwidget</w>
       <w>changement</w>
       <w>chaud</w>
       <w>chemin</w>
       <w>chemindacces</w>
       <w>cible</w>
       <w>compteur</w>
+      <w>createfinal</w>
+      <w>createinitial</w>
+      <w>createstate</w>
+      <w>deplace</w>
+      <w>dest</w>
       <w>déjà</w>
       <w>enlimination</w>
       <w>entrez</w>
       <w>etats</w>
       <w>existant</w>
+      <w>extractaction</w>
       <w>fichier</w>
       <w>fichierbase</w>
       <w>gerant</w>
       <w>gerantfichier</w>
+      <w>graphes</w>
+      <w>gtranslate</w>
       <w>iimport</w>
       <w>initilisation</w>
       <w>intermax</w>
@@ -33,7 +43,12 @@
       <w>iterateur</w>
       <w>iterateurbis</w>
       <w>linebis</w>
+      <w>lompech</w>
+      <w>mainmenu</w>
+      <w>mainwindow</w>
+      <w>mainwindowmanual</w>
       <w>matrice</w>
+      <w>msgbox</w>
       <w>nbnoeud</w>
       <w>newfile</w>
       <w>nodedistance</w>
@@ -41,18 +56,27 @@
       <w>optimation</w>
       <w>pomme</w>
       <w>postion</w>
+      <w>pythonlogo</w>
+      <w>rahhhh</w>
       <w>realated</w>
+      <w>removeedge</w>
+      <w>retranslate</w>
       <w>récupération</w>
       <w>saisir</w>
       <w>sauvegarde</w>
+      <w>screenshot</w>
       <w>statecolor</w>
+      <w>stateselected</w>
+      <w>statusbar</w>
       <w>statut</w>
       <w>supress</w>
+      <w>tbutton</w>
       <w>tikz</w>
       <w>tikzpicture</w>
       <w>usepackage</w>
       <w>usetikzlibrary</w>
       <w>veuillez</w>
+      <w>zoomfactor</w>
     </words>
   </dictionary>
 </component>
