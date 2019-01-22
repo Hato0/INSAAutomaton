@@ -6,7 +6,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -17,28 +20,37 @@ from TransitionClass import *
 class States(QGraphicsItem):
     registry = []
 
-    def __init__(self):
+    def __init__(self, graphwidget):
         """
         Initialisation of States Object
         """
         super(States, self).__init__()
         self.registry.append(self)
-        self.status = 1
-        self.selected = False
-        self.name = ""
-        self.position_x = 0
-        self.position_y = 0
-        self.arrowSize = 5
         self.position = QtCore.QPointF()
+        self.position_x = self.position.x()
+        self.position_y = self.position.y()
         self.setFlag(QGraphicsItem.ItemIsMovable)
         self.setFlag(QGraphicsItem.ItemSendsGeometryChanges)
         self.setFlag(QGraphicsItem.ItemIsSelectable)
         self.setCursor(Qt.OpenHandCursor)
+        self.status = 1
+        self.selected = False
+        self.name = ""
+        self.arrowSize = 5
         self.link = []
         self.color = ""
         self.shape = ""
         self.link_name = []
         self.attributeletter = ""
+
+    def add_transition(self, transition):
+        """
+        Add a transition to the node
+        :param transition:
+        :return:
+        """
+        self.add_link(transition)
+        transition.adjust()
 
     def move_state(self, position_x, position_y):
         if self.newPosition == self.pos():
@@ -46,19 +58,22 @@ class States(QGraphicsItem):
         self.setPos(position_x, position_y)
         return True
 
-    @staticmethod
-    def shape_determination():
-        figure = QtGui.QPainterPath()
-        figure.addEllipse(-15, -15, 30, 30)
-        figure.addRect(100, 200, 11, 16)
-        figure.addRect(100, 100, 11, 11)
-        return figure
-
     def boundingRect(self):
         param = 2
         return QtCore.QRectF(-10 - param, -10 - param, 23 + param, 23 + param)
 
-    def paint(self, painter, option, widget):
+    @staticmethod
+    def shape_determination(value):
+        figure = QtGui.QPainterPath()
+        if value == 1:
+            figure.addEllipse(-15, -15, 30, 30)
+        elif value == 2:
+            figure.addRect(100, 200, 11, 16)
+        else:
+            figure.addRect(100, 100, 11, 11)
+        return figure
+
+    def paint(self, painter, option, widget: QWidget = None):
         """
         Set color for States , change color when select and deselect state
 
@@ -74,15 +89,15 @@ class States(QGraphicsItem):
             explained in method Transition.paint()"""
             if self.status == 0:
                 arrow = QPointF(-10, 0)
-                line = QLineF(-30, 0, -10,0)
+                line = QLineF(-30, 0, -10, 0)
                 angle = math.acos(line.dx() / line.length())
                 if line.dy() >= 0:
                     angle = math.pi * 2 - angle
-                destArrowP1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
-                                                     math.cos(angle - math.pi / 3) * self.arrowSize)
-                destArrowP2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
-                                                     math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
-                painter.drawPolygon(QPolygonF([line.p2(), destArrowP1, destArrowP2 ]))
+                dest_arrow_p1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
+                                                       math.cos(angle - math.pi / 3) * self.arrowSize)
+                dest_arrow_p2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
+                                                       math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
+                painter.drawPolygon(QPolygonF([line.p2(), dest_arrow_p1, dest_arrow_p2]))
                 painter.setPen(Qt.black)
                 painter.drawLine(-10, 0, -30, 0)
                 """paint the final state orange when selected, keep the outside circle"""
@@ -96,15 +111,15 @@ class States(QGraphicsItem):
             painter.setBrush(Qt.green)
             if self.status == 0:
                 arrow = QPointF(-10, 0)
-                line = QLineF(-30, 0, -10,0)
+                line = QLineF(-30, 0, -10, 0)
                 angle = math.acos(line.dx() / line.length())
                 if line.dy() >= 0:
                     angle = math.pi * 2 - angle
-                destArrowP1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
-                                                          math.cos(angle - math.pi / 3) * self.arrowSize)
-                destArrowP2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
-                                                          math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
-                painter.drawPolygon(QPolygonF([line.p2(), destArrowP1, destArrowP2 ]))
+                dest_arrow_p1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
+                                                       math.cos(angle - math.pi / 3) * self.arrowSize)
+                dest_arrow_p2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
+                                                       math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
+                painter.drawPolygon(QPolygonF([line.p2(), dest_arrow_p1, dest_arrow_p2]))
                 painter.setPen(Qt.black)
                 painter.drawLine(-10, 0, -30, 0)
             elif self.status == 2:
@@ -116,11 +131,11 @@ class States(QGraphicsItem):
                 angle = math.acos(line.dx() / line.length())
                 if line.dy() >= 0:
                     angle = math.pi * 2 - angle
-                destArrowP1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
-                                                             math.cos(angle - math.pi / 3) * self.arrowSize)
-                destArrowP2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
-                                                              math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
-                painter.drawPolygon(QPolygonF([line.p2(), destArrowP1, destArrowP2 ]))
+                dest_arrow_p1 = arrow + QtCore.QPointF(math.sin(angle - math.pi / 3) * self.arrowSize,
+                                                       math.cos(angle - math.pi / 3) * self.arrowSize)
+                dest_arrow_p2 = arrow + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * self.arrowSize,
+                                                       math.cos(angle - math.pi + math.pi / 3) * self.arrowSize)
+                painter.drawPolygon(QPolygonF([line.p2(), dest_arrow_p1, dest_arrow_p2]))
                 painter.setPen(Qt.black)
                 painter.drawLine(-10, 0, -30, 0)
                 """draw the final state (when we create or unselected)"""
@@ -131,7 +146,7 @@ class States(QGraphicsItem):
             painter.setPen(Qt.black)
             painter.setBrush(Qt.white)
         painter.drawEllipse(QtCore.QRectF(-20 / 2.0, -20 / 2.0, 20, 20))
-        painter.drawText(QtCore.QRect(-10, -10, 20, 20), QtCore.Qt.AlignCenter, self.val)
+        painter.drawText(QtCore.QRect(-10, -10, 20, 20), QtCore.Qt.AlignCenter, self.name)
         self.update()
 
     def state_color(self, painter):

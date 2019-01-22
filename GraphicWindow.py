@@ -6,8 +6,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-
-from PyQt5 import QtWidgets
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 from ActionClass import *
 from FileClass import FilesBlock
@@ -21,7 +23,9 @@ class Window(QtWidgets.QMainWindow):
     action_select_circle: QAction
     action_select_rectangle: QAction
     menu_select_states: QMenu
-    tbutton: QToolButton
+    menu_select_color: QMenu
+    tbutton1: QToolButton
+    tbutton2: QToolButton
     toolBar: QToolBar
     toolBar_list_states: QToolBar
     centralWidget: QWidget
@@ -90,13 +94,14 @@ class Window(QtWidgets.QMainWindow):
         """ Make the extract_action widget a toolBar which can be move everywhere on the window | Right clic on the top
          able or disable the option"""
 
+        """ Menu 1 : State Choice """
         self.menu_select_states = QtWidgets.QMenu("")
 
-        self.tbutton = QtWidgets.QToolButton(self)
-        self.tbutton.setMenu(self.menu_select_states)
-        self.tbutton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-        self.tbutton.setIcon(QtGui.QIcon("Picture/states.png"))
-        self.tbutton.setToolTip("Select state form")
+        self.tbutton1 = QtWidgets.QToolButton(self)
+        self.tbutton1.setMenu(self.menu_select_states)
+        self.tbutton1.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.tbutton1.setIcon(QtGui.QIcon("Picture/states.png"))
+        self.tbutton1.setToolTip("Select state form")
 
         self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
         self.action_select_circle.triggered.connect(self.create_state_circle)
@@ -110,8 +115,19 @@ class Window(QtWidgets.QMainWindow):
         self.action_select_square.triggered.connect(self.create_states_square)
         self.menu_select_states.addAction(self.action_select_square)
 
+        """ Menu 2 : Color Choice   TO BE COMPLETED
+        self.menu_select_color = QtWidgets.QMenu("")
+
+        self.tbutton2 = QtWidgets.QToolButton(self)
+        self.tbutton2.setMenu(self.menu_select_color)
+        self.tbutton2.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.tbutton2.setIcon(QtGui.QIcon("Picture/color.png"))
+        self.tbutton2.setToolTip("Select state color")
+
+        self.action_select_blue = QtWidgets.QAction(QtGui.QIcon("Picture"))"""
+
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
-        self.toolBar.addWidget(self.tbutton)
+        self.toolBar.addWidget(self.tbutton1)
         self.toolBar.addAction(transition_action)
         self.toolBar.addAction(leave_action)
 
@@ -226,13 +242,3 @@ class GraphWidget(QtWidgets.QGraphicsView):
             return
         self.scale(zoom_factor, zoom_factor)
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    MainWindowManual = QtWidgets.QMainWindow()
-    ui = Window()
-    ui.setup_total(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

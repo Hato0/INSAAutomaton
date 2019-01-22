@@ -6,22 +6,25 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QDialog, QLineEdit, QFormLayout, QPushButton
+from StateClass import *
 
 
-class StateParameters(QDialog):
+class StateParameters(QDialog, States):
     def __init__(self):
         super(StateParameters, self).__init__()
-
-        name = "StateTest"
-        status = "InitialTest"
-        position_x = 0
-        position_y = 0
-        color = "RedTest"
-        shape = "CircleTest"
+        print("window creation")
+        name = States.get_name()
+        status = States.get_status()
+        position_x = States.get_position_x()
+        position_y = States.get_position_y()
+        color = States.get_color()
+        shape = States.get_shape()
 
         self.setGeometry(50, 50, 400, 600)
         self.setWindowTitle("States parameters edit")
@@ -29,7 +32,7 @@ class StateParameters(QDialog):
 
         self.name_get = QLineEdit()
         self.name_get.setObjectName("State Name")
-        self.name_get.setText(name)
+        self.name_get.setText(str(name))
 
         self.status_get = QLineEdit()
         self.status_get.setObjectName("Status: 'Initial', 'Final', 'Classic'")
@@ -45,11 +48,11 @@ class StateParameters(QDialog):
 
         self.color_get = QLineEdit()
         self.color_get.setObjectName("State color wish")
-        self.color_get.setText(color)
+        self.color_get.setText(str(color))
 
         self.shape_get = QLineEdit()
         self.shape_get.setObjectName("State shape (Square, Rectangle, Circle)")
-        self.shape_get.setText(shape)
+        self.shape_get.setText(str(shape))
 
         self.push_button = QPushButton()
         self.push_button.setObjectName("connect")
@@ -67,10 +70,16 @@ class StateParameters(QDialog):
         layout.addWidget(self.push_button)
 
         self.setLayout(layout)
+        self.show()
 
     def end_window(self):
         self.close()
-        return self.name_get, self.status_get, self.position_x_get, self.position_y_get, self.color_get, self.shape_get
+        States.set_name(self.name_get)
+        States.set_status(self.status_get)
+        States.set_position_x(self.position_x_get)
+        States.set_position_y(self.position_y_get)
+        States.set_color(self.color_get)
+        States.set_shape(self.shape_get)
 
 
 

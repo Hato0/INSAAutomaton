@@ -6,7 +6,13 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
+
+from random import randint
 
 from GraphicWindow import *
 from StateClass import *
@@ -20,6 +26,7 @@ class Scene(QGraphicsScene):
         super(QGraphicsScene, self).__init__()
         self.state_selected = []
         self.trans_selected = []
+        self.states_list = []
         self.InvalidInMsg = QMessageBox()
         self.InvalidInMsg.setStandardButtons(QMessageBox.Ok)
         self.InvalidInMsg.setWindowTitle('Invalid input !')
@@ -53,19 +60,27 @@ class Scene(QGraphicsScene):
         CHANGE TO OPEN WINDOW PARAMETERS
         Rename with double mouse click
         """
-        state_parameters: StateParameters
         self.select_elements(event)
         self.state_parameters = StateParameters()
-        self.state_parameters.show()
         self.update()
+
+    def mousePressEvent(self, event):
+        if event.button() == QtCore.Qt.RightButton:
+            self.select_elements(event)
+            return
+        if event.button() == QtCore.Qt.MidButton:
+            self.re_define()
+            return
+        QtWidgets.QGraphicsScene.mousePressEvent(self, event)
 
     def create_state(self, shape):
         """
         Create new state , random place it on scene, add to states_list
         """
-        state = States()
+        state = States(self)
         self.addItem(state)
         state.setPos(randint(-50, 50), randint(-50, 50))
+        self.states_list.append(state)
         self.update()
 
     def create_initial(self):
@@ -73,8 +88,7 @@ class Scene(QGraphicsScene):
         Make chosen states  initials
         """
         for state in self.state_selected:
-            state.final = False
-            state.initial = True
+            state.value = 0
         self.deselect_states()
         self.update()
 
@@ -83,8 +97,7 @@ class Scene(QGraphicsScene):
         Make chosen states  finals
         """
         for state in self.state_selected:
-            state.initial = False
-            state.final = True
+            state.value = 2
         self.deselect_states()
         self.update()
 
@@ -120,7 +133,7 @@ class Scene(QGraphicsScene):
         We can choose one state to create a transition towards itself.
         """
         trans_val, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
-            'Enter Transition Name:')
+                                                               'Enter Transition Name:')
         if ok_pressed:
             """ If 2 states are chosen, create a transition with a name between these. """
             if len(self.state_selected)== 2:
@@ -156,7 +169,7 @@ class Scene(QGraphicsScene):
             self.removeItem(state)
         for state in self.selectedItems():
             # check on all selected items, if there are states then delete them.
-            if isinstance(state,States):
+            if isinstance(state, States):
                 for i in range(len(state.link)):
                     self.removeItem(state.link[i])
                 self.removeItem(state)
