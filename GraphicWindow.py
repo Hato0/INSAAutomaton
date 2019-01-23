@@ -10,10 +10,17 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
-from ActionClass import *
+import sys
+
+from PyQt5 import QtWidgets, QtGui, QtCore
+
+from ActionClass import Scene
 from FileClass import FilesBlock
-from StateClass import *
 from TransitionClass import *
 
 
@@ -22,16 +29,17 @@ class Window(QtWidgets.QMainWindow):
     action_select_square: QAction
     action_select_circle: QAction
     action_select_rectangle: QAction
-    menu_select_states: QMenu
-    menu_select_color: QMenu
     tbutton1: QToolButton
-    tbutton2: QToolButton
+    """menu_select_color: QMenu
+    tbutton2: QToolButton"""
+    menu_select_states: QMenu
     toolBar: QToolBar
     toolBar_list_states: QToolBar
     centralWidget: QWidget
     verticalLayout: QVBoxLayout
 
     def setup_total(self, MainWindow):
+        print("setup_total")
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(903, 555)
         self.setGeometry(50, 50, 1500, 800)
@@ -154,12 +162,14 @@ class Window(QtWidgets.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslate_ui(self, main_window):
+        print("retranslate_ui")
         _translate = QtCore.QCoreApplication.translate
         main_window.setWindowTitle(_translate("main_window", "Graph GUI "))
 
         self.show()
 
     def close_application(self):
+        print("close_application")
         """
         Define a pop up window used to inform the user above all active window
         """
@@ -172,22 +182,31 @@ class Window(QtWidgets.QMainWindow):
         else:
             pass
 
-    def new_application(self):
-        self.__init__()
+    @staticmethod
+    def new_application():
+        print("new_application")
+        app = QtWidgets.QApplication(sys.argv)
+        new_MainWindow = QtWidgets.QMainWindow()
+        ui = Window()
+        ui.setup_total(new_MainWindow)
+        sys.exit(app.exec_())
 
     def import_application(self):
+        print("import_application")
         file = FilesBlock()
         text = QtWidgets.QFileDialog.getOpenFileName(self, 'Import File')
         file.set_name(text[0])
         FilesBlock.importation(file)
 
     def export_application(self):
+        print("export_application")
         file = FilesBlock()
         text = QtWidgets.QFileDialog.getSaveFileName(self, 'Export File')
         file.set_name(text[0])
         FilesBlock.export(file)
 
     def save_application(self):
+        print("save_application")
         file = FilesBlock()
         text = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File')
         header, ok_pressed = QtWidgets.QInputDialog.getText(self, "Get header ", "Enter a header for "
@@ -198,15 +217,19 @@ class Window(QtWidgets.QMainWindow):
             FilesBlock.save(file, header)
 
     def create_state_circle(self):
+        print("create_state_circle")
         self.graphicsView.scene.create_state(1)
 
     def create_states_rectangle(self):
+        print("create_states_rectangle")
         self.graphicsView.scene.create_state(2)
 
     def create_states_square(self):
+        print("create_states_square")
         self.graphicsView.scene.create_state(3)
 
     def add_transition(self):
+        print("add_transition")
         self.graphicsView.scene.create_transition()
 
 

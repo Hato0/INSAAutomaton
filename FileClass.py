@@ -6,12 +6,17 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import StateClass
 
 
 class FilesBlock:
+    print("FilesBlock")
 
     def __init__(self):
         """
@@ -35,6 +40,7 @@ class FilesBlock:
         self.name = v
 
     def export(self):
+        print("export")
         """
         Open or create a file to export the automaton on Latex/Tikz
         :return: None
@@ -124,6 +130,7 @@ class FilesBlock:
         files.close()
 
     def save(self, header):
+        print("save")
         """
         Set a safe to recover the user work
         :return: None
@@ -161,6 +168,7 @@ class FilesBlock:
         file.close()
 
     def importation(self):
+        print("importation")
         """
         Initialise state with existing file
         :return: None

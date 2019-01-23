@@ -10,6 +10,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -19,6 +23,7 @@ from TransitionClass import *
 
 class States(QGraphicsItem):
     registry = []
+    print("States Class")
 
     def __init__(self, graphwidget):
         """
@@ -44,6 +49,7 @@ class States(QGraphicsItem):
         self.attributeletter = ""
 
     def add_transition(self, transition):
+        print("add_transition")
         """
         Add a transition to the node
         :param transition:
@@ -53,17 +59,20 @@ class States(QGraphicsItem):
         transition.adjust()
 
     def move_state(self, position_x, position_y):
+        print("move_state")
         if self.newPosition == self.pos():
             return False
         self.setPos(position_x, position_y)
         return True
 
     def boundingRect(self):
+        """print("boundingRect")"""
         param = 2
         return QtCore.QRectF(-10 - param, -10 - param, 23 + param, 23 + param)
 
     @staticmethod
     def shape_determination(value):
+        print("shape_determination")
         figure = QtGui.QPainterPath()
         if value == 1:
             figure.addEllipse(-15, -15, 30, 30)
@@ -74,6 +83,7 @@ class States(QGraphicsItem):
         return figure
 
     def paint(self, painter, option, widget: QWidget = None):
+        """print("paint")"""
         """
         Set color for States , change color when select and deselect state
 
@@ -81,10 +91,10 @@ class States(QGraphicsItem):
         if self.selected:
             """In this case, we choose as right click"""
             self.setSelected(0)
-            """if the state is seleted paint it orange"""
+            """if the state is seleted paint it blue"""
             """Set pen to black"""
             painter.setPen(Qt.black)
-            painter.setBrush(QColor(223,50, 0, 255))
+            painter.setBrush(Qt.blue)
             """paint the initial state orange when selected and keep the arrow. Description for drawing arrow is 
             explained in method Transition.paint()"""
             if self.status == 0:
@@ -100,15 +110,15 @@ class States(QGraphicsItem):
                 painter.drawPolygon(QPolygonF([line.p2(), dest_arrow_p1, dest_arrow_p2]))
                 painter.setPen(Qt.black)
                 painter.drawLine(-10, 0, -30, 0)
-                """paint the final state orange when selected, keep the outside circle"""
+                """paint the final state blue when selected, keep the outside circle"""
             elif self.status == 2:
                 painter.drawEllipse(QtCore.QRectF(-25 / 2.0, -25 / 2.0, 25, 25))
                 """draw the state initial"""
         elif self.isSelected():
             """In this case, we choose as left click or choose mouse area by left click"""
-            """pain it green when selected"""
+            """pain it blue when selected"""
             painter.setPen(Qt.black)
-            painter.setBrush(Qt.green)
+            painter.setBrush(Qt.blue)
             if self.status == 0:
                 arrow = QPointF(-10, 0)
                 line = QLineF(-30, 0, -10, 0)
@@ -127,7 +137,7 @@ class States(QGraphicsItem):
             """draw the initial state (when we create or unselected)"""
         elif self.status == 0:
                 arrow = QPointF(-10, 0)
-                line = QLineF(-30, 0, -10,0)
+                line = QLineF(-30, 0, -10, 0)
                 angle = math.acos(line.dx() / line.length())
                 if line.dy() >= 0:
                     angle = math.pi * 2 - angle
@@ -150,6 +160,7 @@ class States(QGraphicsItem):
         self.update()
 
     def state_color(self, painter):
+        print("state_color")
         if self.selected:
             painter.setPen(Qt.black)
             painter.setBrush(QColor(self.get_color()))
@@ -158,6 +169,7 @@ class States(QGraphicsItem):
             self.update()
 
     def movement(self, change, value):
+        print("movement")
         if change == QGraphicsItem.ItemPositionHasChanged:
             for transition in self.link:
                 transition.adjust()

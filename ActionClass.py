@@ -10,16 +10,22 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
 
-from GraphicWindow import *
+from PyQt5 import QtWidgets, QtGui, QtCore
+
 from StateClass import *
 from StateParameters import StateParameters
 
 
 class Scene(QGraphicsScene):
+    print("Scene Class")
     state_parameters: StateParameters
 
     def __init__(self):
@@ -32,6 +38,7 @@ class Scene(QGraphicsScene):
         self.InvalidInMsg.setWindowTitle('Invalid input !')
 
     def deselect_states(self):
+        print("deselect_states")
         """
         Deselect all states
         """
@@ -40,6 +47,7 @@ class Scene(QGraphicsScene):
         self.state_selected = []
 
     def deselect_transitions(self):
+        print("deselect_transitions")
         """
         Deselect all transitions
         """
@@ -48,23 +56,44 @@ class Scene(QGraphicsScene):
         self.trans_selected = []
 
     def keyPressEvent(self, event):
+        print("keyPressEvent")
         """
         if delete pressed
         remove edge between selected nodes
         """
+        print("key press event", event.key())
         if event.key() == QtCore.Qt.Key_Delete:
             self.delete_selected_states()
 
     def mouseDoubleClickEvent(self, event):
+        print("mouseDoubleClickEvent")
         """
         CHANGE TO OPEN WINDOW PARAMETERS
         Rename with double mouse click
         """
         self.select_elements(event)
-        self.state_parameters = StateParameters()
-        self.update()
+        if len(self.state_selected) == 1:
+            self.popup_window()
+        else:
+            pass
+
+    def popup_window(self):
+        print("popup_window")
+        popup = StateParameters()
+        MainWindowParameters = QtWidgets.QDialog()
+        popup.setup_popup(MainWindowParameters)
+        MainWindowParameters.show()
+        """self.state_selected[0].set_name(popup.name_get)
+        self.state_selected[0].set_status(popup.status_get)
+        self.state_selected[0].set_position_x(popup.position_x_get)
+        self.state_selected[0].set_position_y(popup.position_y_get)
+        self.state_selected[0].set_color(popup.color_get)
+        self.state_selected[0].set_shape(popup.shape_get)"""
+        print("popup_window adjustment done")
 
     def mousePressEvent(self, event):
+        print("mousePressEvent")
+
         if event.button() == QtCore.Qt.RightButton:
             self.select_elements(event)
             return
@@ -72,8 +101,10 @@ class Scene(QGraphicsScene):
             self.re_define()
             return
         QtWidgets.QGraphicsScene.mousePressEvent(self, event)
+        print("Mouse press Event")
 
     def create_state(self, shape):
+        print("create_state")
         """
         Create new state , random place it on scene, add to states_list
         """
@@ -84,24 +115,27 @@ class Scene(QGraphicsScene):
         self.update()
 
     def create_initial(self):
+        print("create_initial")
         """
         Make chosen states  initials
         """
         for state in self.state_selected:
-            state.value = 0
+            state.status = 0
         self.deselect_states()
         self.update()
 
     def create_final(self):
+        print("create_final")
         """
         Make chosen states  finals
         """
         for state in self.state_selected:
-            state.value = 2
+            state.status = 2
         self.deselect_states()
         self.update()
 
     def select_elements(self, event):
+        print("select_elements")
         """
         Change color and status of chosen items. Add to list state_selected or trans_selected
         """
@@ -128,6 +162,7 @@ class Scene(QGraphicsScene):
         self.update()
 
     def create_transition(self):
+        print("create_transition")
         """
         Create transition between 2 chosen state. The first chosen one is source, the second is destination
         We can choose one state to create a transition towards itself.
@@ -151,7 +186,7 @@ class Scene(QGraphicsScene):
                 self.update()
             elif len(self.state_selected) == 1:
                 """ if only 1 state is chosen, we create a self-transition of that state """
-                self.addItem(SelfTransition(self.state_selected[0],trans_val))
+                self.addItem(SelfTransition(self.state_selected[0], trans_val))
                 self.deselect_states()
                 self.update()
             else:
@@ -160,6 +195,7 @@ class Scene(QGraphicsScene):
                 self.InvalidInMsg.exec_()
 
     def delete_selected_states(self):
+        print("delete_selected_states")
         """
         Delete chosen state and all transitions connect to it.
         """
@@ -178,6 +214,7 @@ class Scene(QGraphicsScene):
         self.update()
 
     def delete_transition(self):
+        print("delete_transition")
         """
         Delete chosen transitions.
         """
@@ -203,6 +240,7 @@ class Scene(QGraphicsScene):
         self.update()
 
     def re_define(self, value=("", 1, 0, 0, "black", "circle")):
+        print("re_define")
         if value[0] == "":
             self.InvalidInMsg.setText('A state or transition must have a new name!')
             self.InvalidInMsg.exec_()
@@ -253,6 +291,7 @@ class Scene(QGraphicsScene):
                 self.InvalidInMsg.exec_()
 
     def reorganize(self,radius=150, s=0):
+        print("reorganize")
         """
         Reorganise chosen state as a form of a regular polygon
         """

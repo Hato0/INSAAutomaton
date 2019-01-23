@@ -6,6 +6,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import math
@@ -19,6 +23,7 @@ from PyQt5.QtWidgets import *
 class Transition(QGraphicsItem):
     mid_x: float
     mid_y: float
+    print("Transition Class")
 
     def __init__(self, state_source, state_final, name):
         super(Transition, self).__init__()
@@ -36,14 +41,17 @@ class Transition(QGraphicsItem):
         self.selected = False
 
     def set_start_arrow(self, state):
+        print("set_start_arrow")
         self.start = state
         self.adjust()
 
     def set_end_arrow(self, state):
+        print("set_end_arrow")
         self.end = state
         self.adjust()
 
     def adjust(self):
+        print("adjust")
         if not self.start or not self.end:
             pass
         if self.final_point.x() - self.source_point.x() > 0:
@@ -63,6 +71,7 @@ class Transition(QGraphicsItem):
             self.final_point = line.p2()
 
     def bounding_rectangle(self):
+        """print("bounding_rectangle")"""
         if not self.start or not self.end:
             return QRectF()
         pen_width = 1
@@ -73,6 +82,7 @@ class Transition(QGraphicsItem):
             .adjusted(-extra, -extra, extra, extra)
 
     def painted(self, painter):
+        """print("painted")"""
         if not self.start or not self.end:
             pass
         line = QLineF(self.source_point, self.final_point)
@@ -103,6 +113,7 @@ class Transition(QGraphicsItem):
 
 
 class SelfTransition(Transition):
+    print("SelfTransition Class")
     """
     Class defines transitions of automata.
     """
@@ -112,6 +123,7 @@ class SelfTransition(Transition):
         Transition.__init__(self, state, state, trans_val)
 
     def boundingRect(self):
+        print("boundingRect")
         """
         Return bounding rectangle of a transition -- the zone that we can click on to choose transition
         """
@@ -126,6 +138,7 @@ class SelfTransition(Transition):
             adjusted(-extra, -extra, extra, extra)
 
     def painted(self, painter):
+        """print("painted")"""
         """
         Draw the transition on scene, change the color of transition when we select it
         """
