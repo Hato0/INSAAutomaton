@@ -14,11 +14,15 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets
 
 from StateClass import *
 from StateParameters import StateParameters
@@ -79,17 +83,21 @@ class Scene(QGraphicsScene):
 
     def popup_window(self):
         print("popup_window")
+        print(type(self.state_selected[0]))
+        #app = QApplication()
+        print(-1)
         popup = StateParameters()
-        MainWindowParameters = QtWidgets.QDialog()
-        popup.setup_popup(MainWindowParameters)
-        MainWindowParameters.show()
+        print(0)
+        PopUpWindow = QtWidgets.QDialog()
+        popup.setup_popup(PopUpWindow, self.state_selected[0])
+        print(1)
+        PopUpWindow.show()
         """self.state_selected[0].set_name(popup.name_get)
         self.state_selected[0].set_status(popup.status_get)
         self.state_selected[0].set_position_x(popup.position_x_get)
         self.state_selected[0].set_position_y(popup.position_y_get)
         self.state_selected[0].set_color(popup.color_get)
         self.state_selected[0].set_shape(popup.shape_get)"""
-        print("popup_window adjustment done")
 
     def mousePressEvent(self, event):
         print("mousePressEvent")
@@ -175,13 +183,13 @@ class Scene(QGraphicsScene):
                 """ Check if between 2 states there is already a transition """
                 for trans in self.items():
                     if isinstance(trans, Transition):
-                        if trans.source == self.state_selected[0] and trans.dest == self.state_selected[1]:
+                        if trans.source_point == self.state_selected[0] and trans.dest == self.state_selected[1]:
                             self.InvalidInMsg.setText('Transition already exists')
                             self.InvalidInMsg.exec_()
                             self.deselect_states()
                             return
                 """ If there isn't, we create a new transition """
-                self.addItem(Transition(self.state_selected[0],self.state_selected[1], trans_val))
+                self.addItem(Transition(self.state_selected[0], self.state_selected[1], trans_val))
                 self.deselect_states()
                 self.update()
             elif len(self.state_selected) == 1:

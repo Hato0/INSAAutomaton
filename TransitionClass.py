@@ -10,6 +10,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import math
@@ -34,8 +38,8 @@ class Transition(QGraphicsItem):
         self.setFlag(QGraphicsItem.ItemIsSelectable)
         self.start = state_source
         self.end = state_final
-        self.start.addTransition(self)
-        self.end.addTransition(self)
+        self.start.add_transition(self)
+        self.end.add_transition(self)
         self.name = name
         self.adjust()
         self.selected = False
@@ -53,12 +57,12 @@ class Transition(QGraphicsItem):
     def adjust(self):
         print("adjust")
         if not self.start or not self.end:
-            pass
+            return
         if self.final_point.x() - self.source_point.x() > 0:
             line = QLineF(self.mapFromItem(self.start, 0, -3), self.mapFromItem(self.end, 0, -3))
         else:
-            line = QLineF(self.mapFromItem(self.start, 0, 3), self.mapFromItem(self.dest, 0, 3))
-        length = line.lenght()
+            line = QLineF(self.mapFromItem(self.start, 0, 3), self.mapFromItem(self.end, 0, 3))
+        length = line.length()
 
         self.prepareGeometryChange()
 
@@ -70,7 +74,7 @@ class Transition(QGraphicsItem):
             self.source_point = line.p1()
             self.final_point = line.p2()
 
-    def bounding_rectangle(self):
+    def boundingRect(self):
         """print("bounding_rectangle")"""
         if not self.start or not self.end:
             return QRectF()
@@ -81,7 +85,7 @@ class Transition(QGraphicsItem):
                                                 self.source_point.y())).normalized()\
             .adjusted(-extra, -extra, extra, extra)
 
-    def painted(self, painter):
+    def paint(self, painter, option, widget):
         """print("painted")"""
         if not self.start or not self.end:
             pass
@@ -127,22 +131,22 @@ class SelfTransition(Transition):
         """
         Return bounding rectangle of a transition -- the zone that we can click on to choose transition
         """
-        if not self.source or not self.dest:
+        if not self.start or not self.end:
             return QRectF()
 
         pen_width = 1.0
-        extra = (pen_width + self.arrowSize) / 2.0
+        extra = (pen_width + self.arrow_size) / 2.0
 
-        return QRectF(self.sourcePoint, QSizeF(self.destPoint.x() + self.sourcePoint.x() - 100, self.destPoint.y() -
-                                               self.sourcePoint.y() - 100)).normalized().\
+        return QRectF(self.source_point, QSizeF(self.final_point.x() + self.source_point.x() - 100, self.final_point.y() -
+                                               self.source_point.y() - 100)).normalized().\
             adjusted(-extra, -extra, extra, extra)
 
-    def painted(self, painter):
+    def paint(self, painter, option, widget):
         """print("painted")"""
         """
         Draw the transition on scene, change the color of transition when we select it
         """
-        if not self.source or not self.dest:
+        if not self.source_point or not self.final_point:
             return
         # Draw the line itself.
         path = QPainterPath()

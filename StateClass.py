@@ -14,6 +14,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -23,6 +27,7 @@ from TransitionClass import *
 
 class States(QGraphicsItem):
     registry = []
+    alpha = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     print("States Class")
 
     def __init__(self, graphwidget):
@@ -43,10 +48,10 @@ class States(QGraphicsItem):
         self.name = ""
         self.arrowSize = 5
         self.link = []
-        self.color = ""
-        self.shape = ""
+        self.color = "white"
+        self.shape = "circle"
         self.link_name = []
-        self.attributeletter = ""
+        self.attributeletter = self.alpha[len(self.registry)]
 
     def add_transition(self, transition):
         print("add_transition")
@@ -168,12 +173,12 @@ class States(QGraphicsItem):
             painter.drawText(QtCore.QRect(-10, -10, 20, 20), QtCore.Qt.AlignCenter, self.name)
             self.update()
 
-    def movement(self, change, value):
+    def itemChange(self, change, value):
         print("movement")
         if change == QGraphicsItem.ItemPositionHasChanged:
             for transition in self.link:
                 transition.adjust()
-        return super(States, self).movement(change, value)
+        return super(States, self).itemChange(change, value)
 
     def get_status(self):
         """
