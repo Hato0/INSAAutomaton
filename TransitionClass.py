@@ -14,6 +14,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import math
@@ -31,15 +35,15 @@ class Transition(QGraphicsItem):
 
     def __init__(self, state_source, state_final, name):
         super(Transition, self).__init__()
-        self.arrow_size = 5
+        self.arrow_size = 7
         self.source_point = QPointF()
         self.final_point = QPointF()
         self.setAcceptedMouseButtons(Qt.NoButton)
         self.setFlag(QGraphicsItem.ItemIsSelectable)
         self.start = state_source
         self.end = state_final
-        self.start.add_transition(self)
-        self.end.add_transition(self)
+        self.start.add_transition(self, name)
+        self.end.add_transition(self, name)
         self.name = name
         self.adjust()
         self.selected = False
@@ -128,34 +132,30 @@ class SelfTransition(Transition):
 
     def boundingRect(self):
         print("boundingRect")
-        """
-        Return bounding rectangle of a transition -- the zone that we can click on to choose transition
-        """
         if not self.start or not self.end:
             return QRectF()
 
         pen_width = 1.0
         extra = (pen_width + self.arrow_size) / 2.0
 
-        return QRectF(self.source_point, QSizeF(self.final_point.x() + self.source_point.x() - 100, self.final_point.y() -
-                                               self.source_point.y() - 100)).normalized().\
+        return QRectF(self.source_point, QSizeF(self.final_point.x() + self.source_point.x() - 50, self.final_point.y()
+                                                -
+                                                self.source_point.y() - 50)).normalized().\
             adjusted(-extra, -extra, extra, extra)
 
     def paint(self, painter, option, widget):
         """print("painted")"""
-        """
-        Draw the transition on scene, change the color of transition when we select it
-        """
         if not self.source_point or not self.final_point:
             return
         # Draw the line itself.
         path = QPainterPath()
-        path.moveTo(self.source_point.x(), self.source_point.y())
-        path.cubicTo(self.source_point.x(), self.source_point.y()-100, self.source_point.x()-100, self.source_point.y(),
-                     self.source_point.x(), self.source_point.y())
+        path.moveTo(self.source_point.x()+10, self.source_point.y()-8)
+        path.cubicTo(self.source_point.x(), self.source_point.y()-75, self.source_point.x()-20,
+                     self.source_point.y()-75,
+                     self.source_point.x()-8, self.source_point.y()-10)
         # draw the curve
-        self.mid_x = (self.source_point.x() + self.final_point.x()-100)/2
-        self.mid_y = (self.source_point.y()-100 + self.final_point.y())/2
+        self.mid_x = (self.source_point.x() + self.final_point.x()-75)/2
+        self.mid_y = (self.source_point.y()-75 + self.final_point.y())/2
 
         # change color when self_transition is selected or not.
         if not self.selected:

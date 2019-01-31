@@ -18,6 +18,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
@@ -85,13 +89,10 @@ class Scene(QGraphicsScene):
         print("popup_window")
         print(type(self.state_selected[0]))
         #app = QApplication()
-        print(-1)
         popup = StateParameters()
-        print(0)
         PopUpWindow = QtWidgets.QDialog()
         popup.setup_popup(PopUpWindow, self.state_selected[0])
-        print(1)
-        PopUpWindow.show()
+        #PopUpWindow.show()
         """self.state_selected[0].set_name(popup.name_get)
         self.state_selected[0].set_status(popup.status_get)
         self.state_selected[0].set_position_x(popup.position_x_get)
@@ -121,6 +122,7 @@ class Scene(QGraphicsScene):
         state.setPos(randint(-50, 50), randint(-50, 50))
         self.states_list.append(state)
         self.update()
+        return state
 
     def create_initial(self):
         print("create_initial")

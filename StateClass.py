@@ -18,6 +18,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -53,7 +57,7 @@ class States(QGraphicsItem):
         self.link_name = []
         self.attributeletter = self.alpha[len(self.registry)]
 
-    def add_transition(self, transition):
+    def add_transition(self, transition, transition_name):
         print("add_transition")
         """
         Add a transition to the node
@@ -61,6 +65,7 @@ class States(QGraphicsItem):
         :return:
         """
         self.add_link(transition)
+        self.add_link_name(transition_name)
         transition.adjust()
 
     def move_state(self, position_x, position_y):
@@ -68,6 +73,8 @@ class States(QGraphicsItem):
         if self.newPosition == self.pos():
             return False
         self.setPos(position_x, position_y)
+        self.position_x = self.position.x()
+        self.position_y = self.position.y()
         return True
 
     def boundingRect(self):
@@ -76,22 +83,15 @@ class States(QGraphicsItem):
         return QtCore.QRectF(-10 - param, -10 - param, 23 + param, 23 + param)
 
     @staticmethod
-    def shape_determination(value):
-        print("shape_determination")
+    def shape_determination():
         figure = QtGui.QPainterPath()
-        if value == 1:
-            figure.addEllipse(-15, -15, 30, 30)
-        elif value == 2:
-            figure.addRect(100, 200, 11, 16)
-        else:
-            figure.addRect(100, 100, 11, 11)
+        figure.addEllipse(-15, -15, 30, 30)
         return figure
 
     def paint(self, painter, option, widget: QWidget = None):
         """print("paint")"""
         """
         Set color for States , change color when select and deselect state
-
         """
         if self.selected:
             """In this case, we choose as right click"""

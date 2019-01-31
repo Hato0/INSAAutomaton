@@ -10,6 +10,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import StateClass
@@ -122,9 +126,10 @@ class FilesBlock:
                     files.write(") edge          node  {")
                     files.write(link_name[iterateurbis])
                     files.write("}  (")
-                    files.write(a[i])
+                    files.write(str(a[i]))
                     files.write(")")
                     files.write("\n")
+                print(iterateurbis)
                 iterateurbis += 1
         files.write("\\end{tikzpicture} \n\\end{document}")
         files.close()
@@ -167,7 +172,7 @@ class FilesBlock:
             file.write("\\EndStateSafe")
         file.close()
 
-    def importation(self):
+    def importation(self, graphicsView):
         print("importation")
         """
         Initialise state with existing file
@@ -182,16 +187,18 @@ class FilesBlock:
         for i in range(int(number_of_states)):
             line = file.readline()
             if line == "\\StateSafe \n":
-                    alpha[cursor] = StateClass.States()
+                    alpha[cursor] = graphicsView.scene.create_state(1)
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_name(line)
                     line = file.readline()
                     line = line.replace('\n', '')
-                    alpha[cursor].set_position_x(int(line))
+                    print(line)
+                    print(type(line))
+                    alpha[cursor].set_position_x(float(line))
                     line = file.readline()
                     line = line.replace('\n', '')
-                    alpha[cursor].set_position_y(int(line))
+                    alpha[cursor].set_position_y(float(line))
                     range_iter = int(file.readline())
                     for j in range(range_iter):
                         line = file.readline()

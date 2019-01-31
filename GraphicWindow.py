@@ -14,10 +14,14 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui
 
 from ActionClass import Scene
 from FileClass import FilesBlock
@@ -26,9 +30,9 @@ from TransitionClass import *
 
 class Window(QtWidgets.QMainWindow):
 
-    action_select_square: QAction
+    action_select_final: QAction
     action_select_circle: QAction
-    action_select_rectangle: QAction
+    action_select_initial: QAction
     tbutton1: QToolButton
     """menu_select_color: QMenu
     tbutton2: QToolButton"""
@@ -111,17 +115,17 @@ class Window(QtWidgets.QMainWindow):
         self.tbutton1.setIcon(QtGui.QIcon("Picture/states.png"))
         self.tbutton1.setToolTip("Select state form")
 
-        self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Circle", self)
+        self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "State", self)
         self.action_select_circle.triggered.connect(self.create_state_circle)
         self.menu_select_states.addAction(self.action_select_circle)
 
-        self.action_select_rectangle = QtWidgets.QAction(QtGui.QIcon("Picture/Rectangle.png"), "Rectangle", self)
-        self.action_select_rectangle.triggered.connect(self.create_states_rectangle)
-        self.menu_select_states.addAction(self.action_select_rectangle)
+        self.action_select_initial = QtWidgets.QAction(QtGui.QIcon("Picture/initial.png"), "Initial", self)
+        self.action_select_initial.triggered.connect(self.create_states_initial)
+        self.menu_select_states.addAction(self.action_select_initial)
 
-        self.action_select_square = QtWidgets.QAction(QtGui.QIcon("Picture/square.png"), "Square", self)
-        self.action_select_square.triggered.connect(self.create_states_square)
-        self.menu_select_states.addAction(self.action_select_square)
+        self.action_select_final = QtWidgets.QAction(QtGui.QIcon("Picture/final.jpg"), "Final", self)
+        self.action_select_final.triggered.connect(self.create_states_final)
+        self.menu_select_states.addAction(self.action_select_final)
 
         """ Menu 2 : Color Choice   TO BE COMPLETED
         self.menu_select_color = QtWidgets.QMenu("")
@@ -185,10 +189,11 @@ class Window(QtWidgets.QMainWindow):
     @staticmethod
     def new_application():
         print("new_application")
+
         app = QtWidgets.QApplication(sys.argv)
-        new_MainWindow = QtWidgets.QMainWindow()
+        new_main_window = QtWidgets.QMainWindow()
         ui = Window()
-        ui.setup_total(new_MainWindow)
+        ui.setup_total(new_main_window)
         sys.exit(app.exec_())
 
     def import_application(self):
@@ -196,7 +201,7 @@ class Window(QtWidgets.QMainWindow):
         file = FilesBlock()
         text = QtWidgets.QFileDialog.getOpenFileName(self, 'Import File')
         file.set_name(text[0])
-        FilesBlock.importation(file)
+        FilesBlock.importation(file, self.graphicsView)
 
     def export_application(self):
         print("export_application")
@@ -220,11 +225,11 @@ class Window(QtWidgets.QMainWindow):
         print("create_state_circle")
         self.graphicsView.scene.create_state(1)
 
-    def create_states_rectangle(self):
+    def create_states_initial(self):
         print("create_states_rectangle")
         self.graphicsView.scene.create_state(2)
 
-    def create_states_square(self):
+    def create_states_final(self):
         print("create_states_square")
         self.graphicsView.scene.create_state(3)
 
