@@ -22,6 +22,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -176,6 +180,8 @@ class States(QGraphicsItem):
     def itemChange(self, change, value):
         print("movement")
         if change == QGraphicsItem.ItemPositionHasChanged:
+            self.position_x = self.pos().x()
+            self.position_y = self.pos().y()
             for transition in self.link:
                 transition.adjust()
         return super(States, self).itemChange(change, value)
