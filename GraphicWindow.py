@@ -18,6 +18,14 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
@@ -127,6 +135,12 @@ class Window(QtWidgets.QMainWindow):
         self.action_select_final.triggered.connect(self.create_states_final)
         self.menu_select_states.addAction(self.action_select_final)
 
+        action_reorganize = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "Reorganize", self)
+        action_reorganize.triggered.connect(self.reorganize)
+
+        action_red_everything = QtWidgets.QAction(QtGui.QIcon("Picture/StateSettings.png"), "Configuration", self)
+        action_red_everything.triggered.connect(self.popupwindow)
+
         """ Menu 2 : Color Choice   TO BE COMPLETED
         self.menu_select_color = QtWidgets.QMenu("")
 
@@ -141,6 +155,8 @@ class Window(QtWidgets.QMainWindow):
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
         self.toolBar.addWidget(self.tbutton1)
         self.toolBar.addAction(transition_action)
+        self.toolBar.addAction(action_reorganize)
+        self.toolBar.addAction(action_red_everything)
         self.toolBar.addAction(leave_action)
 
         self.toolBar_list_states = self.addToolBar("Able or Disable states show")
@@ -237,6 +253,13 @@ class Window(QtWidgets.QMainWindow):
         print("add_transition")
         self.graphicsView.scene.create_transition()
 
+    def reorganize(self):
+        print("reorganize")
+        self.graphicsView.scene.reorganize()
+
+    def popupwindow(self):
+        self.graphicsView.scene.popup_window()
+
 
 class GraphWidget(QtWidgets.QGraphicsView):
     """
@@ -255,11 +278,11 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
         self.setDragMode(QtWidgets.QGraphicsView.RubberBandDrag)
 
-    def wheel_event(self, event):
+    def wheelEvent(self, event):
         """
         We can zoom in/ zoom out the GraphicsView by using wheelButton of the mouse.
         """
-        self.zoomView(math.pow(2.0, -event.angleDelta().y() / 200.0))
+        self.zoom_view(math.pow(2.0, -event.angleDelta().y() / 300.0))
 
     def zoom_view(self, zoom_factor):
         """

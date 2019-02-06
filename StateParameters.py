@@ -22,6 +22,14 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QLineEdit, QPushButton, QLabel
@@ -127,7 +135,7 @@ class StateParameters(QDialog):
         layout.addWidget(self.color_get)
         layout.addWidget(self.push_button)
         self.setLayout(layout)
-        self.show()
+        """self.show()"""
 
     def end_window(self):
         self.close()

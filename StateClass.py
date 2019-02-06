@@ -26,6 +26,14 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -74,7 +82,7 @@ class States(QGraphicsItem):
 
     def move_state(self, position_x, position_y):
         print("move_state")
-        if self.newPosition == self.pos():
+        if self.position == self.pos():
             return False
         self.setPos(position_x, position_y)
         self.position_x = self.position.x()

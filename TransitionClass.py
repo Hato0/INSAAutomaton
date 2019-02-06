@@ -18,6 +18,14 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import math
@@ -147,17 +155,17 @@ class SelfTransition(Transition):
         """print("painted")"""
         if not self.source_point or not self.final_point:
             return
-        # Draw the line itself.
+        """ Draw the line itself."""
         path = QPainterPath()
         path.moveTo(self.source_point.x()+10, self.source_point.y()-8)
-        path.cubicTo(self.source_point.x(), self.source_point.y()-75, self.source_point.x()-20,
-                     self.source_point.y()-75,
+        path.cubicTo(self.source_point.x(), self.source_point.y()-45, self.source_point.x()-20,
+                     self.source_point.y()-45,
                      self.source_point.x()-8, self.source_point.y()-10)
-        # draw the curve
+
         self.mid_x = (self.source_point.x() + self.final_point.x()-75)/2
         self.mid_y = (self.source_point.y()-75 + self.final_point.y())/2
 
-        # change color when self_transition is selected or not.
+        """change color when self_transition is selected or not."""
         if not self.selected:
             painter.setPen(QPen(Qt.black, 1, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
         else:
