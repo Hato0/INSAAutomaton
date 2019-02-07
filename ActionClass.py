@@ -38,6 +38,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
@@ -114,7 +118,6 @@ class Scene(QGraphicsScene):
         print("popup_window")
         if len(self.state_selected) == 1:
             self.popup.setup_popup(self.PopUpWindow, self.state_selected[0])
-            self.state_selected[0] = self.popup.status
             self.deselect_states()
             self.update()
         else:
@@ -315,7 +318,6 @@ class Scene(QGraphicsScene):
                 elif len(self.state_selected) == 1:
                     flag = True
                     for state in self.state_selected:
-                        # Delete the state and create a new one with new name
                         for item in self.items():
                             if isinstance(item, States):
                                 if item.name == new_name:
@@ -332,7 +334,6 @@ class Scene(QGraphicsScene):
                             self.InvalidInMsg.setText('A state with this name exist')
                             self.InvalidInMsg.exec_()
 
-                # If we choose plus than 2 items, we push an InvalidMsg
                 else:
                     self.InvalidInMsg.setText('Only 1 state !')
                     self.InvalidInMsg.exec_()
