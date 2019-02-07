@@ -34,12 +34,17 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
 
 from PyQt5 import QtWidgets
 
+from GrilleClass import GridScene
 from StateClass import *
 from StateParameters import StateParameters
 
@@ -47,11 +52,13 @@ from StateParameters import StateParameters
 class Scene(QGraphicsScene):
     print("Scene Class")
     state_parameters: StateParameters
+    grid: GridScene
 
     def __init__(self):
         super(QGraphicsScene, self).__init__()
         self.state_selected = []
         self.trans_selected = []
+        self.grid = GridScene()
         self.states_list = []
         self.InvalidInMsg = QMessageBox()
         self.InvalidInMsg.setStandardButtons(QMessageBox.Ok)
@@ -107,7 +114,9 @@ class Scene(QGraphicsScene):
         print("popup_window")
         if len(self.state_selected) == 1:
             self.popup.setup_popup(self.PopUpWindow, self.state_selected[0])
-            self.popup.status
+            self.state_selected[0] = self.popup.status
+            self.deselect_states()
+            self.update()
         else:
             pass
 
@@ -118,7 +127,7 @@ class Scene(QGraphicsScene):
             self.select_elements(event)
             return
         if event.button() == QtCore.Qt.MidButton:
-            self.re_define()
+            self.rename()
             return
         QtWidgets.QGraphicsScene.mousePressEvent(self, event)
         print("Mouse press Event")
@@ -191,6 +200,19 @@ class Scene(QGraphicsScene):
                 element.selected = False
                 self.trans_selected.remove(element)
         self.update()
+
+    def addGrid(self):
+        print("Change show")
+        if not self.grid.gridSetView:
+            print("Show grid")
+            self.grid.gridSetView = True
+            self.addItem(self.grid)
+            self.update()
+        elif self.grid.gridSetView:
+            print("Hide grid")
+            self.grid.gridSetView = False
+            self.removeItem(self.grid)
+            self.update()
 
     def create_transition(self):
         print("create_transition")

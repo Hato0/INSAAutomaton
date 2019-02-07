@@ -34,6 +34,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 from typing import Any, Union
 
 from PyQt5 import QtGui, QtWidgets
@@ -43,6 +47,12 @@ from StateClass import States
 
 
 class StateParameters(QDialog):
+    status: str
+    name: str
+    position_x: str
+    position_y: str
+    color: str
+    shape: str
     state: Union[States, Any]
     label_name: QLabel
     label_color: QLabel
@@ -57,6 +67,10 @@ class StateParameters(QDialog):
     position_x_get: QLineEdit
     status_get: QLineEdit
     name_get: QLineEdit
+
+    def __init__(self):
+        self.status = int()
+        super(StateParameters, self).__init__()
 
     def setup_popup(self, MainWindowParameters, state):
         print("window creation")
@@ -149,20 +163,18 @@ class StateParameters(QDialog):
     def end_window(self):
         self.close()
 
-        name = self.name_get.text()
-        status = self.status_get.text()
-        position_x = self.position_x_get.text()
-        position_y = self.position_y_get.text()
-        color = self.color_get.text()
-        shape = self.shape_get.text()
+        self.name = self.name_get.text()
+        self.status = self.status_get.text()
+        self.position_x = self.position_x_get.text()
+        self.position_y = self.position_y_get.text()
+        self.color = self.color_get.text()
+        self.shape = self.shape_get.text()
 
-        self.state.set_name(name)
-        self.state.set_status(status)
-        self.state.setPos(float(position_x), float(position_y))
-        self.state.set_position_x(position_x)
-        self.state.set_position_y(position_y)
-        self.state.set_color(color)
-        self.state.set_shape(shape)
-
-
+        self.state.set_name(self.name)
+        """self.state.set_status(self.status)"""
+        self.state.setPos(float(self.position_x), float(self.position_y))
+        self.state.set_position_x(self.position_x)
+        self.state.set_position_y(self.position_y)
+        self.state.set_color(self.color)
+        self.state.set_shape(self.shape)
 

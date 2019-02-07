@@ -30,6 +30,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
@@ -145,6 +149,10 @@ class Window(QtWidgets.QMainWindow):
         self.action_select_finalAndInitial.triggered.connect(self.create_states_finalAndInitial)
         self.menu_select_states.addAction(self.action_select_finalAndInitial)
 
+        grid_action = QtWidgets.QAction(QtGui.QIcon('Picture/Grid.png'), "Show / Hide Grid (Ctrl+G)", self)
+        grid_action.setShortcut("Ctrl+G")
+        grid_action.triggered.connect(self.showGrid)
+
         action_reorganize = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "Reorganize", self)
         action_reorganize.triggered.connect(self.reorganize)
 
@@ -167,6 +175,7 @@ class Window(QtWidgets.QMainWindow):
         self.toolBar.addAction(transition_action)
         self.toolBar.addAction(action_reorganize)
         self.toolBar.addAction(action_red_everything)
+        self.toolBar.addAction(grid_action)
         self.toolBar.addAction(leave_action)
 
         self.toolBar_list_states = self.addToolBar("Able or Disable states show")
@@ -221,6 +230,10 @@ class Window(QtWidgets.QMainWindow):
         ui = Window()
         ui.setup_total(new_main_window)
         sys.exit(app.exec_())
+
+    def showGrid(self):
+        print("show_grid")
+        self.graphicsView.scene.addGrid()
 
     def import_application(self):
         print("import_application")
@@ -291,6 +304,7 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
         self.setDragMode(QtWidgets.QGraphicsView.RubberBandDrag)
+        self.scene.grid = GridScene()
 
     def wheelEvent(self, event):
         """
@@ -307,3 +321,76 @@ class GraphWidget(QtWidgets.QGraphicsView):
             return
         self.scale(zoom_factor, zoom_factor)
 
+
+class GridScene(QGraphicsItem):
+
+    def paint(self, painter, option, widget: QWidget = None):
+        numBlockY = 500
+        numBlockX = 500
+        blockWidth = 50
+        blockHeigth = 50
+        painter.setBrush(QBrush(QtCore.Qt.SolidPattern))
+
+        for i in range(numBlockY):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(- numBlockY * blockWidth, 0, 0, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(- numBlockY * blockWidth, i * blockHeigth,0, i * blockHeigth)
+
+        for i in range(numBlockY):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, numBlockY * blockWidth, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(0, -i * blockHeigth,numBlockY * blockWidth, -i * blockHeigth)
+
+        for i in range(numBlockY):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(- numBlockY * blockWidth, 0, 0, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(- numBlockY * blockWidth, -i * blockHeigth,0, -i * blockHeigth)
+
+        for i in range(numBlockY):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, numBlockY * blockWidth, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(0, i * blockHeigth,numBlockY * blockWidth, i * blockHeigth)
+
+        for i in range(numBlockX):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, -numBlockX * blockHeigth, 0, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(i * blockWidth, -numBlockX * blockHeigth, i * blockWidth, 0)
+
+        for i in range(numBlockX):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, 0, numBlockX * blockHeigth)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(-i * blockWidth, 0, -i * blockWidth, numBlockX * blockHeigth)
+
+        for i in range(numBlockX):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, -numBlockX * blockHeigth, 0, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(-i * blockWidth, -numBlockX * blockHeigth, -i * blockWidth, 0)
+
+        for i in range(numBlockX):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, 0, numBlockX * blockHeigth)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(i * blockWidth, 0, i * blockWidth, numBlockX * blockHeigth)
