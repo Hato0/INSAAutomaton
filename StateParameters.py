@@ -42,6 +42,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 from typing import Any, Union
 
 from PyQt5 import QtGui, QtWidgets
@@ -175,7 +179,7 @@ class StateParameters(QDialog):
         self.shape = self.shape_get.text()
 
         self.state.set_name(self.name)
-        self.state.set_status(self.status)
+        self.state.status = self.status
         self.state.setPos(float(self.position_x), float(self.position_y))
         self.state.set_position_x(self.position_x)
         self.state.set_position_y(self.position_y)

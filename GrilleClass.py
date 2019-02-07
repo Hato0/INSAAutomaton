@@ -10,6 +10,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
@@ -24,40 +28,72 @@ class GridScene(QGraphicsItem):
         self.gridSetView = False
 
     def paint(self, painter, option, widget):
-        numBlockY = 100
-        numBlockX = 100
-        blockWidth = 10
-        blockHeigth = 10
+        numBlockY = 500
+        numBlockX = 500
+        blockWidth = 50
+        blockHeigth = 50
         painter.setBrush(QBrush(QtCore.Qt.SolidPattern))
 
         for i in range(numBlockY) :
             if i == 0:
                 painter.setPen(Qt.red)
-                painter.drawLine(-1000, 0, numBlockY * blockWidth, 0)
+                painter.drawLine(0, -numBlockY * blockWidth, 0, 0)
             else:
                 painter.setPen(Qt.gray)
-                painter.drawLine(-1000, i * blockHeigth, numBlockY * blockWidth, i * blockHeigth)
+                painter.drawLine(i * blockHeigth, -numBlockY * blockWidth, i * blockHeigth, 0)
 
         for i in range(numBlockY) :
             if i == 0:
                 painter.setPen(Qt.red)
-                painter.drawLine(-1000, 0, numBlockY * blockWidth, 0)
+                painter.drawLine(0, -numBlockY * blockWidth, 0, 0)
             else:
                 painter.setPen(Qt.gray)
-                painter.drawLine(-1000, -i * blockHeigth, numBlockY * blockWidth, -i * blockHeigth)
+                painter.drawLine(-i * blockHeigth, -numBlockY * blockWidth, -i * blockHeigth, 0)
+
+        for i in range(numBlockY) :
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, 0, numBlockY * blockWidth)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(-i * blockHeigth, numBlockY * blockWidth, -i * blockHeigth, 0)
+
+        for i in range(numBlockY) :
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, 0, numBlockY * blockWidth)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(i * blockHeigth, numBlockY * blockWidth, i * blockHeigth, 0)
 
         for i in range(numBlockX):
             if i == 0:
                 painter.setPen(Qt.red)
-                painter.drawLine(0, -600, 0, numBlockX * blockHeigth)
+                painter.drawLine(-numBlockX * blockHeigth, 0, 0, 0)
             else:
                 painter.setPen(Qt.gray)
-                painter.drawLine(i * blockWidth, -600, i * blockWidth, numBlockX * blockHeigth)
+                painter.drawLine( -numBlockX * blockHeigth, i * blockWidth, 0, i * blockWidth)
 
         for i in range(numBlockX):
             if i == 0:
                 painter.setPen(Qt.red)
-                painter.drawLine(0, -600, 0, numBlockX * blockHeigth)
+                painter.drawLine(-numBlockX * blockHeigth, 0, 0, 0)
             else:
                 painter.setPen(Qt.gray)
-                painter.drawLine(-i * blockWidth, -600, -i * blockWidth, numBlockX * blockHeigth)
+                painter.drawLine( -numBlockX * blockHeigth, -i * blockWidth, 0, -i * blockWidth)
+
+        for i in range(numBlockX):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, numBlockX * blockHeigth, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(0, -i * blockWidth, numBlockX * blockHeigth, -i * blockWidth)
+
+        for i in range(numBlockX):
+            if i == 0:
+                painter.setPen(Qt.red)
+                painter.drawLine(0, 0, numBlockX * blockHeigth, 0)
+            else:
+                painter.setPen(Qt.gray)
+                painter.drawLine(0, i * blockWidth, numBlockX * blockHeigth, i * blockWidth)

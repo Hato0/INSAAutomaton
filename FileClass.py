@@ -18,6 +18,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import StateClass
@@ -112,25 +116,26 @@ class FilesBlock:
         iterateurbis = 0
         for itemlink in StateClass.States.registry:
             a = itemlink.link
-            for i in range(len(a)):
+            for i in range(len(a)-1):
                 attributeletter = itemlink.get_attributeletter()
-                link_name = itemlink.get_link_name()
+                link = itemlink.get_link()
+                print(len(link))
                 if a[i] == itemlink.get_name():
                     files.write("(")
                     files.write(attributeletter)
                     files.write(") edge [loop]   node  {")
-                    files.write(link_name[iterateurbis])
+                    files.write(link[iterateurbis].name)
                     files.write("}  (")
-                    files.write(a[i])
+                    files.write(a[i].end.attributeletter)
                     files.write(")")
                     files.write("\n")
                 else:
                     files.write("(")
                     files.write(attributeletter)
                     files.write(") edge          node  {")
-                    files.write(link_name[iterateurbis])
+                    files.write(link[iterateurbis].name)
                     files.write("}  (")
-                    files.write(str(a[i]))
+                    files.write(a[i].end.attributeletter)
                     files.write(")")
                     files.write("\n")
                 print(iterateurbis)
@@ -163,9 +168,7 @@ class FilesBlock:
             for i in a:
                 file.write(str(i))
                 file.write("\n")
-            b = item.get_link_name()
-            for i in b:
-                file.write(str(i))
+                file.write(i.name)
                 file.write("\n")
             file.write(item.get_color())
             file.write("\n")
@@ -203,6 +206,7 @@ class FilesBlock:
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_position_y(float(line))
+                    alpha[cursor].setPos(alpha[cursor].position_x, alpha[cursor].position_y)
                     range_iter = int(file.readline())
                     for j in range(range_iter):
                         line = file.readline()
@@ -221,6 +225,7 @@ class FilesBlock:
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_attributeletter(line)
+                    alpha[cursor].update()
             file.readline()
             cursor += 1
         file.close()

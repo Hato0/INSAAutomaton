@@ -42,6 +42,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
@@ -109,6 +113,7 @@ class Scene(QGraphicsScene):
         Rename with double mouse click
         """
         self.select_elements(event)
+        print(self.state_selected)
         if len(self.state_selected) == 1:
             self.popup_window()
         else:
@@ -223,11 +228,11 @@ class Scene(QGraphicsScene):
         Create transition between 2 chosen state. The first chosen one is source, the second is destination
         We can choose one state to create a transition towards itself.
         """
-        trans_val, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
-                                                               'Enter Transition Name:')
+        trans_name, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
+                                                                'Enter Transition Name:')
         if ok_pressed:
             """ If 2 states are chosen, create a transition with a name between these. """
-            if len(self.state_selected)== 2:
+            if len(self.state_selected) == 2:
                 """ Check if between 2 states there is already a transition """
                 for trans in self.items():
                     if isinstance(trans, Transition):
@@ -237,7 +242,40 @@ class Scene(QGraphicsScene):
                             self.deselect_states()
                             return
                 """ If there isn't, we create a new transition """
-                self.addItem(Transition(self.state_selected[0], self.state_selected[1], trans_val))
+                self.addItem(Transition(self.state_selected[0], self.state_selected[1], trans_name))
+                self.deselect_states()
+                self.update()
+            elif len(self.state_selected) == 1:
+                """ if only 1 state is chosen, we create a self-transition of that state """
+                self.addItem(SelfTransition(self.state_selected[0], trans_name))
+                self.deselect_states()
+                self.update()
+            else:
+                """ if we choose > 2 transition, we can not create a transition """
+                self.InvalidInMsg.setText('Must select 2 states to create transition')
+                self.InvalidInMsg.exec_()
+
+    def create_transition_courbe(self):
+        print("create_transition_courbe")
+        """
+        Create transition between 2 chosen state. The first chosen one is source, the second is destination
+        We can choose one state to create a transition towards itself.
+        """
+        trans_val, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition Curved',
+                                                               'Enter Transition Name:')
+        if ok_pressed:
+            """ If 2 states are chosen, create a transition with a name between these. """
+            if len(self.state_selected)== 2:
+                """ Check if between 2 states there is already a transition """
+                for trans in self.items():
+                    if isinstance(trans, TransitionCourbe):
+                        if trans.source_point == self.state_selected[0] and trans.dest == self.state_selected[1]:
+                            self.InvalidInMsg.setText('Transition already exists')
+                            self.InvalidInMsg.exec_()
+                            self.deselect_states()
+                            return
+                """ If there isn't, we create a new transition """
+                self.addItem(TransitionCourbe(self.state_selected[0], self.state_selected[1], trans_val))
                 self.deselect_states()
                 self.update()
             elif len(self.state_selected) == 1:
@@ -338,11 +376,11 @@ class Scene(QGraphicsScene):
                     self.InvalidInMsg.setText('Only 1 state !')
                     self.InvalidInMsg.exec_()
 
-    def reorganize(self, radius=150, s=0):
+    """def reorganize(self, radius=150, s=0):
         print("reorganize")
-        """
+        
         Reorganise chosen state as a form of a regular polygon
-        """
+        
         deplace = 800
         stateselected = []
         for state in self.selectedItems():
@@ -368,5 +406,5 @@ class Scene(QGraphicsScene):
         self.deselect_states()
         for i in stateselected:
             i.setSelected(0)
-        stateselected = []
+        stateselected = []"""
 

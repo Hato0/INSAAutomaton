@@ -6,17 +6,23 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="49" />
-    <bookmark url="file://$PROJECT_DIR$/StateClass.py" line="388" />
-    <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="123" />
+    <bookmark url="file://$PROJECT_DIR$/StateClass.py" line="399" />
+    <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="124" />
     <bookmark url="file://$PROJECT_DIR$/FileClass.py" line="50" />
-    <bookmark url="file://$PROJECT_DIR$/StateParameters.py" line="36" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/StateParameters.py" line="40" mnemonic="9" />
     <bookmark url="file://$PROJECT_DIR$/make.py" description="MainWindow = QtWidgets.QMainWindow()" line="19" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ba40801-7b01-43fd-96a8-119429dff4bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Thibaut.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Thibaut.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ActionClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/ActionClass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/FileClass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphicWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphicWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrilleClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrilleClass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/StateClass.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateParameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/StateParameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitionClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/TransitionClass.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,17 +35,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FileClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3281">
-              <caret line="193" column="68" selection-start-line="193" selection-start-column="68" selection-end-line="193" selection-end-column="68" />
+            <state relative-caret-position="638">
+              <caret line="177" column="40" lean-forward="true" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testsave.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="539">
+              <caret line="317" selection-start-line="317" selection-end-line="317" />
+              <folding>
+                <element signature="e#1267#1277#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StateClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="152" column="44" lean-forward="true" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+            <state relative-caret-position="519">
+              <caret line="98" column="39" lean-forward="true" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
               <folding>
                 <element signature="e#1400#1423#0" expanded="true" />
               </folding>
@@ -59,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TransitionClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+            <state relative-caret-position="604">
+              <caret line="228" lean-forward="true" selection-start-line="228" selection-end-line="228" />
               <folding>
                 <element signature="e#1004#1015#0" expanded="true" />
               </folding>
@@ -68,13 +86,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ActionClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="162">
+              <caret line="268" column="74" lean-forward="true" selection-start-line="268" selection-start-column="74" selection-end-line="268" selection-end-column="74" />
               <folding>
-                <element signature="e#1400#1426#0" expanded="true" />
+                <element signature="e#1532#1558#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GrilleClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+            <state relative-caret-position="621">
+              <caret line="94" column="92" selection-start-line="94" selection-start-column="92" selection-end-line="94" selection-end-column="92" />
               <folding>
                 <element signature="e#475#499#0" expanded="true" />
               </folding>
@@ -95,8 +113,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StateParameters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="173" column="8" selection-start-line="173" selection-start-column="8" selection-end-line="173" selection-end-column="8" />
+            <state relative-caret-position="3026">
+              <caret line="183" column="27" lean-forward="true" selection-start-line="183" selection-start-column="27" selection-end-line="183" selection-end-column="27" />
+              <folding>
+                <element signature="e#1530#1559#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,9 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GraphWidget</find>
-      <find>initial</find>
-      <find>create_state</find>
       <find>print</find>
       <find>QColor</find>
       <find>select_ele</find>
@@ -154,6 +172,9 @@
       <find>retra</find>
       <find>update</find>
       <find>move</find>
+      <find>isselect</find>
+      <find>leng</find>
+      <find>self.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -202,19 +223,19 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/test.txt" />
         <option value="$PROJECT_DIR$/make.py" />
+        <option value="$PROJECT_DIR$/StateParameters.py" />
         <option value="$PROJECT_DIR$/FileClass.py" />
+        <option value="$PROJECT_DIR$/TransitionClass.py" />
+        <option value="$PROJECT_DIR$/ActionClass.py" />
+        <option value="$PROJECT_DIR$/StateClass.py" />
         <option value="$PROJECT_DIR$/GrilleClass.py" />
         <option value="$PROJECT_DIR$/GraphicWindow.py" />
-        <option value="$PROJECT_DIR$/StateClass.py" />
-        <option value="$PROJECT_DIR$/TransitionClass.py" />
-        <option value="$PROJECT_DIR$/StateParameters.py" />
-        <option value="$PROJECT_DIR$/ActionClass.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="218" />
-    <option name="y" value="-12" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="327" />
+    <option name="y" value="-20" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -224,6 +245,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -240,11 +262,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../workingversioncontrol" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
@@ -647,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549549160413</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Update 07/02/19 ,  15:19&#10;To run file, execute make.py">
+      <created>1549550457725</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1549550457725</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers>
       <GitHub url="https://gist.github.com/Hato0" />
     </servers>
@@ -673,9 +701,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.13326226" />
+      <window_info content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.13432837" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25266525" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -686,9 +714,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49840087" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49520257" weight="0.2156013" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4792111" visible="true" weight="0.2383532" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5207889" side_tool="true" visible="true" weight="0.2383532" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.48614073" weight="0.28169015" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.478145" visible="true" weight="0.21825397" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.521855" side_tool="true" visible="true" weight="0.21825397" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.48560768" weight="0.28169015" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.17162699" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -901,16 +929,13 @@
     <entry file="file://$PROJECT_DIR$/Picture/initial.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/testsave.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testexport.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FileClass.py">
+    <entry file="file://$PROJECT_DIR$/StateParameters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3281">
-          <caret line="193" column="68" selection-start-line="193" selection-start-column="68" selection-end-line="193" selection-end-column="68" />
+        <state relative-caret-position="3026">
+          <caret line="183" column="27" lean-forward="true" selection-start-line="183" selection-start-column="27" selection-end-line="183" selection-end-column="27" />
+          <folding>
+            <element signature="e#1530#1559#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -924,17 +949,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
+    <entry file="file://$PROJECT_DIR$/testexport.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        <state relative-caret-position="638">
+          <caret line="177" column="40" lean-forward="true" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testsave.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TransitionClass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="228" lean-forward="true" selection-start-line="228" selection-end-line="228" />
+          <folding>
+            <element signature="e#1004#1015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ActionClass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="268" column="74" lean-forward="true" selection-start-line="268" selection-start-column="74" selection-end-line="268" selection-end-column="74" />
+          <folding>
+            <element signature="e#1532#1558#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/StateClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="152" column="44" lean-forward="true" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+        <state relative-caret-position="519">
+          <caret line="98" column="39" lean-forward="true" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
           <folding>
             <element signature="e#1400#1423#0" expanded="true" />
           </folding>
@@ -943,37 +998,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GrilleClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        <state relative-caret-position="621">
+          <caret line="94" column="92" selection-start-line="94" selection-start-column="92" selection-end-line="94" selection-end-column="92" />
           <folding>
             <element signature="e#475#499#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TransitionClass.py">
+    <entry file="file://$PROJECT_DIR$/GraphicWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+        <state relative-caret-position="539">
+          <caret line="317" selection-start-line="317" selection-end-line="317" />
           <folding>
-            <element signature="e#1004#1015#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StateParameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="173" column="8" selection-start-line="173" selection-start-column="8" selection-end-line="173" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ActionClass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-          <folding>
-            <element signature="e#1400#1426#0" expanded="true" />
+            <element signature="e#1267#1277#0" expanded="true" />
           </folding>
         </state>
       </provider>

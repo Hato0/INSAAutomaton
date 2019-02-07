@@ -34,6 +34,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
@@ -159,6 +163,11 @@ class Window(QtWidgets.QMainWindow):
         action_red_everything = QtWidgets.QAction(QtGui.QIcon("Picture/StateSettings.png"), "Configuration", self)
         action_red_everything.triggered.connect(self.popupwindow)
 
+        transition_courbe_action = QtWidgets.QAction(QtGui.QIcon('Picture/Arrow.png'), 'Create transitions courbe',
+                                                     self)
+        transition_courbe_action.triggered.connect(self.add_transition_courbe)
+
+
         """ Menu 2 : Color Choice   TO BE COMPLETED
         self.menu_select_color = QtWidgets.QMenu("")
 
@@ -173,6 +182,7 @@ class Window(QtWidgets.QMainWindow):
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
         self.toolBar.addWidget(self.tbutton1)
         self.toolBar.addAction(transition_action)
+        self.toolBar.addAction(transition_courbe_action)
         self.toolBar.addAction(action_reorganize)
         self.toolBar.addAction(action_red_everything)
         self.toolBar.addAction(grid_action)
@@ -287,6 +297,10 @@ class Window(QtWidgets.QMainWindow):
     def popupwindow(self):
         self.graphicsView.scene.popup_window()
 
+    def add_transition_courbe(self):
+        print("add_transition_courbe")
+        self.graphicsView.scene.create_transition_courbe()
+
 
 class GraphWidget(QtWidgets.QGraphicsView):
     """
@@ -304,13 +318,12 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
         self.setDragMode(QtWidgets.QGraphicsView.RubberBandDrag)
-        self.scene.grid = GridScene()
 
     def wheelEvent(self, event):
         """
         We can zoom in/ zoom out the GraphicsView by using wheelButton of the mouse.
         """
-        self.zoom_view(math.pow(2.0, -event.angleDelta().y() / 300.0))
+        self.zoom_view(math.pow(2.0, event.angleDelta().y() / 300.0))
 
     def zoom_view(self, zoom_factor):
         """
@@ -322,75 +335,3 @@ class GraphWidget(QtWidgets.QGraphicsView):
         self.scale(zoom_factor, zoom_factor)
 
 
-class GridScene(QGraphicsItem):
-
-    def paint(self, painter, option, widget: QWidget = None):
-        numBlockY = 500
-        numBlockX = 500
-        blockWidth = 50
-        blockHeigth = 50
-        painter.setBrush(QBrush(QtCore.Qt.SolidPattern))
-
-        for i in range(numBlockY):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(- numBlockY * blockWidth, 0, 0, 0)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(- numBlockY * blockWidth, i * blockHeigth,0, i * blockHeigth)
-
-        for i in range(numBlockY):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(0, 0, numBlockY * blockWidth, 0)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(0, -i * blockHeigth,numBlockY * blockWidth, -i * blockHeigth)
-
-        for i in range(numBlockY):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(- numBlockY * blockWidth, 0, 0, 0)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(- numBlockY * blockWidth, -i * blockHeigth,0, -i * blockHeigth)
-
-        for i in range(numBlockY):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(0, 0, numBlockY * blockWidth, 0)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(0, i * blockHeigth,numBlockY * blockWidth, i * blockHeigth)
-
-        for i in range(numBlockX):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(0, -numBlockX * blockHeigth, 0, 0)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(i * blockWidth, -numBlockX * blockHeigth, i * blockWidth, 0)
-
-        for i in range(numBlockX):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(0, 0, 0, numBlockX * blockHeigth)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(-i * blockWidth, 0, -i * blockWidth, numBlockX * blockHeigth)
-
-        for i in range(numBlockX):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(0, -numBlockX * blockHeigth, 0, 0)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(-i * blockWidth, -numBlockX * blockHeigth, -i * blockWidth, 0)
-
-        for i in range(numBlockX):
-            if i == 0:
-                painter.setPen(Qt.red)
-                painter.drawLine(0, 0, 0, numBlockX * blockHeigth)
-            else:
-                painter.setPen(Qt.gray)
-                painter.drawLine(i * blockWidth, 0, i * blockWidth, numBlockX * blockHeigth)

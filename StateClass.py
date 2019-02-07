@@ -38,6 +38,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -82,6 +86,17 @@ class States(QGraphicsItem):
         """
         self.add_link(transition)
         self.add_link_name(transition_name)
+
+    def add_transition_courbe(self, transition, transition_name):
+        print("add_transition_courbe")
+        """
+        Add a transition curved to the node
+        :param transition:
+        :return:
+        """
+        self.add_link(transition)
+        self.add_link_name(transition_name)
+        transition.adjust()
 
     def move_state(self, position_x, position_y):
         print("move_state")
