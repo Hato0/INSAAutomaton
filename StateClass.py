@@ -6,51 +6,6 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-
 
 from PyQt5 import QtGui
 
@@ -132,6 +87,7 @@ class States(QGraphicsItem):
         print("adjusting position")
         newX = round(self.get_position_x() / 25.0) * 25.0
         newY = round(self.get_position_y() / 25.0) * 25.0
+        self.setPos(newX, newY)
         self.set_position_x(newX)
         self.set_position_y(newY)
         print(self.get_position_x())

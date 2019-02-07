@@ -6,46 +6,6 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
 
 import sys
 
@@ -103,6 +63,11 @@ class Window(QtWidgets.QMainWindow):
         save_action.setShortcut("Ctrl+S")
         save_action.setStatusTip('Save the current file')
         save_action.triggered.connect(self.save_application)
+        """Create state widget and associate it to create_state_circle"""
+        state_action = QtWidgets.QAction("&State", self)
+        state_action.setShortcut("S")
+        state_action.setStatusTip('Create state')
+        state_action.triggered.connect(self.create_state_circle)
         """ Create leave widget and associate it to close_application """
         leave_action = QtWidgets.QAction("&Quit", self)
         leave_action.setShortcut("Ctrl+Q")
@@ -114,6 +79,7 @@ class Window(QtWidgets.QMainWindow):
         """ Create the file drop down menu """
         file_menu = mainmenu.addMenu('&File')
         """ Add file parameters """
+        file_menu.addAction(state_action)
         file_menu.addAction(new_action)
         file_menu.addAction(open_action)
         file_menu.addAction(save_action)
@@ -150,10 +116,6 @@ class Window(QtWidgets.QMainWindow):
         self.tbutton1.setIcon(QtGui.QIcon("Picture/states.png"))
         self.tbutton1.setToolTip("Select state form")
 
-        self.action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "State", self)
-        self.action_select_circle.triggered.connect(self.create_state_circle)
-        self.menu_select_states.addAction(self.action_select_circle)
-
         self.action_select_initial = QtWidgets.QAction(QtGui.QIcon("Picture/initial.png"), "Initial", self)
         self.action_select_initial.triggered.connect(self.create_states_initial)
         self.menu_select_states.addAction(self.action_select_initial)
@@ -181,6 +143,9 @@ class Window(QtWidgets.QMainWindow):
                                                      self)
         transition_courbe_action.triggered.connect(self.add_transition_courbe)
 
+        action_select_circle = QtWidgets.QAction(QtGui.QIcon("Picture/circle.png"), "Create State", self)
+        action_select_circle.triggered.connect(self.create_state_circle)
+
 
         """ Menu 2 : transition Choice  """
         self.menu_select_transition = QtWidgets.QMenu("")
@@ -199,11 +164,27 @@ class Window(QtWidgets.QMainWindow):
         self.action_select_curv_trans.triggered.connect(self.add_transition_courbe)
         self.menu_select_transition.addAction(self.action_select_curv_trans)
 
+        self.menu_select_opti = QtWidgets.QMenu("")
+
+        self.tbutton3 = QtWidgets.QToolButton(self)
+        self.tbutton3.setMenu(self.menu_select_transition)
+        self.tbutton3.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.tbutton3.setIcon(QtGui.QIcon("Picture/circled-dot.png"))
+        self.tbutton3.setToolTip("Select transition")
+
+        self.action_select_opti1 = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "In Line", self)
+        self.action_select_opti1.triggered.connect(self.putInLine)
+        self.menu_select_opti.addAction(self.action_select_opti1)
+
+        self.action_select_opti2 = QtWidgets.QAction(QtGui.QIcon("Picture/Arrow_curved.png"), "Curved", self)
+        self.action_select_opti2.triggered.connect(self.putInGroup)
+        self.menu_select_opti.addAction(self.action_select_opti2)
+
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
         self.toolBar.addWidget(self.tbutton1)
+        self.toolBar.addAction(action_select_circle)
         self.toolBar.addWidget(self.tbutton2)
-        self.toolBar.addAction(action_putInLine)
-        self.toolBar.addAction(action_putInGroup)
+        self.toolBar.addWidget(self.tbutton3)
         self.toolBar.addAction(action_red_everything)
         self.toolBar.addAction(grid_action)
         self.toolBar.addAction(leave_action)
@@ -362,5 +343,3 @@ class GraphWidget(QtWidgets.QGraphicsView):
         if factor < 0.09 or factor > 50:
             return
         self.scale(zoom_factor, zoom_factor)
-
-

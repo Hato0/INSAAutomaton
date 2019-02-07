@@ -1,0 +1,36 @@
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows}
+\begin{document}
+
+\begin{tikzpicture}
+node[state, shape = circle, draw = white]   (B) at (-125.0 , 175.0) {$$};
+node[state, accepting, shape = circle, draw = white]   (C) at (75.0 , -25.0) {$$};
+node[state, initial, shape = circle, draw = white]   (D) at (-125.0 , -75.0) {$$};
+node[state, accepting, shape = circle, draw = white]   (E) at (86.0 , 112.0) {$$};
+
+\path  (B) edge          node  {Trans1
+}  (B)
+(B) edge          node  {Trans2
+}  (D)
+(B) edge          node  {Trans1
+}  (B)
+(B) edge          node  {Trans2
+}  (D)
+(C) edge          node  {Trans1
+}  (B)
+(C) edge          node  {Trans1
+}  (B)
+(C) edge          node  {Trans3
+}  (D)
+(C) edge          node  {Trans3
+}  (D)
+(D) edge          node  {Trans2
+}  (D)
+(D) edge          node  {Trans3
+}  (D)
+(D) edge          node  {Trans2
+}  (D)
+(D) edge          node  {Trans3
+}  (D)
+\end{tikzpicture} 
+\end{document}

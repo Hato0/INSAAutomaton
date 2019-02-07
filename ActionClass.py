@@ -6,55 +6,6 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-
 
 from random import randint
 
@@ -122,6 +73,7 @@ class Scene(QGraphicsScene):
                 print(state.get_position_x(), state.get_position_y())
                 for transition in state.link:
                     transition.adjust()
+                    self.update()
 
     def mouseDoubleClickEvent(self, event):
         print("mouseDoubleClickEvent")
@@ -276,6 +228,8 @@ class Scene(QGraphicsScene):
             object_end: States
             object_start: States
             print(start, end)
+            object_end = None
+            object_start = None
             for states in States.registry:
                 if isinstance(states, States):
                     if states.attributeletter == start:

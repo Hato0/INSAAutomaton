@@ -6,31 +6,6 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-#
-#  You should have received a copy of the legal license with
-#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
-#
-
 
 import StateClass
 
@@ -124,26 +99,26 @@ class FilesBlock:
         iterateurbis = 0
         for itemlink in StateClass.States.registry:
             a = itemlink.link
-            for i in range(len(a)-1):
+            for i in a:
                 attributeletter = itemlink.get_attributeletter()
                 link = itemlink.get_link()
                 print(len(link))
-                if a[i] == itemlink.get_name():
+                if i.name == itemlink.get_name():
                     files.write("(")
                     files.write(attributeletter)
                     files.write(") edge [loop]   node  {")
-                    files.write(link[iterateurbis].name)
+                    files.write(i.name)
                     files.write("}  (")
-                    files.write(a[i].end.attributeletter)
+                    files.write(i.end.attributeletter)
                     files.write(")")
                     files.write("\n")
                 else:
                     files.write("(")
                     files.write(attributeletter)
                     files.write(") edge          node  {")
-                    files.write(link[iterateurbis].name)
+                    files.write(i.name)
                     files.write("}  (")
-                    files.write(a[i].end.attributeletter)
+                    files.write(i.end.attributeletter)
                     files.write(")")
                     files.write("\n")
                 print(iterateurbis)
@@ -187,6 +162,8 @@ class FilesBlock:
             file.write(item.get_shape())
             file.write("\n")
             file.write(item.get_attributeletter())
+            file.write("\n")
+            file.write(str(item.get_status()))
             file.write("\n")
             file.write("\\EndStateSafe")
         file.close()
@@ -244,6 +221,10 @@ class FilesBlock:
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_attributeletter(line)
+                    line = file.readline()
+                    line = line.replace('\n', '')
+
+                    alpha[cursor].set_status(float(line))
                     alpha[cursor].update()
             file.readline()
             cursor += 1
