@@ -30,6 +30,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import math
@@ -223,7 +227,7 @@ class TransitionCourbe(QGraphicsItem):
         painter.setBrush(Qt.black)
         painter.drawPolygon(QPolygonF([line.p2(), dest_arrow_p1, dest_arrow_p2]))
         self.mid_x = (self.source_point.x() + self.final_point.x()) / 2
-        self.mid_y = (self.source_point.y() + self.final_point.y()) / 2
+        self.mid_y = (self.source_point.y()-70 + self.final_point.y()-70) / 2
         if self.final_point.x() - self.final_point.x() > 0:
             painter.drawText(self.mid_x - 10, self.mid_y - 10, self.name)
         else:
@@ -276,4 +280,3 @@ class SelfTransition(Transition):
         painter.drawPath(path)
         painter.drawText(self.mid_x, self.mid_y, self.name)
         self.update()
-

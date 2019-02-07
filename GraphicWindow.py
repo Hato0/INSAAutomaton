@@ -42,6 +42,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
@@ -59,8 +63,8 @@ class Window(QtWidgets.QMainWindow):
     action_select_circle: QAction
     action_select_initial: QAction
     tbutton1: QToolButton
-    """menu_select_color: QMenu
-    tbutton2: QToolButton"""
+    menu_select_transition: QMenu
+    """tbutton2: QToolButton"""
     menu_select_states: QMenu
     toolBar: QToolBar
     toolBar_list_states: QToolBar
@@ -128,7 +132,7 @@ class Window(QtWidgets.QMainWindow):
         action_putInLine.triggered.connect(self.putInLine)
 
         action_putInGroup = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "put in group", self)
-        action_putInLine.triggered.connect(self.putInGroup)
+        action_putInGroup.triggered.connect(self.putInGroup)
 
         """ Graphic Views """
         self.graphicsView = GraphWidget()
@@ -178,21 +182,26 @@ class Window(QtWidgets.QMainWindow):
         transition_courbe_action.triggered.connect(self.add_transition_courbe)
 
 
-        """ Menu 2 : Color Choice   TO BE COMPLETED
-        self.menu_select_color = QtWidgets.QMenu("")
+        """ Menu 2 : transition Choice  """
+        self.menu_select_transition = QtWidgets.QMenu("")
 
         self.tbutton2 = QtWidgets.QToolButton(self)
-        self.tbutton2.setMenu(self.menu_select_color)
+        self.tbutton2.setMenu(self.menu_select_transition)
         self.tbutton2.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-        self.tbutton2.setIcon(QtGui.QIcon("Picture/color.png"))
-        self.tbutton2.setToolTip("Select state color")
+        self.tbutton2.setIcon(QtGui.QIcon("Picture/Arrow.png"))
+        self.tbutton2.setToolTip("Select transition")
 
-        self.action_select_blue = QtWidgets.QAction(QtGui.QIcon("Picture"))"""
+        self.action_select_normal_trans = QtWidgets.QAction(QtGui.QIcon("Picture/Arrow.png"), "Normal", self)
+        self.action_select_normal_trans.triggered.connect(self.add_transition)
+        self.menu_select_transition.addAction(self.action_select_normal_trans)
+
+        self.action_select_curv_trans = QtWidgets.QAction(QtGui.QIcon("Picture/Arrow_curved.png"), "Curved", self)
+        self.action_select_curv_trans.triggered.connect(self.add_transition_courbe)
+        self.menu_select_transition.addAction(self.action_select_curv_trans)
 
         self.toolBar = self.addToolBar("Able or Disable options tool_Bar")
         self.toolBar.addWidget(self.tbutton1)
-        self.toolBar.addAction(transition_action)
-        self.toolBar.addAction(transition_courbe_action)
+        self.toolBar.addWidget(self.tbutton2)
         self.toolBar.addAction(action_putInLine)
         self.toolBar.addAction(action_putInGroup)
         self.toolBar.addAction(action_red_everything)
@@ -262,7 +271,9 @@ class Window(QtWidgets.QMainWindow):
         text = QtWidgets.QFileDialog.getOpenFileName(self, 'Import File')
         file.set_name(text[0])
         recup = FilesBlock.importation(file, self.graphicsView)
-        self.graphicsView.scene.create_transition(recup[0], recup[1], recup[2])
+        print(recup)
+        for i in range(len(recup)):
+            self.graphicsView.scene.create_transition(recup[i][0], recup[i][1], recup[i][2])
 
     def export_application(self):
         print("export_application")

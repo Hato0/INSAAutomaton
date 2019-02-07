@@ -26,6 +26,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import StateClass
@@ -230,6 +234,7 @@ class FilesBlock:
                         line = file.readline()
                         interim.append(line)
                         transition_to_do.append(interim)
+                        interim = []
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_color(line)
@@ -242,7 +247,5 @@ class FilesBlock:
                     alpha[cursor].update()
             file.readline()
             cursor += 1
-        for i in range(len(transition_to_do)):
-            graphicsView.scene.create_transition(transition_to_do[i][0], transition_to_do[i][1], transition_to_do[i][2])
         file.close()
         return transition_to_do

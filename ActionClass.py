@@ -50,6 +50,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
@@ -109,6 +113,15 @@ class Scene(QGraphicsScene):
                 self.delete_selected_states()
             elif len(self.trans_selected) != 0:
                 self.delete_transition()
+
+    def mouseMoveEvent(self, event):
+        super().mouseMoveEvent(event)
+        for state in self.states_list:
+            if state.isUnderMouse() and event.buttons() == QtCore.Qt.LeftButton and self.grid.gridSetView:
+                state.adjust_state()
+                print(state.get_position_x(), state.get_position_y())
+                for transition in state.link:
+                    transition.adjust()
 
     def mouseDoubleClickEvent(self, event):
         print("mouseDoubleClickEvent")
@@ -262,19 +275,13 @@ class Scene(QGraphicsScene):
         else:
             object_end: States
             object_start: States
+            print(start, end)
             for states in States.registry:
                 if isinstance(states, States):
-                    print(1)
                     if states.attributeletter == start:
-                        print(2)
                         object_start = states
                     elif states.attributeletter == end:
-                        print(3)
                         object_end = states
-                    else:
-                        object_start = None
-                        object_end = None
-
             if object_start != object_end and object_end is not None and object_start is not None:
                 """ Check if between 2 states there is already a transition """
                 for trans in self.items():
@@ -478,12 +485,14 @@ class Scene(QGraphicsScene):
         print(statelist)
         statelist[0].move_state(0, 0)
         for i in range(1, len(statelist)):
-            statelist[i].move_state(statelist[i - 1].position_x + 60, statelist[i - 1].position_y - 40)
+            statelist[i].move_state(statelist[i - 1].position_x + 60, statelist[i - 1].position_y)
 
     def PutInLine(self, statesToLine):
         statelist = statesToLine
         for i in range(1, len(statelist)):
-            statelist[i].move_state(statelist[i - 1].position_x + 70, statelist[i - 1].position_y)
+            statelist[i].setPos(statelist[i - 1].getPos().x() + 40, statelist[i - 1].getPos().y())
+            statelist[i].set_position_x(statelist[i].getPos().x())
+            statelist[i].set_position_y(statelist[i].getPos().y())
 
     def putInGroup(self, rayon=100):
         statesSelected = []
