@@ -30,12 +30,20 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
+from typing import Any, Union
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QLineEdit, QPushButton, QLabel
 
+from StateClass import States
+
 
 class StateParameters(QDialog):
+    state: Union[States, Any]
     label_name: QLabel
     label_color: QLabel
     label_x_position: QLabel
@@ -53,6 +61,7 @@ class StateParameters(QDialog):
     def setup_popup(self, MainWindowParameters, state):
         print("window creation")
         print("initialisation of state parameters")
+        self.state = state
         name = state.get_name()
         status = state.get_status()
         position_x = state.get_position_x()
@@ -78,11 +87,11 @@ class StateParameters(QDialog):
         self.name_get.setText(str(name))
 
         self.label_status = QLabel()
-        self.label_status.setText("State status (initial = 0 , final = 2 , normal = 1) :")
+        self.label_status.setText("State status (initial = 0 , final = 2 , normal = 1 , initial and final = 3 ) :")
         self.label_status.setGeometry(20, 20, 20, 20)
 
         self.status_get = QLineEdit()
-        self.status_get.setObjectName("Status: 'Initial', 'Final', 'Classic'")
+        self.status_get.setObjectName("Status: 'Initial', 'Final', 'Classic' , 'Initial and Final'")
         self.status_get.setText(str(status))
 
         self.label_x_position = QLabel()
@@ -116,10 +125,10 @@ class StateParameters(QDialog):
         self.shape_get = QLineEdit()
         self.shape_get.setObjectName("State shape (Square, Rectangle, Circle)")
         self.shape_get.setText(str(shape))
-
         self.push_button = QPushButton("Validate", self)
         self.push_button.setToolTip("This will upgrade your state")
         self.push_button.clicked.connect(self.end_window)
+
         layout = QtWidgets.QFormLayout()
         layout.addWidget(self.label_name)
         layout.addWidget(self.name_get)
@@ -135,24 +144,25 @@ class StateParameters(QDialog):
         layout.addWidget(self.color_get)
         layout.addWidget(self.push_button)
         self.setLayout(layout)
-        """self.show()"""
+        self.show()
 
     def end_window(self):
         self.close()
 
-    def get_name(self):
-        return self.name_get
+        name = self.name_get.text()
+        status = self.status_get.text()
+        position_x = self.position_x_get.text()
+        position_y = self.position_y_get.text()
+        color = self.color_get.text()
+        shape = self.shape_get.text()
 
-    def get_position_x(self):
-        return self.position_x_get
+        self.state.set_name(name)
+        self.state.set_status(status)
+        self.state.setPos(float(position_x), float(position_y))
+        self.state.set_position_x(position_x)
+        self.state.set_position_y(position_y)
+        self.state.set_color(color)
+        self.state.set_shape(shape)
 
-    def get_position_y(self):
-        return self.position_y_get
-
-    def get_status(self):
-        return self.status_get
-
-    def get_shape(self):
-        return self.shape_get
 
 

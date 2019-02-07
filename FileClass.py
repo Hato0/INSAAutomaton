@@ -14,6 +14,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import StateClass
@@ -187,7 +191,7 @@ class FilesBlock:
         for i in range(int(number_of_states)):
             line = file.readline()
             if line == "\\StateSafe \n":
-                    alpha[cursor] = graphicsView.scene.create_state(1)
+                    alpha[cursor] = graphicsView.scene.create_state()
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_name(line)

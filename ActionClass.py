@@ -30,6 +30,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
@@ -52,6 +56,9 @@ class Scene(QGraphicsScene):
         self.InvalidInMsg = QMessageBox()
         self.InvalidInMsg.setStandardButtons(QMessageBox.Ok)
         self.InvalidInMsg.setWindowTitle('Invalid input !')
+
+        self.popup = StateParameters()
+        self.PopUpWindow = QtWidgets.QDialog()
 
     def deselect_states(self):
         print("deselect_states")
@@ -92,23 +99,17 @@ class Scene(QGraphicsScene):
         """
         self.select_elements(event)
         if len(self.state_selected) == 1:
-            self.rename()
+            self.popup_window()
         else:
             pass
 
     def popup_window(self):
         print("popup_window")
-        #app = QApplication()
-        popup = StateParameters()
-        PopUpWindow = QtWidgets.QDialog()
-        popup.setup_popup(PopUpWindow, self.state_selected[0])
-        popup.show()
-        """self.state_selected[0].set_name(popup.name_get)
-        self.state_selected[0].set_status(popup.status_get)
-        self.state_selected[0].set_position_x(popup.position_x_get)
-        self.state_selected[0].set_position_y(popup.position_y_get)
-        self.state_selected[0].set_color(popup.color_get)
-        self.state_selected[0].set_shape(popup.shape_get)"""
+        if len(self.state_selected) == 1:
+            self.popup.setup_popup(self.PopUpWindow, self.state_selected[0])
+            self.popup.status
+        else:
+            pass
 
     def mousePressEvent(self, event):
         print("mousePressEvent")
@@ -122,7 +123,7 @@ class Scene(QGraphicsScene):
         QtWidgets.QGraphicsScene.mousePressEvent(self, event)
         print("Mouse press Event")
 
-    def create_state(self, shape):
+    def create_state(self):
         print("create_state")
         """
         Create new state , random place it on scene, add to states_list
@@ -151,6 +152,16 @@ class Scene(QGraphicsScene):
         """
         for state in self.state_selected:
             state.status = 2
+        self.deselect_states()
+        self.update()
+
+    def create_finalAndInitial(self):
+        print("create_final_and_initial")
+        """
+        Make chosen states  finals and initial
+        """
+        for state in self.state_selected:
+            state.status = 3
         self.deselect_states()
         self.update()
 
@@ -285,7 +296,7 @@ class Scene(QGraphicsScene):
                         # Delete the state and create a new one with new name
                         for item in self.items():
                             if isinstance(item, States):
-                                if item.val == new_name:
+                                if item.name == new_name:
                                     flag = False
                         if flag:
                             state.name = new_name

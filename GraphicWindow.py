@@ -26,6 +26,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
@@ -38,6 +42,7 @@ from TransitionClass import *
 
 class Window(QtWidgets.QMainWindow):
 
+    action_select_finalAndInitial: QAction
     action_select_final: QAction
     action_select_circle: QAction
     action_select_initial: QAction
@@ -134,6 +139,11 @@ class Window(QtWidgets.QMainWindow):
         self.action_select_final = QtWidgets.QAction(QtGui.QIcon("Picture/final.jpg"), "Final", self)
         self.action_select_final.triggered.connect(self.create_states_final)
         self.menu_select_states.addAction(self.action_select_final)
+
+        self.action_select_finalAndInitial = QtWidgets.QAction(QtGui.QIcon("Picture/final-initial.png"),
+                                                               "Final and Initial", self)
+        self.action_select_finalAndInitial.triggered.connect(self.create_states_finalAndInitial)
+        self.menu_select_states.addAction(self.action_select_finalAndInitial)
 
         action_reorganize = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "Reorganize", self)
         action_reorganize.triggered.connect(self.reorganize)
@@ -239,15 +249,19 @@ class Window(QtWidgets.QMainWindow):
 
     def create_state_circle(self):
         print("create_state_circle")
-        self.graphicsView.scene.create_state(1)
+        self.graphicsView.scene.create_state()
 
     def create_states_initial(self):
         print("create_states_rectangle")
-        self.graphicsView.scene.create_state(2)
+        self.graphicsView.scene.create_initial()
 
     def create_states_final(self):
         print("create_states_square")
-        self.graphicsView.scene.create_state(3)
+        self.graphicsView.scene.create_final()
+
+    def create_states_finalAndInitial(self):
+        print("create_states_finalAndInitial")
+        self.graphicsView.scene.create_finalAndInitial()
 
     def add_transition(self):
         print("add_transition")
