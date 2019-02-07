@@ -42,6 +42,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from PyQt5 import QtGui
@@ -76,6 +80,8 @@ class States(QGraphicsItem):
         self.shape = "circle"
         self.link_name = []
         self.attributeletter = self.alpha[len(self.registry)]
+        self.transitionDest = []
+        self.transitionSource = []
 
     def add_transition(self, transition, transition_name):
         print("add_transition")
@@ -323,6 +329,12 @@ class States(QGraphicsItem):
         Change states position
         """
         self.position_y = v
+
+    def addTransitionDest(self, v):
+        self.transitionDest.append(v)
+
+    def addTransitionSource(self, v):
+        self.transitionSource.append(v)
 
     def get_link(self):
         """

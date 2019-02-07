@@ -46,6 +46,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 from random import randint
@@ -222,38 +226,71 @@ class Scene(QGraphicsScene):
             self.removeItem(self.grid)
             self.update()
 
-    def create_transition(self):
+    def create_transition(self, start = "", end = "", name = ""):
         print("create_transition")
         """
         Create transition between 2 chosen state. The first chosen one is source, the second is destination
         We can choose one state to create a transition towards itself.
         """
-        trans_name, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
-                                                                'Enter Transition Name:')
-        if ok_pressed:
-            """ If 2 states are chosen, create a transition with a name between these. """
-            if len(self.state_selected) == 2:
+        if start == "" and end == "" and name == "":
+            trans_name, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Create Transition',
+                                                                    'Enter Transition Name:')
+            if ok_pressed:
+                """ If 2 states are chosen, create a transition with a name between these. """
+                if len(self.state_selected) == 2:
+                    """ Check if between 2 states there is already a transition """
+                    for trans in self.items():
+                        if isinstance(trans, Transition):
+                            if trans.source_point == self.state_selected[0] and trans.dest == self.state_selected[1]:
+                                self.InvalidInMsg.setText('Transition already exists')
+                                self.InvalidInMsg.exec_()
+                                self.deselect_states()
+                                return
+                    """ If there isn't, we create a new transition """
+                    self.addItem(Transition(self.state_selected[0], self.state_selected[1], trans_name))
+                    self.deselect_states()
+                    self.update()
+                elif len(self.state_selected) == 1:
+                    """ if only 1 state is chosen, we create a self-transition of that state """
+                    self.addItem(SelfTransition(self.state_selected[0], trans_name))
+                    self.deselect_states()
+                    self.update()
+                else:
+                    """ if we choose > 2 transition, we can not create a transition """
+                    self.InvalidInMsg.setText('Must select 2 states to create transition')
+                    self.InvalidInMsg.exec_()
+        else:
+            object_end: States
+            object_start: States
+            for states in States.registry:
+                if isinstance(states, States):
+                    print(1)
+                    if states.attributeletter == start:
+                        print(2)
+                        object_start = states
+                    elif states.attributeletter == end:
+                        print(3)
+                        object_end = states
+                    else:
+                        object_start = None
+                        object_end = None
+
+            if object_start != object_end and object_end is not None and object_start is not None:
                 """ Check if between 2 states there is already a transition """
                 for trans in self.items():
                     if isinstance(trans, Transition):
-                        if trans.source_point == self.state_selected[0] and trans.dest == self.state_selected[1]:
-                            self.InvalidInMsg.setText('Transition already exists')
-                            self.InvalidInMsg.exec_()
+                        if trans.source_point == object_start and trans.dest == object_end:
                             self.deselect_states()
                             return
                 """ If there isn't, we create a new transition """
-                self.addItem(Transition(self.state_selected[0], self.state_selected[1], trans_name))
+                self.addItem(Transition(object_start, object_end, name))
                 self.deselect_states()
                 self.update()
-            elif len(self.state_selected) == 1:
+            elif start == end and object_end is not None and object_start is not None:
                 """ if only 1 state is chosen, we create a self-transition of that state """
-                self.addItem(SelfTransition(self.state_selected[0], trans_name))
+                self.addItem(SelfTransition(object_start, name))
                 self.deselect_states()
                 self.update()
-            else:
-                """ if we choose > 2 transition, we can not create a transition """
-                self.InvalidInMsg.setText('Must select 2 states to create transition')
-                self.InvalidInMsg.exec_()
 
     def create_transition_courbe(self):
         print("create_transition_courbe")
@@ -332,7 +369,7 @@ class Scene(QGraphicsScene):
     def rename(self):
         print("re_define")
         new_name, ok_pressed = QtWidgets.QInputDialog.getText(QtWidgets.QMainWindow(), 'Rename state',
-                                                             'Enter a name :')
+                                                              'Enter a name :')
         if ok_pressed:
             if new_name == "":
                 self.InvalidInMsg.setText("Can't be empty")
@@ -376,35 +413,129 @@ class Scene(QGraphicsScene):
                     self.InvalidInMsg.setText('Only 1 state !')
                     self.InvalidInMsg.exec_()
 
-    """def reorganize(self, radius=150, s=0):
-        print("reorganize")
-        
-        Reorganise chosen state as a form of a regular polygon
-        
-        deplace = 800
-        stateselected = []
+    def orderForLine(self):
+        statesSelected = []
+        orderedStates = []
         for state in self.selectedItems():
             if isinstance(state, States):
-                stateselected.append(state)
+                statesSelected.append(state)
+        print(statesSelected)
+        for state in statesSelected:
+            if state.status == 0:
+                orderedStates.append(state)
+        for i in range(len(statesSelected) - 1):
+            Transitionlistlenght = 0
+            statetoappend = None
+            for state in orderedStates[-1].transitionSource:
+                if len(state.transitionSource) > Transitionlistlenght:
+                    Transitionlistlenght = len(state.transitionSource)
+                    statetoappend = state
+            if statetoappend != None:
+                orderedStates.append(statetoappend)
+        for j in statesSelected:
+            if j not in orderedStates:
+                orderedStates.append(j)
+        return orderedStates
 
-        if len(stateselected) > 0:
-            ''' then calcul geometric form '''
-            w = 360 / len(stateselected)
-            for i in range(len(stateselected)):
-                t = w * i + deplace
-                x = radius * math.cos(math.radians(t))
-                y = radius * math.sin(math.radians(t))
-                stateselected[i].move_state(x, y)
-        elif len(self.state_selected) > 0:
-            ''' then calcul geometric form '''
-            w = 360 / len(self.state_selected)
-            for i in range(len(self.state_selected)):
-                t = w * i + deplace
-                x = radius * math.cos(math.radians(t))
-                y = radius * math.sin(math.radians(t))
-                self.state_selected[i].move_state(x, y)
+    def OrderForLine(statelist):
+        statesSelected = statelist
+        orderedStates = []
+        print(statesSelected)
+        for state in statesSelected:
+            if state.status == 0:
+                orderedStates.append(state)
+        for i in range(len(statesSelected) - 1):
+            Transitionlistlenght = 0
+            for state in orderedStates[-1].transitionSource:
+                if len(state.transitionSource) > Transitionlistlenght:
+                    Transitionlistlenght = len(state.transitionSource)
+                    statetoappend = state
+                orderedStates.append(statetoappend)
+        for j in statesSelected:
+            if j not in orderedStates:
+                orderedStates.append(j)
+            return orderedStates
+
+    def getGroups(self):
+        statesSelected = []
+        groups = []
+        for state in self.selectedItems():
+            if isinstance(state, States):
+                statesSelected.append(state)
+        for i in range(len(statesSelected)):
+            group = [statesSelected[i]]
+            j = 0
+            while (statesSelected[j].transitionDest) != []:
+                if group[0] in statesSelected[j].transitionDest and group not in groups:
+                    groups.append(group)
+                    break
+                group.append(statesSelected[j].transitionDest[0])
+                j += 1
+        return groups
+
+    def putInLine(self):
+        statelist = self.orderForLine()
+        print(statelist)
+        statelist[0].move_state(0, 0)
+        for i in range(1, len(statelist)):
+            statelist[i].move_state(statelist[i - 1].position_x + 60, statelist[i - 1].position_y - 40)
+
+    def PutInLine(self, statesToLine):
+        statelist = statesToLine
+        for i in range(1, len(statelist)):
+            statelist[i].move_state(statelist[i - 1].position_x + 70, statelist[i - 1].position_y)
+
+    def putInGroup(self, rayon=100):
+        statesSelected = []
+        for state in self.selectedItems():
+            if isinstance(state, States):
+                statesSelected.append(state)
+        if len(statesSelected) > 0:
+            w = math.pi * 2 / len(statesSelected)
+            for i in range(len(statesSelected)):
+                t = w * i
+                x = rayon * math.cos(t)
+                y = rayon * math.sin(t)
+                statesSelected[i].move_state(x, y)
         self.deselect_states()
-        for i in stateselected:
+        for i in statesSelected:
             i.setSelected(0)
-        stateselected = []"""
+
+    def PutInGroup(self, statelist, rayon=100):
+        statesSelected = statelist
+        if len(statesSelected) > 0:
+            w = math.pi * 2 / len(statesSelected)
+            for i in range(len(statesSelected)):
+                t = w * i
+                x = rayon * math.cos(t)
+                y = rayon * math.sin(t)
+                statesSelected[i].move_state(x, y)
+
+    def reorganize(self):
+        statesToLine = []
+        statesSelected = []
+        orderedStates = []
+        statesToOrder = []
+        for state in self.selectedItems():
+            if isinstance(state, States):
+                statesSelected.append(state)
+                statesToLine.append(state)
+        groups = self.getGroups()
+        for state in statesSelected:
+            if state.status == 0:
+                orderedStates.append(state)
+                statesToOrder.remove(state)
+        for state in statesSelected:
+            for i in range(len(groups)):
+                """on distingue les états devant être mis en ligne de ceux devant être mis en groupe"""
+                if state in groups[i]:
+                    statesToLine.remove(state)
+                if orderedStates != []:
+                    if orderedStates[0] in groups[i]:
+                        """on forme les groupes contenant l'état initial de l'automate"""
+                        self.putInGroup(groups[i])
+                    for state1 in groups[i]:
+                        statesToOrder.remove(state1)
+        self.PutInLine(statesToLine)
+
 

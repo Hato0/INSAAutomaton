@@ -22,6 +22,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 
 import StateClass
@@ -166,7 +170,11 @@ class FilesBlock:
             file.write("\n")
             a = item.get_link()
             for i in a:
-                file.write(str(i))
+                file.write("start")
+                file.write(str(i.start.attributeletter))
+                file.write("\n")
+                file.write("end")
+                file.write(str(i.end.attributeletter))
                 file.write("\n")
                 file.write(i.name)
                 file.write("\n")
@@ -187,6 +195,8 @@ class FilesBlock:
         """
         alpha = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         cursor = 0
+        transition_to_do = []
+        interim = []
         file = open(self.name, 'r')
         file.readline()
         number_of_states = file.readline()
@@ -211,11 +221,15 @@ class FilesBlock:
                     for j in range(range_iter):
                         line = file.readline()
                         line = line.replace('\n', '')
-                        alpha[cursor].add_link(line)
-                    for t in range(range_iter):
+                        line = line.replace('start', '')
+                        interim.append(line)
                         line = file.readline()
                         line = line.replace('\n', '')
-                        alpha[cursor].add_link_name(line)
+                        line = line.replace('end', '')
+                        interim.append(line)
+                        line = file.readline()
+                        interim.append(line)
+                        transition_to_do.append(interim)
                     line = file.readline()
                     line = line.replace('\n', '')
                     alpha[cursor].set_color(line)
@@ -228,4 +242,7 @@ class FilesBlock:
                     alpha[cursor].update()
             file.readline()
             cursor += 1
+        for i in range(len(transition_to_do)):
+            graphicsView.scene.create_transition(transition_to_do[i][0], transition_to_do[i][1], transition_to_do[i][2])
         file.close()
+        return transition_to_do

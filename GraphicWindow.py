@@ -38,6 +38,10 @@
 #  You should have received a copy of the legal license with
 #  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
 #
+#
+#  You should have received a copy of the legal license with
+#  this file. If not, please write to: thibaut.lompech@insa-cvl.fr
+#
 
 import sys
 
@@ -120,6 +124,12 @@ class Window(QtWidgets.QMainWindow):
         transition_action = QtWidgets.QAction(QtGui.QIcon('Picture/Arrow.png'), 'Create transitions', self)
         transition_action.triggered.connect(self.add_transition)
 
+        action_putInLine = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "put in line", self)
+        action_putInLine.triggered.connect(self.putInLine)
+
+        action_putInGroup = QtWidgets.QAction(QtGui.QIcon("Picture/circled-dot.png"), "put in group", self)
+        action_putInLine.triggered.connect(self.putInGroup)
+
         """ Graphic Views """
         self.graphicsView = GraphWidget()
         self.graphicsView.setObjectName("graphicsView")
@@ -183,7 +193,8 @@ class Window(QtWidgets.QMainWindow):
         self.toolBar.addWidget(self.tbutton1)
         self.toolBar.addAction(transition_action)
         self.toolBar.addAction(transition_courbe_action)
-        self.toolBar.addAction(action_reorganize)
+        self.toolBar.addAction(action_putInLine)
+        self.toolBar.addAction(action_putInGroup)
         self.toolBar.addAction(action_red_everything)
         self.toolBar.addAction(grid_action)
         self.toolBar.addAction(leave_action)
@@ -250,7 +261,8 @@ class Window(QtWidgets.QMainWindow):
         file = FilesBlock()
         text = QtWidgets.QFileDialog.getOpenFileName(self, 'Import File')
         file.set_name(text[0])
-        FilesBlock.importation(file, self.graphicsView)
+        recup = FilesBlock.importation(file, self.graphicsView)
+        self.graphicsView.scene.create_transition(recup[0], recup[1], recup[2])
 
     def export_application(self):
         print("export_application")
@@ -300,6 +312,12 @@ class Window(QtWidgets.QMainWindow):
     def add_transition_courbe(self):
         print("add_transition_courbe")
         self.graphicsView.scene.create_transition_courbe()
+
+    def putInLine(self):
+        self.graphicsView.scene.putInLine()
+
+    def putInGroup(self):
+        self.graphicsView.scene.putInGroup()
 
 
 class GraphWidget(QtWidgets.QGraphicsView):
